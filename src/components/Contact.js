@@ -1,6 +1,9 @@
+import SinglePageHead from "./SinglePageHead";
+
 const Contact = () => {
 	return (
-		
+		<>
+		<SinglePageHead pageInfo={{name:'Contact'}} />
 		<div class="contact">
             <div class="container">
                 <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
@@ -62,7 +65,7 @@ const Contact = () => {
                 </div>
             </div>
         </div>
-
+		</>
 	)
 }
 
