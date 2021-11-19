@@ -1,6 +1,9 @@
+import SinglePageHead from "../SinglePageHead";
+
 const AllClasses = () => {
 	return (
 		<>
+		<SinglePageHead pageInfo={{name:'Classes'}} />
 		<div className="about wow fadeInUp" data-wow-delay="0.1s">
             <div className="container">
                 <div className="row align-items-center">
@@ -27,7 +30,7 @@ const AllClasses = () => {
                 </div>
             </div>
         </div> 
-		 <div className="class">
+		 <div className="class" style={{marginTop: '100px'}}>
             <div className="container">
                 <div className="section-header text-center wow zoomIn" data-wow-delay="0.1s">
                     <p>Our Classes</p>

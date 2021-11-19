@@ -1,6 +1,9 @@
+import SinglePageHead from "../SinglePageHead";
+
 const TeamAll = () => {
 	return (
 		<>
+		<SinglePageHead pageInfo={{name:'Teachers'}} />
 		<div className="team">
             <div className="container">
                 <div className="section-header text-center wow zoomIn" data-wow-delay="0.1s">
