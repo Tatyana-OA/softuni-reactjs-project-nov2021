@@ -9,6 +9,7 @@ import Register from './components/User/Register'
 import Login from './components/User/Login';
 import Profile from './components/User/Profile';
 import ErrorPage from './components/ErrorPage';
+import CreateClass from './components/Classes/CreateClass';
 
 const App = () => {
 	return (
@@ -24,6 +25,7 @@ const App = () => {
 				<Route path="/login" component={Login}/>
 
 				<Route path="/profile" component={Profile}/>
+				<Route path="/create" component={CreateClass}/>
 				<Route path="/logout" render={
 					() => (<Redirect to="/"/>)
 				}/>
