@@ -1,4 +1,5 @@
 import SinglePageHead from "./SinglePageHead";
+import { Link } from 'react-router-dom';
 
 const ErrorPage = () => {
 	return (
@@ -14,10 +15,10 @@ const ErrorPage = () => {
                         </div>
                         <div className="about-text" style={{textAlign:'center'}}>
                         <div className="about-img">
-                            %<img src="./img/errorimage.gif" alt="Image" style={{width: '70%'}} />
+                            %<img src="./img/errorimage.gif" alt="Error Image" style={{width: '70%'}} />
 
                    		 </div>
-                            <a className="btn" href="/">Back to Website</a>
+                            <Link className="btn" to="/">Back to Website</Link>
                         </div>
 
                 </div>
