@@ -1,5 +1,6 @@
 
 import LatestClasses from "./Classes/LatestClasses";
+import { Link } from 'react-router-dom';
 
 const Hero = (props) => {
 	return (
@@ -14,8 +15,8 @@ const Hero = (props) => {
                                 Lorem ipsum dolor sit amet elit. Phasell nec pretum mi. Curabi ornare velit non. Aliqua metus tortor auctor quis sem.
                             </p>
                             <div className="hero-btn">
-                                <a className="btn" href="">Join Now</a>
-                                <a className="btn" href="">Contact Us</a>
+                                <Link className="btn" to="/register">Join Now</Link>
+                                <Link className="btn" to="/contact">Contact Us</Link>
                             </div>
                         </div>
                     </div>

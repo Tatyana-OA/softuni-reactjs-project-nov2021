@@ -4,60 +4,60 @@ const Contact = () => {
 	return (
 		<>
 		<SinglePageHead pageInfo={{name:'Contact'}} />
-		<div class="contact">
-            <div class="container">
-                <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+		<div className="contact">
+            <div className="container">
+                <div className="section-header text-center wow zoomIn" data-wow-delay="0.1s">
                     <p>Get In Touch</p>
                     <h2>For Any Query</h2>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-md-4 contact-item wow zoomIn" data-wow-delay="0.2s">
-                                <i class="fa fa-map-marker-alt"></i>
-                                <div class="contact-text">
+                <div className="row">
+                    <div className="col-12">
+                        <div className="row">
+                            <div className="col-md-4 contact-item wow zoomIn" data-wow-delay="0.2s">
+                                <i className="fa fa-map-marker-alt"></i>
+                                <div className="contact-text">
                                     <h2>Location</h2>
                                     <p>123 Street, New York, USA</p>
                                 </div>
                             </div>
-                            <div class="col-md-4 contact-item wow zoomIn" data-wow-delay="0.4s">
-                                <i class="fa fa-phone-alt"></i>
-                                <div class="contact-text">
+                            <div className="col-md-4 contact-item wow zoomIn" data-wow-delay="0.4s">
+                                <i className="fa fa-phone-alt"></i>
+                                <div className="contact-text">
                                     <h2>Phone</h2>
                                     <p>+012 345 67890</p>
                                 </div>
                             </div>
-                            <div class="col-md-4 contact-item wow zoomIn" data-wow-delay="0.6s">
-                                <i class="far fa-envelope"></i>
-                                <div class="contact-text">
+                            <div className="col-md-4 contact-item wow zoomIn" data-wow-delay="0.6s">
+                                <i className="far fa-envelope"></i>
+                                <div className="contact-text">
                                     <h2>Email</h2>
                                     <p>info@example.com</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="contact-form">
+                    <div className="col-12 wow fadeInUp" data-wow-delay="0.1s">
+                        <div className="contact-form">
                             <div id="success"></div>
-                            <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                                <div class="control-group">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
-                                    <p class="help-block text-danger"></p>
+                            <form name="sentMessage" id="contactForm">
+                                <div className="control-group">
+                                    <input type="text" className="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
+                                    <p className="help-block text-danger"></p>
                                 </div>
-                                <div class="control-group">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
-                                    <p class="help-block text-danger"></p>
+                                <div className="control-group">
+                                    <input type="email" className="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
+                                    <p className="help-block text-danger"></p>
                                 </div>
-                                <div class="control-group">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
-                                    <p class="help-block text-danger"></p>
+                                <div className="control-group">
+                                    <input type="text" className="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
+                                    <p className="help-block text-danger"></p>
                                 </div>
-                                <div class="control-group">
-                                    <textarea class="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
-                                    <p class="help-block text-danger"></p>
+                                <div className="control-group">
+                                    <textarea className="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
+                                    <p className="help-block text-danger"></p>
                                 </div>
                                 <div>
-                                    <button class="btn" type="submit" id="sendMessageButton">Send Message</button>
+                                    <button className="btn" type="submit" id="sendMessageButton">Send Message</button>
                                 </div>
                             </form>
                         </div>
