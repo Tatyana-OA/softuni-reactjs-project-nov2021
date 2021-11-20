@@ -3,7 +3,7 @@ import SinglePageHead from "../SinglePageHead";
 const Register = (props) => {
 	return (
 		<>
-	<SinglePageHead pageInfo={{name:'Register'}}/>
+	<SinglePageHead pageInfo={{name:'Register', slug:'register'}}/>
 
   <div className="container-register">
     <div className="title sign">Registration</div>

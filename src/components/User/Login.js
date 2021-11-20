@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Login = (props) => {
 	return (
 		<>
-		<SinglePageHead pageInfo={{name:'Login'}}/>
+		<SinglePageHead pageInfo={{name:'Login', slug:'login' }}/>
 		<div className="main">
 		<p className="sign" align="center">Sign in</p>
 		<form className="form1">

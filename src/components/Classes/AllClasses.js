@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const AllClasses = () => {
 	return (
 		<>
-		<SinglePageHead pageInfo={{name:'Classes'}} />
+		<SinglePageHead pageInfo={{name:'Classes', slug:'classes' }} />
 		<div className="about wow fadeInUp" data-wow-delay="0.1s">
             <div className="container">
                 <div className="row align-items-center">

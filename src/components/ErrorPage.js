@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const ErrorPage = () => {
 	return (
 		<>
-		<SinglePageHead pageInfo={{name:'Error'}} />
+		<SinglePageHead pageInfo={{name:'Error', slug:'error'}} />
 		<div className="about wow fadeInUp" data-wow-delay="0.1s">
             <div className="container">
     

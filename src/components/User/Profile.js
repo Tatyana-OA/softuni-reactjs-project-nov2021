@@ -5,7 +5,7 @@ import SingleClassCard from "../Classes/SingleClassCard";
 const Profile = (props) => {
   return (
     <>
-      <SinglePageHead pageInfo={{ name: "My Account" }} />
+      <SinglePageHead pageInfo={{ name: "My Account", slug:'profile' }} />
       <div className="team">
         <div className="container">
           <div className="row inf-content">

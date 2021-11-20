@@ -20,6 +20,7 @@ const Header = (props) => {
 				<div className="user-navigation navbar-nav">
 					<NavLink to="/profile" className="nav-item nav-link" activeClassName="active">My Profile</NavLink>
 					<NavLink to="/logout" className="nav-item nav-link" activeClassName="active">Logout</NavLink>
+					<NavLink to="/create" className="nav-item nav-link" activeClassName="active">Create Class</NavLink>
 				</div>
 
 				</div>

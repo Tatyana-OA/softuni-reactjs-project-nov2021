@@ -3,7 +3,7 @@ import SinglePageHead from "./SinglePageHead";
 const Contact = () => {
 	return (
 		<>
-		<SinglePageHead pageInfo={{name:'Contact'}} />
+		<SinglePageHead pageInfo={{name:'Contact', slug:'contact'}} />
 		<div className="contact">
             <div className="container">
                 <div className="section-header text-center wow zoomIn" data-wow-delay="0.1s">
