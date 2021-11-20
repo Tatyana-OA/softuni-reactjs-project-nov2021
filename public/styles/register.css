@@ -54,7 +54,7 @@ form .input-box span.details{
   font-weight: 500;
   margin-bottom: 5px;
 }
-.user-details .input-box input{
+.user-details .input-box input, .user-details .input-box select{
   height: 45px;
   width: 100%;
   outline: none;
@@ -64,6 +64,15 @@ form .input-box span.details{
   border: 1px solid #ccc;
   border-bottom-width: 2px;
   transition: all 0.3s ease;
+}
+.user-details .input-box textarea {
+	outline: none;
+	font-size: 16px;
+	border-radius: 20px;
+	padding-left: 15px;
+	border: 1px solid #ccc;
+	border-bottom-width: 2px;
+	transition: all 0.3s ease;
 }
 .user-details .input-box input:focus,
 .user-details .input-box input:valid{
