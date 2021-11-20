@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
 const Header = (props) => {
 	return (
@@ -12,21 +13,15 @@ const Header = (props) => {
 					<NavLink to="/classes" className="nav-item nav-link" activeClassName="active">Classes</NavLink>
 					<NavLink to="/teachers" className="nav-item nav-link" activeClassName="active">Teachers</NavLink>
 					<NavLink to="/contact" className="nav-item nav-link" activeClassName="active">Contact</NavLink>
-					<div className="nav-item dropdown">
-						<NavLink to="/join" className="nav-link dropdown-toggle" activeClassName="active" data-toggle="dropdown">Join us</NavLink>
-						<div className="dropdown-menu">
-							<NavLink to="/register" className="dropdown-item" activeClassName="active">Register</NavLink>
-							<NavLink to="/login" className="dropdown-item" activeClassName="active">Login</NavLink>
-						</div>
-					</div>
+				<div className="guest-navigation navbar-nav">
+					<NavLink to="/login" className="nav-item nav-link" activeClassName="active">Login</NavLink>
+					<NavLink to="/register" className="nav-item nav-link" activeClassName="active">Register</NavLink>
+				</div>
+				<div className="user-navigation navbar-nav">
+					<NavLink to="/profile" className="nav-item nav-link" activeClassName="active">My Profile</NavLink>
+					<NavLink to="/logout" className="nav-item nav-link" activeClassName="active">Logout</NavLink>
+				</div>
 
-					<div className="nav-item dropdown">
-						<NavLink to="/my-account" className="nav-link dropdown-toggle" data-toggle="dropdown" activeClassName="active">My account</NavLink>
-						<div className="dropdown-menu">
-							<NavLink to="/profile" className="dropdown-item" activeClassName="active">Profile</NavLink>
-							<NavLink to="/logout" className="dropdown-item" activeClassName="active">Logout</NavLink>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
