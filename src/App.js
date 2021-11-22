@@ -10,6 +10,7 @@ import Login from './components/User/Login';
 import Profile from './components/User/Profile';
 import ErrorPage from './components/ErrorPage';
 import CreateClass from './components/Classes/CreateClass';
+import ClassDetails from './components/Classes/ClassDetails';
 
 const App = () => {
 	return (
@@ -20,6 +21,7 @@ const App = () => {
 				<Route path="/classes" component={AllClasses}/>
 				<Route path="/teachers" component={TeamAll}/>
 				<Route path="/contact" component={Contact}/>
+				<Route path="/details" component={ClassDetails}/>
 
 				<Route path="/register" component={Register}/>
 				<Route path="/login" component={Login}/>
