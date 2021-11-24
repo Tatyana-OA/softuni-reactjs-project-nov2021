@@ -97,14 +97,14 @@
 }
 
 .class .class-teacher a {
-    width: 40px;
+    width: 210px;
     height: 40px;
     padding: 0 0 3px 1px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
-    font-weight: 100;
+    font-size: 20px;
+    font-weight: 400;
     color: #343148;
     background: #F7CAC9;
     border-radius: 40px;

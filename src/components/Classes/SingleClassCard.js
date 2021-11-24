@@ -10,7 +10,7 @@ const SingleClassCard = ({classData}) => {
 				<div className="class-teacher">
 					<img src="./img/teacher-1.png" alt="Teacher Image" />
 					<h3>Elise Moran</h3>
-					<a href="">+</a>
+					<a href="">Details</a>
 				</div>
 				<h2>{classData.name}</h2>
 				<div className="class-meta">
