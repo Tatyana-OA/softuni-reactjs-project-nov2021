@@ -1,9 +1,10 @@
-const SingleClassCard = (props) => {
+const SingleClassCard = ({classData}) => {
+	console.log(classData)
 	return (
 		<div className="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
 		<div className="class-wrap">
 			<div className="class-img">
-				<img src="./img/class-1.jpg" alt="Class Image" />
+				<img src={classData.imageUrl} alt="Class Image" />
 			</div>
 			<div className="class-text">
 				<div className="class-teacher">
@@ -11,10 +12,10 @@ const SingleClassCard = (props) => {
 					<h3>Elise Moran</h3>
 					<a href="">+</a>
 				</div>
-				<h2>Pilates Yoga</h2>
+				<h2>{classData.name}</h2>
 				<div className="class-meta">
-					<p><i className="far fa-calendar-alt"></i>Sun, Tue, Thu</p>
-					<p><i className="far fa-clock"></i>9:00 - 10:00</p>
+					<p><i className="far fa-calendar-alt"></i>{classData.date}</p>
+					<p><i className="far fa-clock"></i>{classData.start_time} - {classData.end_time}</p>
 				</div>
 			</div>
 		</div>

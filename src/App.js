@@ -12,6 +12,7 @@ import ErrorPage from './components/ErrorPage';
 import CreateClass from './components/Classes/CreateClass';
 import ClassDetails from './components/Classes/ClassDetails';
 
+
 const App = () => {
 	return (
 		<>

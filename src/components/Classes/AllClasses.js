@@ -1,8 +1,21 @@
 import SinglePageHead from "../SinglePageHead";
 import SingleClassCard from "../../components/Classes/SingleClassCard";
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+
+import * as classService from '../../services/classService';
 
 const AllClasses = () => {
+	const [allClasses, setAllClasses] = useState([]);
+
+	useEffect( async ()=>{
+
+		const result = await classService.getAll();
+		console.log(result)
+		setAllClasses(result);
+
+	},[])
+
 	return (
 		<>
 		<SinglePageHead pageInfo={{name:'Classes', slug:'classes' }} />
@@ -50,11 +63,8 @@ const AllClasses = () => {
                     </div>
                 </div>
                 <div className="row class-container">
-					<SingleClassCard />
-					<SingleClassCard />
-					<SingleClassCard />
-					<SingleClassCard />
-					<SingleClassCard />
+					{ allClasses.map(c => <SingleClassCard key = {c.id} classData = {c.acf}/>) }
+
                 </div>
             </div>
         </div>
