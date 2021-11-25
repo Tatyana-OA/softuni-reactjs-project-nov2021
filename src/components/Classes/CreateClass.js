@@ -7,7 +7,7 @@ const CreateClass = () => {
 	function submitCreate(e) {
 		e.preventDefault();
 		const formData = new FormData(e.target);
-		const {name, type, imageUrl, capacity, description, start, end, date } = Object.fromEntries(formData)
+		const {name, type, imageUrl, capacity, description, start_time, end_time, date } = Object.fromEntries(formData)
 		console.log( Object.fromEntries(formData));
 		console.log('create form')
 
@@ -22,8 +22,8 @@ const CreateClass = () => {
 				imageUrl,
 				capacity,
 				date,
-				"start_time": start,
-				"end_time": end,
+				start_time,
+				end_time,
 			}
 
 		}
@@ -71,11 +71,11 @@ const CreateClass = () => {
           </div>
 		  <div className="input-box">
             <span className="details">Class Start Time</span>
-            <input type="time" name="start" />
+            <input type="time" name="start_time" />
           </div>
 		  <div className="input-box">
             <span className="details">Class End Time</span>
-            <input type="time" name="end"  />
+            <input type="time" name="end_time"  />
           </div>
         </div>
         <div className="button">

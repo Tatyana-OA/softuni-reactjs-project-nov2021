@@ -1,10 +1,14 @@
 const apiUrl = 'https://nexxita.ephedratk.com';
+const currentUser = {
+	"username": "Nexxita",
+	"password": "18071702TKteam"
+}
 async function getBearerToken() {
 	try {
 		const settings = {
 			method: 'POST',
 		};
-		let response = await fetch(`${apiUrl}/wp-json/jwt-auth/v1/token?username=Nexxita&password=18071702TKteam`, settings);
+		let response = await fetch(`${apiUrl}/wp-json/jwt-auth/v1/token?username=${currentUser.username}&password=${currentUser.password}`, settings);
 		let result = await response.json()
 		console.log("Retrieved access token")
 		return result.token;
@@ -13,7 +17,7 @@ async function getBearerToken() {
 	}
 
 }
-const bearerToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9uZXh4aXRhLmVwaGVkcmF0ay5jb20iLCJpYXQiOjE2Mzc3NjUzMTYsIm5iZiI6MTYzNzc2NTMxNiwiZXhwIjoxNjM4MzcwMTE2LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.gqll5FDn2TEHR0v2vL-RrS9xzz78bnjWTJB86zmY-Q4"
+
 
 
 export async function getAll()  {
