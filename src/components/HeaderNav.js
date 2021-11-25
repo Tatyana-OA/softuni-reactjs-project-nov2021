@@ -1,7 +1,23 @@
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const Header = (props) => {
+const Header = () => {
+
+	const [storageLength, setSessionLength] = useState(0);
+
+	useEffect( ()=>{
+
+		let result = sessionStorage.length
+		setSessionLength(result);
+		console.log('latest classes', storageLength)
+
+	},[])
+
+
+	const userLogout = () => {
+		sessionStorage.clear();
+	}
+	console.log('renderHeader')
 	return (
 		<>
 		<div className="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -13,7 +29,7 @@ const Header = (props) => {
 					<NavLink to="/classes" className="nav-item nav-link" activeClassName="active">Classes</NavLink>
 					<NavLink to="/teachers" className="nav-item nav-link" activeClassName="active">Teachers</NavLink>
 					<NavLink to="/contact" className="nav-item nav-link" activeClassName="active">Contact</NavLink>
-					{ sessionStorage.length === 0 ? (
+					{ storageLength === 0 ? (
 					<div className="guest-navigation navbar-nav">
 					<NavLink to="/login" className="nav-item nav-link" activeClassName="active">Login</NavLink>
 					<NavLink to="/register" className="nav-item nav-link" activeClassName="active">Register</NavLink>
@@ -21,7 +37,7 @@ const Header = (props) => {
 					) : (
 						<div className="user-navigation navbar-nav">
 						<NavLink to="/profile" className="nav-item nav-link" activeClassName="active">My Profile</NavLink>
-						<NavLink to="/logout" className="nav-item nav-link" activeClassName="active">Logout</NavLink>
+						<NavLink to="/logout" className="nav-item nav-link" activeClassName="active" onClick={userLogout}>Logout</NavLink>
 						<NavLink to="/create" className="nav-item nav-link" activeClassName="active">Create Class</NavLink>
 					</div>
 					)}
@@ -31,14 +47,7 @@ const Header = (props) => {
 		</div>
 	</div>
 
-        
 
-       
-
-
-		
-
-    
 	</>
 	)
 }

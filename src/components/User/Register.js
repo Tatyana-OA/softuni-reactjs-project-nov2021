@@ -21,15 +21,13 @@ const Register = (props) => {
 				first_name,
 				last_name,
 				email
-    		}
+    		},
+
 		}
 
 		userService.createUser(cleanUserData)
 
-		sessionStorage.setItem('username', username)
-		for (let key in cleanUserData.acf) {
-			sessionStorage.setItem(`${key}`, cleanUserData.acf[key])
-		}
+
 
 	}
 	return (
