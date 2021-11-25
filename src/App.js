@@ -14,6 +14,7 @@ import ClassDetails from './components/Classes/ClassDetails';
 
 
 const App = () => {
+	console.log(sessionStorage)
 	return (
 		<>
 		<Header />
