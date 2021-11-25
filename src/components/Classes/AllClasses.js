@@ -11,8 +11,8 @@ const AllClasses = () => {
 	useEffect( async ()=>{
 
 		const result = await classService.getAll();
-		console.log(result)
 		setAllClasses(result);
+		console.log('all classes', allClasses)
 
 	},[])
 

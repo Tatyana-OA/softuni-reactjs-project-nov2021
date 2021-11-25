@@ -1,8 +1,20 @@
 import SinglePageHead from "../SinglePageHead";
 import SingleTeamMember from "../Team/TeamSingleCard";
 import SingleClassCard from "../Classes/SingleClassCard";
+import { useState, useEffect } from "react";
+
+import * as classService from '../../services/classService';
 
 const Profile = (props) => {
+	const [userClasses, setuserClasses] = useState([]);
+
+	useEffect( async ()=>{
+		//TO FIX
+		const result = await classService.getAll();
+		setuserClasses(result);
+		console.log('USER', result)
+
+	},[])
   return (
     <>
       <SinglePageHead pageInfo={{ name: "My Account", slug:'profile' }} />
@@ -80,10 +92,7 @@ const Profile = (props) => {
           <div className="container">
             <div className="row class-container">
               {/* TO DO DYNAMIC  */}
-              <SingleClassCard />
-              <SingleClassCard />
-              <SingleClassCard />
-              <SingleClassCard />
+			  { userClasses.map(c => <SingleClassCard key = {c.id} classData = {c.acf}/>) }
             </div>
           </div>
         </div>

@@ -1,7 +1,20 @@
 
 import SingleClassCard from './SingleClassCard';
 
+import { useState, useEffect } from "react";
+
+import * as classService from '../../services/classService';
+
 const LatestClasses = () => {
+	const [latestClasses, setLatestClasses] = useState([]);
+
+	useEffect( async ()=>{
+
+		const result = await classService.getLatest();
+		setLatestClasses(result);
+		console.log('latest classes', latestClasses)
+
+	},[])
 
 	return (
 		<>
@@ -13,11 +26,7 @@ const LatestClasses = () => {
                 </div>
 
                 <div className="row class-container">
-                   <SingleClassCard />
-				   <SingleClassCard />
-				   <SingleClassCard />
-				   <SingleClassCard />
-				   <SingleClassCard />
+				{ latestClasses.map(c => <SingleClassCard key = {c.id} classData = {c.acf}/>) }
                 </div>
             </div>
         </div>
