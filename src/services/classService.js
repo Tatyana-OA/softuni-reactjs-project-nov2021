@@ -3,7 +3,7 @@ const currentUser = {
 	"username": "Nexxita",
 	"password": "18071702TKteam"
 }
-async function getBearerToken() {
+export async function getBearerToken(currentUser) {
 	try {
 		const settings = {
 			method: 'POST',
@@ -17,8 +17,6 @@ async function getBearerToken() {
 	}
 
 }
-
-
 
 export async function getAll()  {
 	try {
@@ -41,7 +39,7 @@ export async function getLatest()  {
 }
 
 export async function createClass(classData) {
-	const token = await getBearerToken();
+	const token = await getBearerToken(currentUser);
 	console.log('token', token)
 	try {
 		const settings = {

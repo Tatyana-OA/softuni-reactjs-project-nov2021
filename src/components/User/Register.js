@@ -1,12 +1,32 @@
 import SinglePageHead from "../SinglePageHead";
 
+import * as userService from '../../services/userService';
+
 const Register = (props) => {
 	const onRegister = (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
-		const {username, email, first_name, last_name, password, re_password, user_imageUrl} = Object.fromEntries(formData)
+		const {username, email, first_name, last_name, password, re_password, user_imageUrl, user_type} = Object.fromEntries(formData)
 		console.log( Object.fromEntries(formData));
-		console.log('create form')
+		console.log('register form')
+
+		const cleanUserData = {
+			username,
+			email,
+			password,
+			"name": username,
+   			 "acf": {
+				user_type,
+				user_imageUrl,
+				first_name,
+				last_name,
+				email
+    		}
+		}
+
+		userService.createUser(cleanUserData)
+
+
 	}
 	return (
 		<>
