@@ -1,21 +1,51 @@
 import SinglePageHead from "../SinglePageHead";
 
-const CreateClass = (props) => {
+import * as classService from '../../services/classService';
+
+const CreateClass = () => {
+
+	function submitCreate(e) {
+		e.preventDefault();
+		const formData = new FormData(e.target);
+		const {name, type, imageUrl, capacity, description, start, end, date } = Object.fromEntries(formData)
+		console.log( Object.fromEntries(formData));
+		console.log('create form')
+
+		const cleanClassData = {
+			"type": "yogac_classes",
+			"title": name,
+			"status": "publish",
+			"acf": {
+				name,
+				description,
+				type,
+				imageUrl,
+				capacity,
+				date,
+				"start_time": start,
+				"end_time": end,
+			}
+
+		}
+
+		classService.createClass(cleanClassData);
+
+	}
 	return (
 		<>
 		<SinglePageHead pageInfo={{name:"Create Class", slug: "create"}} />
 		<div className="container-register">
     <div className="title sign">Create Yoga Class</div>
     <div className="content">
-      <form action="#">
+      <form action="#" method="POST" onSubmit={submitCreate}>
         <div className="user-details">
           <div className="input-box">
-            <span className="details">Title</span>
-            <input type="text" placeholder="Enter class name" required />
+            <span className="details">Name</span>
+            <input type="text" name="name" placeholder="Enter class name" />
           </div>
           <div className="input-box">
             <span className="details">Type</span>
-			<select>
+			<select name="type">
 				<option value="body balance">Body Balance</option>
 				<option value="hatha yoga">Hatha Yoga</option>
 				<option value="children yoga">Children Yoga</option>
@@ -25,27 +55,27 @@ const CreateClass = (props) => {
 
           <div className="input-box">
             <span className="details">Class Image</span>
-            <input type="text" placeholder="Enter image URL for class" required />
+            <input type="text" name="imageUrl" placeholder="Enter image URL for class" />
           </div>
 		  <div className="input-box">
             <span className="details">Class Capacity</span>
-            <input type="text" placeholder="Enter max class attendees" required />
+            <input type="text" name="capacity" placeholder="Enter max class attendees" />
           </div>
 		  <div className="input-box">
             <span className="details">Description</span>
-            <textarea rows="4" cols="30" placeholder="Enter class description" required />
+            <textarea name="description" rows="4" cols="30" placeholder="Enter class description" />
           </div>
 		  <div className="input-box">
             <span className="details">Date</span>
-            <input type="date" placeholder="Enter max class attendees" required />
+            <input type="date" name="date"  placeholder="Enter max class attendees" />
           </div>
 		  <div className="input-box">
             <span className="details">Class Start Time</span>
-            <input type="time" placeholder="Enter max class attendees" required />
+            <input type="time" name="start" />
           </div>
 		  <div className="input-box">
             <span className="details">Class End Time</span>
-            <input type="time" placeholder="Enter max class attendees" required />
+            <input type="time" name="end"  />
           </div>
         </div>
         <div className="button">
