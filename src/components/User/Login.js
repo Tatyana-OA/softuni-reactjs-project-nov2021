@@ -1,9 +1,11 @@
 import SinglePageHead from "../SinglePageHead";
 import { Link } from 'react-router-dom';
 import * as userService from '../../services/userService';
+import { useHistory } from "react-router";
 
 
-const Login =  ({history}) => {
+const Login =  ({onLoginCall}) => {
+	let history = useHistory();
 	const userLogin = (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
@@ -11,10 +13,10 @@ const Login =  ({history}) => {
 		console.log( Object.fromEntries(formData));
 		console.log('login')
 
-		 userService.getBearerToken({username,password})
+		userService.getBearerToken({username,password})
 
-		console.log('logged in')
-
+		console.log('login', sessionStorage)
+		onLoginCall();
 		history.push("/")
 	}
 	return (

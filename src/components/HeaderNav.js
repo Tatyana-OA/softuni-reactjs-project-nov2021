@@ -1,19 +1,11 @@
 import { NavLink } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
-const Header = () => {
+const Header = ({
+	isAuth,
+	user,
+}) => {
 
-	const [storageLength, setSessionLength] = useState(0);
-
-	useEffect( ()=>{
-
-		let result = sessionStorage.length
-		setSessionLength(result);
-		console.log('latest classes', storageLength)
-
-	},[])
-
-
+	let storageLength=1;
 	const userLogout = () => {
 		sessionStorage.clear();
 	}
@@ -29,22 +21,28 @@ const Header = () => {
 					<NavLink to="/classes" className="nav-item nav-link" activeClassName="active">Classes</NavLink>
 					<NavLink to="/teachers" className="nav-item nav-link" activeClassName="active">Teachers</NavLink>
 					<NavLink to="/contact" className="nav-item nav-link" activeClassName="active">Contact</NavLink>
-					{ storageLength === 0 ? (
-					<div className="guest-navigation navbar-nav">
-					<NavLink to="/login" className="nav-item nav-link" activeClassName="active">Login</NavLink>
-					<NavLink to="/register" className="nav-item nav-link" activeClassName="active">Register</NavLink>
-					</div>
-					) : (
+
+					{! isAuth ? (
+						<div className="guest-navigation navbar-nav">
+						<NavLink to="/login" className="nav-item nav-link" activeClassName="active">Login</NavLink>
+						<NavLink to="/register" className="nav-item nav-link" activeClassName="active">Register</NavLink>
+						</div>
+					) :
+					(
 						<div className="user-navigation navbar-nav">
-						<NavLink to="/profile" className="nav-item nav-link" activeClassName="active">My Profile</NavLink>
-						<NavLink to="/logout" className="nav-item nav-link" activeClassName="active" onClick={userLogout}>Logout</NavLink>
 						<NavLink to="/create" className="nav-item nav-link" activeClassName="active">Create Class</NavLink>
+						<NavLink to="/profile" className="nav-item nav-link user-profile" activeClassName="active">My Profile</NavLink>
+						<NavLink to="/logout" className="nav-item nav-link" activeClassName="active" onClick={userLogout}>Logout</NavLink>
+
 					</div>
-					)}
+					)
+
+				}
 
 				</div>
 			</div>
 		</div>
+		{user.first_name ? (<div className="welcome-user">Welcome, {user.first_name}!</div>) : (<div className="welcome-user">Welcome, Guest!</div>)}
 	</div>
 
 

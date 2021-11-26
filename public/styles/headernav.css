@@ -101,3 +101,13 @@
         box-shadow: none;
     }
 }
+
+.welcome-user {
+	border-left: 2px solid white;
+    padding-left: 10px;
+    color: black;
+}
+
+.navbar .container-fluid {
+	margin-right:10px;
+}

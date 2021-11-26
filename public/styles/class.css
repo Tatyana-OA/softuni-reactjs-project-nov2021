@@ -45,6 +45,7 @@
 
 .class .class-img {
     position: relative;
+	height: 225px;
 }
 
 .class .class-img img {

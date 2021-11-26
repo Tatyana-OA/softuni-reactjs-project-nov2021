@@ -11,13 +11,30 @@ import Profile from './components/User/Profile';
 import ErrorPage from './components/ErrorPage';
 import CreateClass from './components/Classes/CreateClass';
 import ClassDetails from './components/Classes/ClassDetails';
+import { useState, useEffect, React } from 'react';
+
+export const appContext = React.createContext();
 
 
 const App = () => {
-	console.log(sessionStorage)
+	const [userInfo, setUserInfo] = useState({isAuth:false, user: ''})
+	useEffect(()=>{
+		let user = sessionStorage;
+		setUserInfo({isAuth:Boolean(user.first_name), user:{...user}})
+	}, [])
+
+	const onLoginCall = () => {
+		let user = sessionStorage;
+		setUserInfo({isAuth:true, user:{...user}})
+	}
+	const onLogoutCall = () => {
+		let user = sessionStorage;
+		setUserInfo({isAuth:false, user:{...user}})
+	}
+	console.log(userInfo)
 	return (
 		<>
-		<Header />
+		<Header {...userInfo} />
 		<Switch>
 				<Route path="/" exact component={Hero}/>
 				<Route path="/classes" component={AllClasses}/>
@@ -25,13 +42,17 @@ const App = () => {
 				<Route path="/contact" component={Contact}/>
 				<Route path="/details" component={ClassDetails}/>
 
-				<Route path="/register" component={Register}/>
-				<Route path="/login" component={Login}/>
+				<Route path="/register" component={Register}/>()
+				<Route path="/login">
+					<Login onLoginCall={onLoginCall}/>
+				</Route>
 
 				<Route path="/profile" component={Profile}/>
 				<Route path="/create" component={CreateClass}/>
 				<Route path="/logout" render={
-					() => (<Redirect to="/"/>)
+					() => (
+					<Redirect to="/" onLogoutCall= {onLogoutCall}/>
+					)
 				}/>
 
 				{/* Example for props (children) in between the route */}
