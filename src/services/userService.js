@@ -82,21 +82,11 @@ export async function createUser(userData) {
 }
 
 export async function getUserById(id) {
-	const token = await getBearerToken({
-		"username": "Nexxita",
-		"password": "18071702TKteam"
-	})
 	try {
-		const settings = {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': 'Bearer ' + token
-			},
-		};
-		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users/${id}`, settings);
 
-		console.log(await response)
+		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users/${id}`);
+
+		console.log(await response, 'userbyid')
 		return response.json();
 	}catch(err) {
 		console.error(err)

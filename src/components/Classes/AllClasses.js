@@ -12,9 +12,10 @@ const AllClasses = () => {
 
 		const result = await classService.getAll();
 		setAllClasses(result);
-		
+
 
 	},[])
+
 	console.log('all classes', allClasses)
 	return (
 		<>
@@ -63,7 +64,7 @@ const AllClasses = () => {
                     </div>
                 </div>
                 <div className="row class-container">
-					{ allClasses.map(c => <SingleClassCard key = {c.id} classData = {c}/>) }
+					{ allClasses.map(c => <SingleClassCard key = {c.id} classData = {c} authorId={c.author}/>) }
 
                 </div>
             </div>

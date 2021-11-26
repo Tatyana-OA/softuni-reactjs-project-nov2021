@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import SinglePageHead from "../SinglePageHead";
 
+
 const ClassDetails = (props) => {
+
   return (
     <>
       <SinglePageHead

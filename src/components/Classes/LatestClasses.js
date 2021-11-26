@@ -27,7 +27,7 @@ const LatestClasses = () => {
                 </div>
 
                 <div className="row class-container">
-				{ latestClasses.map(c => <SingleClassCard key = {c.id} classData = {c}/>) }
+				{ latestClasses.map(c => <SingleClassCard key = {c.id} classData = {c} authorId={c.author}/>) }
                 </div>
             </div>
         </div>
