@@ -102,7 +102,7 @@ const Profile = ({
             data-wow-delay="0.1s"
           >
             <p> Someone's Classes </p>
-            <h2>Classes you've booked</h2>
+            <h2>{currentUser.acf.user_type == "student" ? "Classes you have booked" : "Classes you teach"}</h2>
           </div>
         </div>
         <div className="class">
