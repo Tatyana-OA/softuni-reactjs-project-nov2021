@@ -92,7 +92,7 @@ const Profile = (props) => {
           <div className="container">
             <div className="row class-container">
               {/* TO DO DYNAMIC  */}
-			  { userClasses.map(c => <SingleClassCard key = {c.id} classData = {c.acf}/>) }
+			  { userClasses.map(c => <SingleClassCard key = {c.id} classData = {c}/>) }
             </div>
           </div>
         </div>

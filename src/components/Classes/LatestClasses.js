@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 import * as classService from '../../services/classService';
 
+
 const LatestClasses = () => {
 	const [latestClasses, setLatestClasses] = useState([]);
 
@@ -26,7 +27,7 @@ const LatestClasses = () => {
                 </div>
 
                 <div className="row class-container">
-				{ latestClasses.map(c => <SingleClassCard key = {c.id} classData = {c.acf}/>) }
+				{ latestClasses.map(c => <SingleClassCard key = {c.id} classData = {c}/>) }
                 </div>
             </div>
         </div>

@@ -1,7 +1,14 @@
+
 const apiUrl = 'http://nexxita.ephedratk.com';
 
+// function UpdateUserContext(userInfo) {
+// 	const [newUser, setNewUser] = useState(user);
+// 	setNewUser
+
+// }
 
 export async function getBearerToken(currentUser) {
+	
 	let result;
 	try {
 		const settings = {
@@ -17,7 +24,6 @@ export async function getBearerToken(currentUser) {
 		for (let key in user.acf) {
 			sessionStorage.setItem(`${key}`, user.acf[key])
 		}
-
 		return result.token;
 
 	}catch(err) {
@@ -72,5 +78,27 @@ export async function createUser(userData) {
 	sessionStorage.setItem('token', token)
 	for (let key in userData.acf) {
 		sessionStorage.setItem(`${key}`, userData.acf[key])
+	}
+}
+
+export async function getUserById(id) {
+	const token = await getBearerToken({
+		"username": "Nexxita",
+		"password": "18071702TKteam"
+	})
+	try {
+		const settings = {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + token
+			},
+		};
+		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users/${id}`, settings);
+
+		console.log(await response)
+		return response.json();
+	}catch(err) {
+		console.error(err)
 	}
 }

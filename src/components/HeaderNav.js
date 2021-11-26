@@ -6,8 +6,9 @@ const Header = ({
 }) => {
 
 	let storageLength=1;
-	const userLogout = () => {
+	const userLogout = ({onLogoutCall}) => {
 		sessionStorage.clear();
+		onLogoutCall()
 	}
 	console.log('renderHeader')
 	return (

@@ -11,9 +11,9 @@ import Profile from './components/User/Profile';
 import ErrorPage from './components/ErrorPage';
 import CreateClass from './components/Classes/CreateClass';
 import ClassDetails from './components/Classes/ClassDetails';
-import { useState, useEffect, React } from 'react';
+import { useState, useEffect} from 'react';
 
-export const appContext = React.createContext();
+
 
 
 const App = () => {
