@@ -3,14 +3,12 @@ import { NavLink } from 'react-router-dom';
 const Header = ({
 	isAuth,
 	user,
+	displayName,
+	userLogout
 }) => {
 
-	let storageLength=1;
-	const userLogout = ({onLogoutCall}) => {
-		sessionStorage.clear();
-		onLogoutCall()
-	}
-	console.log('renderHeader')
+	console.log(user, 'Navigation')
+	let userGreet = displayName || user.username
 	return (
 		<>
 		<div className="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -32,8 +30,8 @@ const Header = ({
 					(
 						<div className="user-navigation navbar-nav">
 						<NavLink to="/create" className="nav-item nav-link" activeClassName="active">Create Class</NavLink>
-						<NavLink to="/profile" className="nav-item nav-link user-profile" activeClassName="active">My Profile</NavLink>
-						<NavLink to="/logout" className="nav-item nav-link" activeClassName="active" onClick={userLogout}>Logout</NavLink>
+						<NavLink to={`/profile/${localStorage.userId}`} className="nav-item nav-link user-profile" activeClassName="active">My Profile</NavLink>
+						<NavLink to="/" className="nav-item nav-link" activeClassName="active" onClick={userLogout}>Logout</NavLink>
 
 					</div>
 					)
@@ -43,7 +41,7 @@ const Header = ({
 				</div>
 			</div>
 		</div>
-		{user.first_name ? (<div className="welcome-user">Welcome, {user.first_name}!</div>) : (<div className="welcome-user">Welcome, Guest!</div>)}
+		{userGreet ? (<div className="welcome-user">Welcome, {userGreet}!</div>) : (<div className="welcome-user">Welcome, Guest!</div>)}
 	</div>
 
 

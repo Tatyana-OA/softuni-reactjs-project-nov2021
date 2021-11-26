@@ -9,14 +9,15 @@ const Login =  ({onLoginCall}) => {
 	const userLogin = (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
-		const {username, password} = Object.fromEntries(formData)
+		let {username, password} = Object.fromEntries(formData)
 		console.log( Object.fromEntries(formData));
 		console.log('login')
 
 		userService.getBearerToken({username,password})
 
 		console.log('login', sessionStorage)
-		onLoginCall();
+		username = username.substring(0,1).toUpperCase() + username.substring(1)
+		onLoginCall(username);
 		history.push("/")
 	}
 	return (

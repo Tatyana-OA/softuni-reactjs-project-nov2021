@@ -18,11 +18,11 @@ export async function getBearerToken(currentUser) {
 		result = await response.json()
 		let user = await searchUserByEmail(result.user_email)
 		user=user[0];
-		sessionStorage.setItem('userId', user.id)
-		sessionStorage.setItem('username', user.name)
-		sessionStorage.setItem('token', result.token)
+		localStorage.setItem('userId', user.id)
+		localStorage.setItem('username', user.name)
+		localStorage.setItem('token', result.token)
 		for (let key in user.acf) {
-			sessionStorage.setItem(`${key}`, user.acf[key])
+			localStorage.setItem(`${key}`, user.acf[key])
 		}
 		return result.token;
 
@@ -74,10 +74,10 @@ export async function createUser(userData) {
 	}catch(err) {
 		console.error(err)
 	}
-	sessionStorage.setItem('username', userData.username)
-	sessionStorage.setItem('token', token)
+	localStorage.setItem('username', userData.username)
+	localStorage.setItem('token', token)
 	for (let key in userData.acf) {
-		sessionStorage.setItem(`${key}`, userData.acf[key])
+		localStorage.setItem(`${key}`, userData.acf[key])
 	}
 }
 
@@ -86,7 +86,7 @@ export async function getUserById(id) {
 
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users/${id}`);
 
-		console.log(await response, 'userbyid')
+		// console.log(await response, 'userbyid')
 		return response.json();
 	}catch(err) {
 		console.error(err)

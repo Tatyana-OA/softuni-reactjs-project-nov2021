@@ -10,7 +10,7 @@ const SingleClassCard = ({classData, authorId}) => {
 		
 	}, [])
 	
-	console.log(classAuthor, 'author')
+	// console.log(classAuthor, 'author')
 	return (
 		<div className="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
 		<div className="class-wrap">

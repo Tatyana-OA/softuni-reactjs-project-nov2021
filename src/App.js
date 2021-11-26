@@ -19,22 +19,23 @@ import { useState, useEffect} from 'react';
 const App = () => {
 	const [userInfo, setUserInfo] = useState({isAuth:false, user: ''})
 	useEffect(()=>{
-		let user = sessionStorage;
+		let user = localStorage;
 		setUserInfo({isAuth:Boolean(user.first_name), user:{...user}})
 	}, [])
 
-	const onLoginCall = () => {
-		let user = sessionStorage;
-		setUserInfo({isAuth:true, user:{...user}})
+	const onLoginCall = (displayName) => {
+		let user = localStorage;
+		let userId = localStorage.userId
+		setUserInfo({isAuth:true, user:{...user}, displayName, userId})
 	}
-	const onLogoutCall = () => {
-		let user = sessionStorage;
-		setUserInfo({isAuth:false, user:{...user}})
+	const userLogout = () => {
+		localStorage.clear()
+		setUserInfo({isAuth:false, user:{}})
 	}
-	console.log(userInfo)
+	console.log(userInfo.user)
 	return (
 		<>
-		<Header {...userInfo} />
+		<Header {...userInfo} userLogout={userLogout} />
 		<Switch>
 				<Route path="/" exact component={Hero}/>
 				<Route path="/classes" component={AllClasses}/>
@@ -47,15 +48,9 @@ const App = () => {
 					<Login onLoginCall={onLoginCall}/>
 				</Route>
 
-				<Route path="/profile" component={Profile}/>
+				<Route path="/profile/:userId" component={Profile} />
 				<Route path="/create" component={CreateClass}/>
-				<Route path="/logout" render={
-					() => (
-					<Redirect to="/" onLogoutCall= {onLogoutCall}/>
-					)
-				}/>
 
-				{/* Example for props (children) in between the route */}
 				<Route path="/custom">
 					<h1>This is a custom page</h1>
 					<p>Hello world</p>

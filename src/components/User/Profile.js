@@ -4,24 +4,41 @@ import SingleClassCard from "../Classes/SingleClassCard";
 import { useState, useEffect } from "react";
 
 import * as classService from '../../services/classService';
+import { getUserById } from "../../services/userService";
 
-const Profile = (props) => {
+const Profile = ({
+	location,
+	history,
+	match
+}) => {
 	const [userClasses, setuserClasses] = useState([]);
-
 	useEffect( async ()=>{
 		//TO FIX
 		const result = await classService.getAll();
 		setuserClasses(result);
-		console.log('USER', result)
+
 
 	},[])
-  return (
+
+	const [currentUser, setCurrentUser] = useState([]);
+	useEffect( async () => {
+		const result = await getUserById(match.params.userId)
+		setCurrentUser(result)
+
+	}, [])
+	console.log(currentUser)
+  return currentUser.name ? (
     <>
       <SinglePageHead pageInfo={{ name: "My Account", slug:'profile' }} />
       <div className="team">
         <div className="container">
           <div className="row inf-content">
-            <SingleTeamMember style={{ marginTop: "2em" }} />
+            <SingleTeamMember
+				style={{ marginTop: "2em" }}
+				userImage={currentUser.acf.user_imageUrl}
+				userFullName={`${currentUser.acf.first_name} ${currentUser.acf.last_name}`}
+				userType = {currentUser.acf.user_type}
+			/>
             <div className="col-md-6 user-info">
               <strong>Information</strong>
               <br />
@@ -35,9 +52,17 @@ const Profile = (props) => {
                           Username
                         </strong>
                       </td>
-                      <td className="text-primary">bootnipets</td>
+                      <td className="text-primary">{currentUser.name || "Yoga User"}</td>
                     </tr>
-
+					<tr>
+                      <td>
+                        <strong>
+                          <span className="glyphicon glyphicon-calendar text-primary"></span>
+                          Full Name
+                        </strong>
+                      </td>
+                      <td className="text-primary">{`${currentUser.acf.first_name} ${currentUser.acf.last_name}` || "Default User"}</td>
+                    </tr>
                     <tr>
                       <td>
                         <strong>
@@ -45,7 +70,7 @@ const Profile = (props) => {
                           Role
                         </strong>
                       </td>
-                      <td className="text-primary">Admin</td>
+                      <td className="text-primary">Yoga {currentUser.acf.user_type || "User"}</td>
                     </tr>
                     <tr>
                       <td>
@@ -54,17 +79,9 @@ const Profile = (props) => {
                           Email
                         </strong>
                       </td>
-                      <td className="text-primary">noreply@email.com</td>
+                      <td className="text-primary">{currentUser.acf.email || "No email provided"}</td>
                     </tr>
-                    <tr>
-                      <td>
-                        <strong>
-                          <span className="glyphicon glyphicon-calendar text-primary"></span>
-                          Joined on
-                        </strong>
-                      </td>
-                      <td className="text-primary">20 jul 20014</td>
-                    </tr>
+
                     <tr>
                       <td>
                         <strong>
@@ -92,12 +109,26 @@ const Profile = (props) => {
           <div className="container">
             <div className="row class-container">
               {/* TO DO DYNAMIC  */}
-			  { userClasses.map(c => <SingleClassCard key = {c.id} classData = {c}/>) }
+			  { userClasses.map(c =>
+			  <SingleClassCard
+			  	key = {c.id}
+				classData = {c}
+				authorId={c.author}
+				/>) }
             </div>
           </div>
         </div>
       </div>
     </>
+  ): (
+	  <>
+	<SinglePageHead pageInfo={{ name: "My Account", slug:'profile' }} />
+	<div className="team">
+	  <div className="container">
+		  Loading...
+		  </div>
+		  </div> 
+		  </>
   );
 };
 export default Profile;
