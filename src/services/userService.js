@@ -93,3 +93,13 @@ export async function getUserById(id) {
 		console.error(err)
 	}
 }
+
+
+export function ValidateEmail(mail) {
+	console.log('validating')
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+      return true;
+    } else {
+		return false;
+	}
+  }
