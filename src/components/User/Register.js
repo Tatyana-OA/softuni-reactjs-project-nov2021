@@ -1,14 +1,20 @@
 import SinglePageHead from "../SinglePageHead";
 
 import * as userService from '../../services/userService';
+import { useContext } from "react";
+import AuthContext from "../../contexts/AuthContext";
+import { useHistory } from "react-router";
 
-const Register = (props) => {
-	const onRegister = (e) => {
+
+const Register = () => {
+	let history = useHistory()
+	const { exposeUserInfo } = useContext(AuthContext)
+	const onRegister = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const {username, email, first_name, last_name, password, re_password, user_imageUrl, user_type} = Object.fromEntries(formData)
-		console.log( Object.fromEntries(formData));
-		console.log('register form')
+
+		// TO DO: VALIDATION
 
 		const cleanUserData = {
 			username,
@@ -25,7 +31,12 @@ const Register = (props) => {
 
 		}
 
-		userService.createUser(cleanUserData)
+		const createdUser = userService.createUser(cleanUserData);
+		
+		exposeUserInfo(createdUser);
+		// username = username.substring(0,1).toUpperCase() + username.substring(1)
+		// onLoginCall(username);
+		history.push("/")
 
 
 

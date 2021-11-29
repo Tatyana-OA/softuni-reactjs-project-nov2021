@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 
 import * as classService from '../../services/classService';
 import { getUserById } from "../../services/userService";
+import { useContext } from "react";
+import AuthContext from "../../contexts/AuthContext";
 
 const Profile = ({
 	location,
@@ -20,14 +22,18 @@ const Profile = ({
 
 	},[])
 
-	const [currentUser, setCurrentUser] = useState([]);
-	useEffect( async () => {
-		const result = await getUserById(match.params.userId)
-		setCurrentUser(result)
+	let {userInfo} = useContext(AuthContext)
+	console.log(userInfo,'Profile Context')
+	const userId = userInfo.user.user.id
+	const user = userInfo.user.user;
 
-	}, [])
-	console.log(currentUser)
-  return currentUser.name ? (
+
+	// return (
+	// 	<h1>PRofile</h1>
+	// )
+
+	console.log(user)
+  return userInfo.isAuth ? (
     <>
       <SinglePageHead pageInfo={{ name: "My Account", slug:'profile' }} />
       <div className="team">
@@ -35,9 +41,9 @@ const Profile = ({
           <div className="row inf-content">
             <SingleTeamMember
 				style={{ marginTop: "2em" }}
-				userImage={currentUser.acf.user_imageUrl}
-				userFullName={`${currentUser.acf.first_name} ${currentUser.acf.last_name}`}
-				userType = {currentUser.acf.user_type}
+				userImage={user.acf.user_imageUrl}
+				userFullName={`${user.acf.first_name} ${user.acf.last_name}`}
+				userType = {user.acf.user_type}
 			/>
             <div className="col-md-6 user-info">
               <strong>Information</strong>
@@ -52,7 +58,7 @@ const Profile = ({
                           Username
                         </strong>
                       </td>
-                      <td className="text-primary">{currentUser.name || "Yoga User"}</td>
+                      <td className="text-primary">{user.name || "Yoga User"}</td>
                     </tr>
 					<tr>
                       <td>
@@ -61,7 +67,7 @@ const Profile = ({
                           Full Name
                         </strong>
                       </td>
-                      <td className="text-primary">{`${currentUser.acf.first_name} ${currentUser.acf.last_name}` || "Default User"}</td>
+                      <td className="text-primary">{`${user.acf.first_name} ${user.acf.last_name}` || "Default User"}</td>
                     </tr>
                     <tr>
                       <td>
@@ -70,7 +76,7 @@ const Profile = ({
                           Role
                         </strong>
                       </td>
-                      <td className="text-primary">Yoga {currentUser.acf.user_type || "User"}</td>
+                      <td className="text-primary">Yoga {user.acf.user_type || "User"}</td>
                     </tr>
                     <tr>
                       <td>
@@ -79,7 +85,7 @@ const Profile = ({
                           Email
                         </strong>
                       </td>
-                      <td className="text-primary">{currentUser.acf.email || "No email provided"}</td>
+                      <td className="text-primary">{user.acf.email || "No email provided"}</td>
                     </tr>
 
                     <tr>
@@ -102,7 +108,7 @@ const Profile = ({
             data-wow-delay="0.1s"
           >
             <p> Someone's Classes </p>
-            <h2>{currentUser.acf.user_type == "student" ? "Classes you have booked" : "Classes you teach"}</h2>
+            <h2>{user.acf.user_type == "student" ? "Classes you have booked" : "Classes you teach"}</h2>
           </div>
         </div>
         <div className="class">

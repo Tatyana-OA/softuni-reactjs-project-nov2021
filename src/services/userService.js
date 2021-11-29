@@ -17,14 +17,16 @@ export async function getBearerToken(currentUser) {
 		let response = await fetch(`${apiUrl}/wp-json/jwt-auth/v1/token?username=${currentUser.username}&password=${currentUser.password}`, settings);
 		result = await response.json()
 		let user = await searchUserByEmail(result.user_email)
-		user=user[0];
+		result.user=user[0];
+		user = user[0]
 		localStorage.setItem('userId', user.id)
 		localStorage.setItem('username', user.name)
 		localStorage.setItem('token', result.token)
 		for (let key in user.acf) {
 			localStorage.setItem(`${key}`, user.acf[key])
 		}
-		return result.token;
+		console.log('login result',result.token)
+		return result;
 
 	}catch(err) {
 		console.error(err)
@@ -43,7 +45,7 @@ export async function searchUserByEmail(email) {
 	try {
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users?search=${email}`, settings)
 		let result = await response.json();
-		console.log(await result)
+		console.log(await result, 'Search user by email')
 		return result;
 	}catch(err) {
 		console.error(err)
@@ -53,7 +55,7 @@ export async function searchUserByEmail(email) {
 
 
 export async function createUser(userData) {
-	const token = await getBearerToken({
+	const {token} = await getBearerToken({
 		"username": "Nexxita",
 		"password": "18071702TKteam"
 	})
@@ -69,7 +71,6 @@ export async function createUser(userData) {
 		};
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users`, settings);
 
-		console.log(await response)
 		return response.json();
 	}catch(err) {
 		console.error(err)

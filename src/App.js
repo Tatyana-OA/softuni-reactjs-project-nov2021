@@ -19,24 +19,23 @@ import AuthContext from './contexts/AuthContext';
 
 const App = () => {
 	const [userInfo, setUserInfo] = useState({isAuth:false, user: ''})
-	useEffect(()=>{
-		let user = localStorage;
-		setUserInfo({isAuth:Boolean(user.first_name), user:{...user}})
-	}, [])
+	console.log('App: ', userInfo)
+	// useEffect(()=>{
+	// 	let user = localStorage;
+	// 	setUserInfo({isAuth:Boolean(user.first_name), user:{...user}})
+	// }, [])
 
-	const onLoginCall = (displayName) => {
-		let user = localStorage;
-		let userId = localStorage.userId
-		setUserInfo({isAuth:true, user:{...user}, displayName, userId})
-	}
 	const userLogout = () => {
 		localStorage.clear()
-		setUserInfo({isAuth:false, user:{}})
+		exposeUserInfo({})
 	}
-	console.log(userInfo.user)
+	const exposeUserInfo = (user) => {
+
+		setUserInfo({isAuth:Boolean(user.first_name || user.token), user:{...user}})
+	}
 	return (
 		<>
-		<AuthContext.Provider value={'Hello'}>
+		<AuthContext.Provider value={{userInfo, exposeUserInfo }}>
 		<Header {...userInfo} userLogout={userLogout} />
 		<Switch>
 				<Route path="/" exact component={Hero}/>
@@ -47,7 +46,7 @@ const App = () => {
 
 				<Route path="/register" component={Register}/>()
 				<Route path="/login">
-					<Login onLoginCall={onLoginCall}/>
+					<Login/>
 				</Route>
 
 				<Route path="/profile/:userId" component={Profile} />

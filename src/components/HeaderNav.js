@@ -3,13 +3,33 @@ import { useContext } from 'react';
 import AuthContext from '../contexts/AuthContext';
 
 const Header = ({
-	isAuth,
-	user,
 	userLogout
 }) => {
 
-	console.log(user, useContext(AuthContext))
-	let userGreet =  useContext(AuthContext)
+	//console.log(user, 'Navigation')
+	let {userInfo} = useContext(AuthContext);
+	let displayName = '';
+	let userId = ''
+
+	if (userInfo.isAuth && userInfo.user.user) {
+		console.log('After login')
+		 displayName = userInfo.user.user_display_name || ''
+		 userId = userInfo.user.user.id || ''
+	} else if (userInfo.isAth && userInfo.user){
+		console.log('After register')
+		displayName = userInfo.user.name || ''
+		userId = userInfo.user.id || ''
+	}
+	 
+
+	
+	
+
+	// 	// id -> 
+	//  console.log(displayName,'context')
+	// //  console.log(userId, 'ID')
+	//  console.log(userInfo, 'userInfo')
+	// //  console.log(userInfo.user.user.id)
 	return (
 		<>
 		<div className="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -22,7 +42,7 @@ const Header = ({
 					<NavLink to="/teachers" className="nav-item nav-link" activeClassName="active">Teachers</NavLink>
 					<NavLink to="/contact" className="nav-item nav-link" activeClassName="active">Contact</NavLink>
 
-					{! isAuth ? (
+					{! userInfo.isAuth ? (
 						<div className="guest-navigation navbar-nav">
 						<NavLink to="/login" className="nav-item nav-link" activeClassName="active">Login</NavLink>
 						<NavLink to="/register" className="nav-item nav-link" activeClassName="active">Register</NavLink>
@@ -31,7 +51,7 @@ const Header = ({
 					(
 						<div className="user-navigation navbar-nav">
 						<NavLink to="/create" className="nav-item nav-link" activeClassName="active">Create Class</NavLink>
-						<NavLink to={`/profile/${localStorage.userId}`} className="nav-item nav-link user-profile" activeClassName="active">My Profile</NavLink>
+						<NavLink to={`/profile/${userId}`} className="nav-item nav-link user-profile" activeClassName="active">My Profile</NavLink>
 						<NavLink to="/" className="nav-item nav-link" activeClassName="active" onClick={userLogout}>Logout</NavLink>
 
 					</div>
@@ -42,7 +62,7 @@ const Header = ({
 				</div>
 			</div>
 		</div>
-		{userGreet ? (<div className="welcome-user">Welcome, {userGreet}!</div>) : (<div className="welcome-user">Welcome, Guest!</div>)}
+		{displayName ? (<div className="welcome-user">Welcome, {displayName}!</div>) : (<div className="welcome-user">Welcome, Guest!</div>)}
 	</div>
 
 
