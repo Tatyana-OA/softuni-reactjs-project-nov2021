@@ -51,15 +51,22 @@ const Contact = () => {
 			  setSuccesss('Message Successfully Sent.')
 			  console.log(toSend)
 			  e.target.reset();
+			  hideSuccessError()
 			})
 			.catch((err) => {
 			  console.log('FAILED...', err);
 			  setSuccesss('Error. Message was not sent.')
+			  hideSuccessError()
 			});
 		//invalidEmail = userService.ValidateEmail(email)
-		
+
 	}
 
+		function hideSuccessError() {
+			setTimeout(() => {
+				setSuccesss('')
+			}, 3000)
+		}
 	return (
 		<>
 		<SinglePageHead pageInfo={{name:'Contact', slug:'contact'}} />
