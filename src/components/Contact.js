@@ -5,23 +5,40 @@ import { useState } from "react";
 
 const Contact = () => {
 	const [toSend, setToSend] = useState({
-		from_name: '',
-		to_name: '',
-		message: '',
-		reply_to: '',
+		"from_name": '',
+		"to_name": 'Admin',
+		"message": '',
+		"reply_to": '',
 	  });
 	  const [success, setSuccesss] = useState('');
+	 let userData = []
+
+	  const getName = (e) => {
+		userData.push(e.target.value)
+		setToSend(prevState => ({
+			...prevState,
+			["from_name"]: e.target.value
+		}));
+		console.log(e.target.value)
+	  }
+	  const getEmail = (e) => {
+		setToSend(prevState => ({
+			...prevState,
+			["reply_to"]: e.target.value
+		}));
+		console.log(e.target.value)
+	  }
+	  const getMessage = (e) => {
+		setToSend(prevState => ({
+			...prevState,
+			["message"]: e.target.value
+		}));
+		console.log(e.target.value)
+	  }
+
 
 	function submitContact(e) {
 		e.preventDefault();
-		const {name, email, message}= Object.fromEntries(new FormData(e.target))
-
-		setToSend({
-		'from_name': name,
-		to_name: 'Admin',
-		message: message,
-		reply_to: email,
-		})
 	
 		send(
 			'service_odjm2ae',
@@ -33,13 +50,14 @@ const Contact = () => {
 			  console.log('SUCCESS!', response.status, response.text);
 			  setSuccesss('Message Successfully Sent.')
 			  console.log(toSend)
+			  e.target.reset();
 			})
 			.catch((err) => {
 			  console.log('FAILED...', err);
 			  setSuccesss('Error. Message was not sent.')
 			});
 		//invalidEmail = userService.ValidateEmail(email)
-		e.target.reset();
+		
 	}
 
 	return (
@@ -83,15 +101,15 @@ const Contact = () => {
                             <form name="sentMessage" id="contactForm" onSubmit={submitContact}> 
 							<div>{success !== '' ? success : ''}</div>
                                 <div className="control-group">
-                                    <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required="required"  data-validation-required-message="Please enter your name" />
+                                    <input onBlur={getName} type="text" name="name" className="form-control" id="name" placeholder="Your Name" required="required"  data-validation-required-message="Please enter your name" />
                                     <p className="help-block text-danger"></p>
                                 </div>
                                 <div className="control-group">
-                                    <input type="email" name="email" className="form-control" id="email" placeholder="Your Email" required="required"  data-validation-required-message="Please enter your email" />
+                                    <input onBlur={getEmail} type="email" name="email" className="form-control" id="email" placeholder="Your Email" required="required"  data-validation-required-message="Please enter your email" />
                                     <p className="help-block text-danger"></p>
                                 </div>
                                 <div className="control-group">
-                                    <textarea name="message" className="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
+                                    <textarea onBlur={getMessage}  name="message" className="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
                                     <p className="help-block text-danger"></p>
                                 </div>
                                 <div>
