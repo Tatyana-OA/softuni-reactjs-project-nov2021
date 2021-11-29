@@ -11,7 +11,8 @@ import Profile from './components/User/Profile';
 import ErrorPage from './components/ErrorPage';
 import CreateClass from './components/Classes/CreateClass';
 import ClassDetails from './components/Classes/ClassDetails';
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useContext } from 'react';
+import AuthContext from './contexts/AuthContext';
 
 
 
@@ -35,6 +36,7 @@ const App = () => {
 	console.log(userInfo.user)
 	return (
 		<>
+		<AuthContext.Provider value={'Hello'}>
 		<Header {...userInfo} userLogout={userLogout} />
 		<Switch>
 				<Route path="/" exact component={Hero}/>
@@ -59,6 +61,7 @@ const App = () => {
 				<Route path="*" component={ErrorPage}></Route>
 				</Switch>
 			<Footer />
+			</AuthContext.Provider>
 		</>
 	)
 }

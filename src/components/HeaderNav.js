@@ -1,14 +1,15 @@
 import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import AuthContext from '../contexts/AuthContext';
 
 const Header = ({
 	isAuth,
 	user,
-	displayName,
 	userLogout
 }) => {
 
-	console.log(user, 'Navigation')
-	let userGreet = displayName || user.username
+	console.log(user, useContext(AuthContext))
+	let userGreet =  useContext(AuthContext)
 	return (
 		<>
 		<div className="navbar navbar-expand-lg bg-dark navbar-dark">
