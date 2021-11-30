@@ -10,20 +10,27 @@ const Header = ({
 	let {userInfo} = useContext(AuthContext);
 	let displayName = '';
 	let userId = ''
+	let locallyAuth=false;
 
 	if (userInfo.isAuth && userInfo.user.user) {
 		console.log('After login')
 		 displayName = userInfo.user.user_display_name || ''
 		 userId = userInfo.user.user.id || ''
-	} else if (userInfo.isAth && userInfo.user){
-		console.log('After register')
-		displayName = userInfo.user.name || ''
-		userId = userInfo.user.id || ''
-	}
-	 
+	} 
 
+	console.log(JSON.parse(localStorage.getItem('user')))
 	
-	
+	if (localStorage.getItem('user')) {
+		const localStorageUser = JSON.parse(localStorage.getItem('user'))
+		console.log('Logged user persists on refresh')
+		displayName = localStorageUser.user_display_name || ''
+		userId = localStorageUser.user.id || ''
+		locallyAuth = !locallyAuth
+		console.log(locallyAuth)
+
+	}
+
+	const isAuth = locallyAuth || userInfo.isAuth
 
 	// 	// id -> 
 	//  console.log(displayName,'context')
@@ -42,7 +49,7 @@ const Header = ({
 					<NavLink to="/teachers" className="nav-item nav-link" activeClassName="active">Teachers</NavLink>
 					<NavLink to="/contact" className="nav-item nav-link" activeClassName="active">Contact</NavLink>
 
-					{! userInfo.isAuth ? (
+					{! isAuth  ? (
 						<div className="guest-navigation navbar-nav">
 						<NavLink to="/login" className="nav-item nav-link" activeClassName="active">Login</NavLink>
 						<NavLink to="/register" className="nav-item nav-link" activeClassName="active">Register</NavLink>

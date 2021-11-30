@@ -22,10 +22,27 @@ const Profile = ({
 
 	},[])
 
+	let userId;
+	let user;
+	
+
 	let {userInfo} = useContext(AuthContext)
 	console.log(userInfo,'Profile Context')
-	const userId = userInfo.user.user.id
-	const user = userInfo.user.user;
+	if (userInfo.user !=='')  {
+		userId = userInfo.user.user.id
+		user = userInfo.user.user;
+	} else {
+	
+			const localStorageUser = JSON.parse(localStorage.getItem('user'))
+			console.log('Logged user persists on refresh')
+			user = localStorageUser.user
+			userId = localStorageUser.user.id || ''
+		
+	}
+
+	let isAuth = userInfo.isAuth || localStorage.user
+
+	console.log(user)
 
 
 	// return (
@@ -33,7 +50,7 @@ const Profile = ({
 	// )
 
 	console.log(user)
-  return userInfo.isAuth ? (
+  return isAuth ? (
     <>
       <SinglePageHead pageInfo={{ name: "My Account", slug:'profile' }} />
       <div className="team">

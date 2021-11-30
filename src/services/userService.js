@@ -19,12 +19,6 @@ export async function getBearerToken(currentUser) {
 		let user = await searchUserByEmail(result.user_email)
 		result.user=user[0];
 		user = user[0]
-		localStorage.setItem('userId', user.id)
-		localStorage.setItem('username', user.name)
-		localStorage.setItem('token', result.token)
-		for (let key in user.acf) {
-			localStorage.setItem(`${key}`, user.acf[key])
-		}
 		console.log('login result',result.token)
 		return result;
 

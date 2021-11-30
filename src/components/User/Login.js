@@ -19,6 +19,7 @@ const Login =  ({}) => {
 		const result = await userService.getBearerToken({username,password})
 		const user = {...result, token:result.token}
 		exposeUserInfo(user);
+		localStorage.setItem('user', JSON.stringify(user))
 		// username = username.substring(0,1).toUpperCase() + username.substring(1)
 		// onLoginCall(username);
 		history.push("/")
