@@ -42,7 +42,7 @@ const App = () => {
 				<Route path="/classes" component={AllClasses}/>
 				<Route path="/teachers" component={TeamAll}/>
 				<Route path="/contact" component={Contact}/>
-				<Route path="/details" component={ClassDetails}/>
+				<Route path="/details/:cardId" component={ClassDetails}/>
 
 				<Route path="/register" component={Register}/>()
 				<Route path="/login">

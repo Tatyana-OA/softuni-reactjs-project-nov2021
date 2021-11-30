@@ -47,3 +47,12 @@ export async function createClass(classData) {
 	}
 }
 
+export async function getClassById(id) {
+	try {
+		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes/${id}`);
+		
+		return response.json();
+	}catch(err) {
+		console.error(err)
+	}
+}

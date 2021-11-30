@@ -2,8 +2,9 @@ import * as userService from '../../services/userService'
 import { useState, useEffect } from 'react';
 import { ClassTeacherInfo } from './ClassTeacherInfo';
 
-const SingleClassCard = ({classData, authorId}) => {
+const SingleClassCard = ({classData, authorId, cardId}) => {
 	const [classAuthor, setClassAuthor] = useState({})
+	console.log(cardId)
 	useEffect( async () => {
 		const result = await userService.getUserById(authorId)
 		setClassAuthor(result["acf"])
@@ -19,7 +20,7 @@ const SingleClassCard = ({classData, authorId}) => {
 			</div>
 			<div className="class-text">
 
-			<ClassTeacherInfo classAuthor={classAuthor}/>
+			<ClassTeacherInfo classAuthor={classAuthor} cardId={cardId}/>
 
 				<h2>{classData.name}</h2>
 				<div className="class-meta">

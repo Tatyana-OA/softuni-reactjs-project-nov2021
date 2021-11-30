@@ -4,15 +4,10 @@ import SingleClassCard from "../Classes/SingleClassCard";
 import { useState, useEffect } from "react";
 
 import * as classService from '../../services/classService';
-import { getUserById } from "../../services/userService";
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";
 
-const Profile = ({
-	location,
-	history,
-	match
-}) => {
+const Profile = () => {
 	const [userClasses, setuserClasses] = useState([]);
 	useEffect( async ()=>{
 		//TO FIX

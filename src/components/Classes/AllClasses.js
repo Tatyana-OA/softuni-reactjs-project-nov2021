@@ -64,7 +64,7 @@ const AllClasses = () => {
                     </div>
                 </div>
                 <div className="row class-container">
-					{ allClasses.map(c => <SingleClassCard key = {c.id} classData = {c} authorId={c.author}/>) }
+					{ allClasses.map(c => <SingleClassCard key = {c.id} classData = {c} authorId={c.author} cardId={c.id}/>) }
 
                 </div>
             </div>
