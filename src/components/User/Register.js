@@ -32,11 +32,9 @@ const Register = () => {
 		}
 
 		const createdUser = userService.createUser(cleanUserData);
-		
-		exposeUserInfo(createdUser);
 		// username = username.substring(0,1).toUpperCase() + username.substring(1)
 		// onLoginCall(username);
-		history.push("/")
+		history.push("/login")
 
 
 
