@@ -13,6 +13,7 @@ import CreateClass from './components/Classes/CreateClass';
 import ClassDetails from './components/Classes/ClassDetails';
 import { useState, useEffect, useContext } from 'react';
 import AuthContext from './contexts/AuthContext';
+import AuthorContext from './contexts/AuthorContext';
 
 
 
@@ -20,10 +21,6 @@ import AuthContext from './contexts/AuthContext';
 const App = () => {
 	const [userInfo, setUserInfo] = useState({isAuth:false, user: ''})
 	console.log('App: ', userInfo)
-	// useEffect(()=>{
-	// 	let user = localStorage;
-	// 	setUserInfo({isAuth:Boolean(user.first_name), user:{...user}})
-	// }, [])
 
 	const userLogout = () => {
 		localStorage.clear()
@@ -33,6 +30,7 @@ const App = () => {
 
 		setUserInfo({isAuth:Boolean(user.first_name || user.token), user:{...user}})
 	}
+
 	return (
 		<>
 		<AuthContext.Provider value={{userInfo, exposeUserInfo }}>

@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 
+
+
 export const ClassTeacherInfo = ({classAuthor, cardId}) => {
+
+	//exposeAuthorInfo(classAuthor)
+	console.log()
 	// console.log(classAuthor, 'prop')
 	console.log(cardId, 'infocard')
 
