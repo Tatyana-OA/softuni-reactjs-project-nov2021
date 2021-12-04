@@ -16,3 +16,9 @@
 i.del {
 	margin-right: 5px;
 }
+.go-back {
+	text-align:center;
+	font-size: 20px;
+	margin-top:15px;
+	text-decoration:underline;
+}

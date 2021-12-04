@@ -14,7 +14,7 @@ import ClassDetails from './components/Classes/ClassDetails';
 import { useState, useEffect, useContext } from 'react';
 import AuthContext from './contexts/AuthContext';
 import EditClass from './components/Classes/EditClass';
-import DeleteClass from './components/Classes/DeleteClass';
+import DeleteClass from './components/Classes/Delete/DeleteClass';
 
 
 

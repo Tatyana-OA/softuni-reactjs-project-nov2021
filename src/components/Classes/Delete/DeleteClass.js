@@ -1,9 +1,10 @@
-import SinglePageHead from "../SinglePageHead";
-import * as classService from '../../services/classService'
+import SinglePageHead from "../../SinglePageHead";
+import * as classService from '../../../services/classService'
 import { useContext } from "react";
-import AuthContext from "../../contexts/AuthContext";
+import AuthContext from "../../../contexts/AuthContext";
 
 import "./DeleteClass.css"
+import { Link } from "react-router-dom";
 
 
 
@@ -57,6 +58,7 @@ const DeleteClass = ({
 		</div>
         <div className="button">
           <input type="submit" value="Yes, I would like to DELETE this class" />
+		  <Link to="/"><p className="go-back">Nah, Go back.</p> </Link>
         </div>
       </form>
     </div>
