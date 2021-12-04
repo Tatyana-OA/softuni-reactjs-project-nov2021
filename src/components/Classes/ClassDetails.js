@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import SinglePageHead from "../SinglePageHead";
 import * as classService from '../../services/classService';
-import { useState, useEffect } from "react";
-import * as userService from '../../services/userService';
+import { useState, useEffect, useContext } from "react";
+import AuthContext from "../../contexts/AuthContext";
+
 
 
 const ClassDetails = ({
@@ -13,7 +14,8 @@ const ClassDetails = ({
 }) => {
 
 const classAuthor = location.state
-console.log(classAuthor)
+const authorId = location.state.authorId
+const {userInfo: currentLoggedUser}= useContext(AuthContext)
 const [classDetails, setClassDetails] = useState({})
 
 useEffect(() => {
@@ -25,7 +27,15 @@ useEffect(() => {
 	 getClass()
 }, [])
 
-let {id, authorId, acf } = classDetails;
+let {id, acf } = classDetails;
+
+const showBtns = Boolean(currentLoggedUser.isAuth) || Boolean(localStorage.getItem('user'))
+const localStorageUser = JSON.parse(localStorage.getItem('user'))
+let isAuthor = false;
+if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
+	|| localStorageUser && localStorageUser.user.id === authorId) {
+	isAuthor = true;
+}
 
 
     return acf ? (
@@ -71,7 +81,6 @@ let {id, authorId, acf } = classDetails;
 					  ) :
 					  <h1> No author info </h1>
 					  }
-                     
                       <li><strong>Class Type:</strong> {acf.type}</li>
                       <li><strong>Group Size:</strong> {acf.capacity} </li>
                       <li><strong>Spots Left:</strong> 5</li>
@@ -80,25 +89,32 @@ let {id, authorId, acf } = classDetails;
                     </ul>
                   </div>
                 </div>
-
-                <div className="sidebar-widget wow fadeInUp">
-					<div className="guest-btns">
+				{showBtns ? (
+				<div className="sidebar-widget wow fadeInUp">
+				{! isAuthor ? (
+				<div className="guest-btns">
+				<button className="submit login details">
+				{" "}
+				<Link className="btn">Book Now</Link>{" "}
+				</button>
+				</div>
+				) : (
+					<div className="author-btns">
 					<button className="submit login details">
-                    {" "}
-                    <Link className="btn">Book Now</Link>{" "}
-                  </button>
+					{" "}
+					<Link className="btn">Edit</Link>{" "}
+					</button>
+					<button className="submit login details">
+					{" "}
+					<Link className="btn">Delete</Link>{" "}
+					</button>
 					</div>
-				  <div className="author-btns">
-				  <button className="submit login details">
-                    {" "}
-                    <Link className="btn">Edit</Link>{" "}
-                  </button>
-				  <button className="submit login details">
-                    {" "}
-                    <Link className="btn">Delete</Link>{" "}
-                  </button>
-				  </div>
-                </div>
+				)}
+
+				</div>
+					)
+				: (<span><Link to="/login">Log in </Link>to Book, Edit or Delete class.</span>)
+				}
               </div>
             </div>
           </div>

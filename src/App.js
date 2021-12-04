@@ -20,17 +20,18 @@ import AuthContext from './contexts/AuthContext';
 
 const App = () => {
 	const [userInfo, setUserInfo] = useState({isAuth:false, user: ''})
+	const localStorageUser = JSON.parse(localStorage.getItem('user'))
+
 	console.log('App: ', userInfo)
 
+	console.log('App says: ', localStorageUser)
 	const userLogout = () => {
 		localStorage.clear()
 		exposeUserInfo({})
 	}
 	const exposeUserInfo = (user) => {
-
 		setUserInfo({isAuth:Boolean(user.first_name || user.token), user:{...user}})
 	}
-
 	return (
 		<>
 		<AuthContext.Provider value={{userInfo, exposeUserInfo }}>

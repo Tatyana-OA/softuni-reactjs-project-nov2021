@@ -24,7 +24,7 @@ const SingleClassCard = ({classData, authorId, cardId}) => {
 			</div>
 			<div className="class-text">
 
-			<ClassTeacherInfo classAuthor={classAuthor} cardId={cardId}/>
+			<ClassTeacherInfo classAuthor={classAuthor} cardId={cardId} authorId={authorId}/>
 
 				<h2>{classData.name}</h2>
 				<div className="class-meta">

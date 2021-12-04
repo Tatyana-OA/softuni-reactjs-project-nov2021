@@ -7,7 +7,7 @@ const Header = ({
 }) => {
 
 	//console.log(user, 'Navigation')
-	let {userInfo} = useContext(AuthContext);
+	let {userInfo, exposeUserInfo} = useContext(AuthContext);
 	let displayName = '';
 	let userId = ''
 	let locallyAuth=false;
