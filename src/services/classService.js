@@ -26,7 +26,7 @@ export async function getLatest()  {
 export async function createClass(classData, userToken) {
 	//console.log(classData, userToken)
 
-	
+
 	try {
 		const settings = {
 			method: 'POST',
@@ -49,6 +49,25 @@ export async function getClassById(id) {
 	try {
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes/${id}`);
 		
+		return response.json();
+	}catch(err) {
+		console.error(err)
+	}
+}
+
+export async function editClassbyId(classData, classId, userToken) {
+	try {
+		const settings = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + userToken
+			},
+			body: JSON.stringify(classData)
+		};
+		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes/${classId}`, settings);
+		console.log(response)
+
 		return response.json();
 	}catch(err) {
 		console.error(err)

@@ -102,11 +102,11 @@ if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
 					<div className="author-btns">
 					<button className="submit login details">
 					{" "}
-					<Link className="btn">Edit</Link>{" "}
+					<Link className="btn" to={{pathname: `/edit/${match.params.cardId}`, state: acf}}>EDIT</Link>
 					</button>
 					<button className="submit login details">
 					{" "}
-					<Link className="btn">Delete</Link>{" "}
+					<Link className="btn">DELETE</Link>{" "}
 					</button>
 					</div>
 				)}

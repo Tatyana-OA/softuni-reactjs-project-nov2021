@@ -13,6 +13,7 @@ import CreateClass from './components/Classes/CreateClass';
 import ClassDetails from './components/Classes/ClassDetails';
 import { useState, useEffect, useContext } from 'react';
 import AuthContext from './contexts/AuthContext';
+import EditClass from './components/Classes/EditClass';
 
 
 
@@ -42,6 +43,7 @@ const App = () => {
 				<Route path="/teachers" component={TeamAll}/>
 				<Route path="/contact" component={Contact}/>
 				<Route path="/details/:cardId" component={ClassDetails}/>
+				<Route path="/edit/:classId" component={EditClass}/>
 
 				<Route path="/register" component={Register}/>()
 				<Route path="/login">
