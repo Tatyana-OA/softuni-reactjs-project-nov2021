@@ -1,7 +1,7 @@
 import SinglePageHead from "../SinglePageHead";
 import SingleClassCard from "../../components/Classes/SingleClassCard";
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 
 import * as classService from '../../services/classService';
 

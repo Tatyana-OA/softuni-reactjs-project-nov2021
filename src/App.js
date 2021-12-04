@@ -13,7 +13,7 @@ import CreateClass from './components/Classes/CreateClass';
 import ClassDetails from './components/Classes/ClassDetails';
 import { useState, useEffect, useContext } from 'react';
 import AuthContext from './contexts/AuthContext';
-import AuthorContext from './contexts/AuthorContext';
+
 
 
 

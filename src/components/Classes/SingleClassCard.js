@@ -2,9 +2,13 @@ import * as userService from '../../services/userService'
 import { useState, useEffect } from 'react';
 import { ClassTeacherInfo } from './ClassTeacherInfo';
 
+
+
 const SingleClassCard = ({classData, authorId, cardId}) => {
 	const [classAuthor, setClassAuthor] = useState({})
-	console.log(cardId)
+		const exposeAuthorInfo = (author) => {
+		setClassAuthor(author)
+	}
 	useEffect( async () => {
 		const result = await userService.getUserById(authorId)
 		setClassAuthor(result["acf"])
