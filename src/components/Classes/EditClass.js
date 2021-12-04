@@ -64,7 +64,7 @@ const EditClass = ({
           </div>
           <div className="input-box">
             <span className="details">Type</span>
-			<select name="type">
+			<select name="type" defaultValue={classInfo.type}>
 				<option value="body balance">Body Balance</option>
 				<option value="hatha yoga">Hatha Yoga</option>
 				<option value="children yoga">Children Yoga</option>
