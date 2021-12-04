@@ -88,6 +88,16 @@ export async function getUserById(id) {
 		console.error(err)
 	}
 }
+export async function getTeachers() {
+	try {
+		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users?user_type=teacher`);
+
+		// console.log(await response, 'userbyid')
+		return response.json();
+	}catch(err) {
+		console.error(err)
+	}
+}
 
 
 export function ValidateEmail(mail) {
@@ -98,3 +108,5 @@ export function ValidateEmail(mail) {
 		return false;
 	}
   }
+
+  

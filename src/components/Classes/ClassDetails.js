@@ -95,7 +95,7 @@ if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
 				<div className="guest-btns">
 				<button className="submit login details">
 				{" "}
-				<Link className="btn">Book Now</Link>{" "}
+				<Link className="btn" to={{pathname: `/book/${match.params.cardId}`, state: acf}} >Book Now</Link>{" "}
 				</button>
 				</div>
 				) : (
