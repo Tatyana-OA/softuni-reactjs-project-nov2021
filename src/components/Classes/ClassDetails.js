@@ -8,9 +8,12 @@ import * as userService from '../../services/userService';
 const ClassDetails = ({
 	location,
 	history,
-	match
+	match,
+	
 }) => {
 
+const classAuthor = location.state
+console.log(classAuthor)
 const [classDetails, setClassDetails] = useState({})
 
 useEffect(() => {
@@ -22,11 +25,7 @@ useEffect(() => {
 	 getClass()
 }, [])
 
-console.log('Details for ', classDetails)
-let {id, author, acf } = classDetails;
-console.log('AUTHOR', author)
-
-
+let {id, authorId, acf } = classDetails;
 
 
     return acf ? (
@@ -60,14 +59,19 @@ console.log('AUTHOR', author)
                   <div className="category-widget">
                     <ul>
                       <li><strong>Taught By</strong></li>
-                      <div className="single-bio wow fadeInUp">
-                        <div className="single-bio-img">
-                          <img src="img/user.jpg" />
-                        </div>
-                        <div className="single-bio-text">
-                          <h3>Jessica Smith</h3>
-                        </div>
-                      </div>
+					  {classAuthor.first_name ? (
+						<div className="single-bio wow fadeInUp">
+						<div className="single-bio-img">
+						<img src={classAuthor.user_imageUrl} />
+						</div>
+						<div className="single-bio-text">
+						<h3>{classAuthor.first_name} {classAuthor.last_name}</h3>
+						</div>
+						</div>
+					  ) :
+					  <h1> No author info </h1>
+					  }
+                     
                       <li><strong>Class Type:</strong> {acf.type}</li>
                       <li><strong>Group Size:</strong> {acf.capacity} </li>
                       <li><strong>Spots Left:</strong> 5</li>
