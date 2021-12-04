@@ -1,10 +1,6 @@
-import {getBearerToken} from './userService';
+
 
 const apiUrl = 'https://nexxita.ephedratk.com';
-const currentUser = {
-	"username": "Nexxita",
-	"password": "18071702TKteam"
-}
 
 
 export async function getAll()  {
@@ -19,7 +15,7 @@ export async function getAll()  {
 
 export async function getLatest()  {
 	try {
-		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes?per_page=4`);
+		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes?per_page=6`);
 		return response.json();
 	}catch(err) {
 		console.error(err)
@@ -27,19 +23,21 @@ export async function getLatest()  {
 
 }
 
-export async function createClass(classData) {
-	const token = await getBearerToken(currentUser);
-	console.log('token', token)
+export async function createClass(classData, userToken) {
+	//console.log(classData, userToken)
+
+	
 	try {
 		const settings = {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				'Authorization': 'Bearer ' + token
+				'Authorization': 'Bearer ' + userToken
 			},
 			body: JSON.stringify(classData)
 		};
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes`, settings);
+		console.log(response)
 
 		return response.json();
 	}catch(err) {

@@ -1,5 +1,5 @@
 
-const apiUrl = 'http://nexxita.ephedratk.com';
+const apiUrl = 'https://nexxita.ephedratk.com';
 
 // function UpdateUserContext(userInfo) {
 // 	const [newUser, setNewUser] = useState(user);

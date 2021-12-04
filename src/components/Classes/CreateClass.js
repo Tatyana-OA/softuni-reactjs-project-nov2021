@@ -1,10 +1,22 @@
 import SinglePageHead from "../SinglePageHead";
-
+import { useContext } from "react";
+import AuthContext from "../../contexts/AuthContext";
 import * as classService from '../../services/classService';
 
-const CreateClass = () => {
 
-	function submitCreate(e) {
+
+const CreateClass = () => {
+	const { userInfo ,exposeUserInfo } = useContext(AuthContext)
+	let userToken;
+	if (!userInfo.isAuth) {
+		console.log(JSON.parse(localStorage.getItem('user')))
+		userToken = JSON.parse(localStorage.getItem('user')).token
+	} else {
+		userToken = userInfo.user.token
+	}
+	console.log(userInfo ,exposeUserInfo )
+
+	async function submitCreate(e) {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const {name, type, imageUrl, capacity, description, start_time, end_time, date } = Object.fromEntries(formData)
@@ -27,8 +39,9 @@ const CreateClass = () => {
 			}
 
 		}
+		console.log(userToken)
 
-		classService.createClass(cleanClassData);
+		await classService.createClass(cleanClassData, userToken);
 
 	}
 	return (
