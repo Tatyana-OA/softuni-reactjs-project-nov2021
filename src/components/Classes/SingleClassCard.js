@@ -16,21 +16,24 @@ const SingleClassCard = ({classData, authorId, cardId}) => {
 	}, [])
 	
 	// console.log(classAuthor, 'author')
-	console.log(classData)
+	if (classData.acf) {
+		classData = classData.acf
+	}
+	console.log('CLASSDATA', classData)
 	return (
 		<div className="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.0s">
 		<div className="class-wrap">
 			<div className="class-img">
-				<img src={classData.acf.imageUrl} alt="Class Image" />
+				<img src={classData.imageUrl} alt="Class Image" />
 			</div>
 			<div className="class-text">
 
-			<ClassTeacherInfo classAuthor={classAuthor} cardId={cardId} authorId={authorId}/>
+		{authorId ? <ClassTeacherInfo classAuthor={classAuthor} cardId={cardId} authorId={authorId}/> : ''}
 
-				<h2>{classData.acf.name}</h2>
+				<h2>{classData.name}</h2>
 				<div className="class-meta">
-					<p><i className="far fa-calendar-alt"></i>{classData.acf.date}</p>
-					<p><i className="far fa-clock"></i>{classData.acf.start_time} - {classData.acf.end_time}</p>
+					<p><i className="far fa-calendar-alt"></i>{classData.date}</p>
+					<p><i className="far fa-clock"></i>{classData.start_time} - {classData.end_time}</p>
 				</div>
 			</div>
 		</div>

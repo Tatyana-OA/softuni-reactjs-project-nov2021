@@ -14,6 +14,7 @@ import ClassDetails from './components/Classes/ClassDetails';
 import { useState, useEffect, useContext } from 'react';
 import AuthContext from './contexts/AuthContext';
 import EditClass from './components/Classes/EditClass';
+import DeleteClass from './components/Classes/DeleteClass';
 
 
 
@@ -44,6 +45,7 @@ const App = () => {
 				<Route path="/contact" component={Contact}/>
 				<Route path="/details/:cardId" component={ClassDetails}/>
 				<Route path="/edit/:classId" component={EditClass}/>
+				<Route path="/delete/:classId" component={DeleteClass}/>
 
 				<Route path="/register" component={Register}/>()
 				<Route path="/login">

@@ -73,3 +73,22 @@ export async function editClassbyId(classData, classId, userToken) {
 		console.error(err)
 	}
 }
+
+
+export async function deleteClassbyId(classId, userToken) {
+	try {
+		const settings = {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + userToken
+			}
+		};
+		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes/${classId}`, settings);
+		console.log(response)
+
+		return response.json();
+	}catch(err) {
+		console.error(err)
+	}
+}

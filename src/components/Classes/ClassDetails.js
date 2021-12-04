@@ -106,7 +106,7 @@ if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
 					</button>
 					<button className="submit login details">
 					{" "}
-					<Link className="btn">DELETE</Link>{" "}
+					<Link className="btn" to={{pathname: `/delete/${match.params.cardId}`, state: acf}}>DELETE</Link>{" "}
 					</button>
 					</div>
 				)}
@@ -121,7 +121,10 @@ if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
         </div>
       </div>
     </>
-  ) : (<h1>Loading</h1>);
+  ) : (  
+	<SinglePageHead
+	  pageInfo={{ name: 'LOADING', slug: window.location.href }}
+	/>);
 };
 
 export default ClassDetails;
