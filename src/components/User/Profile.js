@@ -2,6 +2,7 @@ import SinglePageHead from "../SinglePageHead";
 import SingleTeamMember from "../Team/TeamSingleCard";
 import SingleClassCard from "../Classes/SingleClassCard";
 import { useState, useEffect } from "react";
+import { isAuth } from '../../hoc/isAuth'
 
 import * as classService from '../../services/classService';
 import { useContext } from "react";
@@ -149,4 +150,4 @@ const Profile = () => {
 		  </>
   );
 };
-export default Profile;
+export default isAuth(Profile);

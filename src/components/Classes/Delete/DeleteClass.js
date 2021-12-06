@@ -2,6 +2,7 @@ import SinglePageHead from "../../SinglePageHead";
 import * as classService from '../../../services/classService'
 import { useContext } from "react";
 import AuthContext from "../../../contexts/AuthContext";
+import { isAuth } from '../../../hoc/isAuth';
 
 import "./DeleteClass.css"
 import { Link } from "react-router-dom";
@@ -68,4 +69,4 @@ const DeleteClass = ({
 	)
 }
 
-export default DeleteClass;
+export default isAuth(DeleteClass);

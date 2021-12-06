@@ -2,6 +2,7 @@ import SinglePageHead from "../SinglePageHead";
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";
 import * as classService from '../../services/classService';
+import { isAuth } from "../../hoc/isAuth";
 
 
 
@@ -100,4 +101,4 @@ const CreateClass = () => {
 		</>
 	)
 }
-export default CreateClass;
+export default isAuth(CreateClass);

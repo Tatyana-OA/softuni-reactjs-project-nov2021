@@ -2,7 +2,7 @@ import SinglePageHead from "../SinglePageHead";
 import * as classService from '../../services/classService'
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";
-
+import { isAuth } from "../../hoc/isAuth";
 
 
 const EditClass = ({
@@ -108,4 +108,4 @@ const EditClass = ({
 	)
 }
 
-export default EditClass;
+export default isAuth(EditClass);
