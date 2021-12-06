@@ -90,10 +90,11 @@ export async function getUserById(id) {
 }
 export async function getTeachers() {
 	try {
-		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users?user_type=teacher`);
+		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users?per_page=100`);
 
 		// console.log(await response, 'userbyid')
 		return response.json();
+		
 	}catch(err) {
 		console.error(err)
 	}

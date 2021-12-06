@@ -14,7 +14,8 @@ const TeamAll = () => {
 		getUsers()
 	}, [])
 
-	console.log(teachers)
+	let teaching = teachers.filter(t => t.acf.user_type==='teacher')
+
 	return (
 		<>
 		<SinglePageHead pageInfo={{name:'Teachers', slug:'teachers' }} />
@@ -25,7 +26,7 @@ const TeamAll = () => {
                     <h2>Expert Yoga Trainer</h2>
                 </div>
                 <div className="row">
-				{teachers.map(t => <TeamSingleCard  userFullName = {t['acf'].first_name + ' ' + t['acf'].last_name} userImage={t['acf'].user_imageUrl} userType={t['acf'].user_type} />)}
+				{teaching.map(t => <TeamSingleCard  userFullName = {t['acf'].first_name + ' ' + t['acf'].last_name} userImage={t['acf'].user_imageUrl} userType={t['acf'].user_type} />)}
                 </div>
             </div>
         </div>

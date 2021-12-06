@@ -65,7 +65,7 @@ const DeleteClass = ({
     </div>
   </div>
 		</>
-	
+
 	)
 }
 

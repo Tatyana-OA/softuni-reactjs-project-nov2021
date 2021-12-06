@@ -1,3 +1,5 @@
+import "./TeamSingleCard.css"
+
 const SingleTeamMember = ({style, userFullName, userImage, userType}) => {
 	console.log(userType)
 	
