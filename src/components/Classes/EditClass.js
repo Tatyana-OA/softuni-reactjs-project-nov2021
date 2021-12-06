@@ -5,6 +5,7 @@ import AuthContext from "../../contexts/AuthContext";
 import { isAuth } from "../../hoc/isAuth";
 
 
+
 const EditClass = ({
 	history,
 	match,
@@ -45,9 +46,9 @@ const EditClass = ({
 
 		}
 
-		await classService.editClassbyId(cleanClassData,classId, userToken)
+		await classService.editClassbyId(cleanClassData,classId, userToken);
 
-		history.push('/')
+		history.push('/');
 	}
 
 	return (
