@@ -9,19 +9,9 @@ import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";
 
 const Profile = () => {
-	const [userClasses, setuserClasses] = useState([]);
-	useEffect( async ()=>{
-		//TO FIX
-		const result = await classService.getAll();
-		setuserClasses(result);
-
-
-	},[])
-
 	let userId;
 	let user;
 	
-
 	let {userInfo} = useContext(AuthContext)
 	console.log(userInfo,'Profile Context')
 	if (userInfo.user !=='')  {
@@ -39,6 +29,18 @@ const Profile = () => {
 	let isAuth = userInfo.isAuth || localStorage.user
 
 	console.log(user)
+	const [userClasses, setuserClasses] = useState([]);
+	useEffect( async ()=>{
+		//TO FIX
+		const result = await classService.getAllbyPerson(userId);
+		setuserClasses(result);
+
+
+	},[])
+
+
+
+
 
 
 	// return (

@@ -92,3 +92,15 @@ export async function deleteClassbyId(classId, userToken) {
 		console.error(err)
 	}
 }
+
+
+export async function getAllbyPerson(personId)  {
+	try {
+		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes?author=${personId}&per_page=100`);
+		return response.json();
+	}catch(err) {
+		console.error(err)
+	}
+
+}
+
