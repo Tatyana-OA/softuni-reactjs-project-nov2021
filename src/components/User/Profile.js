@@ -3,6 +3,8 @@ import SingleTeamMember from "../Team/TeamSingleCard";
 import SingleClassCard from "../Classes/SingleClassCard";
 import { useState, useEffect } from "react";
 import { isAuth } from '../../hoc/isAuth'
+import "./Profile.css"
+
 
 import * as classService from '../../services/classService';
 import { useContext } from "react";
@@ -28,15 +30,26 @@ const Profile = () => {
 
 	let isAuth = userInfo.isAuth || localStorage.user
 
-	console.log(user)
+	console.log(user, 'tis user')
+	console.log(user.acf.participates_in_classes)
 	const [userClasses, setuserClasses] = useState([]);
 	useEffect( async ()=>{
 		//TO FIX
+		let classes = []
+		if (user.acf.participates_in_classes != null) {
+		
+			for (let cl of user.acf.participates_in_classes) {
+				console.log(cl, 'classId')
+				let receivedClass = await classService.getClassById(cl['classId'])
+				classes.push(receivedClass)
+			}
+		}
+		console.log(classes, 'received classes')
 		const result = await classService.getAllbyPerson(userId);
-		setuserClasses(result);
+		setuserClasses(classes);
 
 
-	},[])
+	},[userInfo])
 
 
 
@@ -122,11 +135,13 @@ const Profile = () => {
             className="section-header text-center wow zoomIn"
             data-wow-delay="0.1s"
           >
-            <p> Someone's Classes </p>
+            <p> {user.acf.first_name}'s Classes </p>
+
             <h2>{user.acf.user_type == "student" ? "Classes you have booked" : "Classes you teach"}</h2>
           </div>
         </div>
-        <div className="class">
+		{user.acf.participates_in_classes !=null && userClasses ? 
+		(    <div className="class">
           <div className="container">
             <div className="row class-container">
               {/* TO DO DYNAMIC  */}
@@ -138,7 +153,10 @@ const Profile = () => {
 				/>) }
             </div>
           </div>
-        </div>
+        </div>) 
+		: 
+		(<h4 className="no-classes-found">No classes found.</h4>)}
+
       </div>
     </>
   ): (
