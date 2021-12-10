@@ -28,10 +28,19 @@ useEffect(() => {
 }, [])
 
 let {id, acf } = classDetails;
+console.log(acf, 'class acf')
 
 const showBtns = Boolean(currentLoggedUser.isAuth) || Boolean(localStorage.getItem('user'))
 const localStorageUser = JSON.parse(localStorage.getItem('user'))
+let currentUserID = '';
+if (currentLoggedUser.user) {
+	currentUserID = currentLoggedUser.user.user.id
+} else if (localStorageUser.user) {
+	currentUserID = localStorageUser.user.id
+}
+console.log(currentUserID)
 let isAuthor = false;
+let hasBooked = false;
 if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
 	|| localStorageUser && localStorageUser.user.id === authorId) {
 	isAuthor = true;
@@ -43,7 +52,9 @@ if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
       <SinglePageHead
         pageInfo={{ name: acf.name, slug: window.location.href }}
       />
-
+	   {console.log(acf.booked_by)}
+	  {acf.booked_by !=null && acf.booked_by.forEach(f=>f['userId'] == currentUserID ? hasBooked=true : "")}
+	 
       <div className="single">
         <div className="container">
           <div className="row details-row">
@@ -83,7 +94,10 @@ if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
 					  }
                       <li><strong>Class Type:</strong> {acf.type}</li>
                       <li><strong>Group Size:</strong> {acf.capacity} </li>
-                      <li><strong>Spots Left:</strong> 5</li>
+                      <li><strong>Spots Left: </strong>
+					  {acf.booked_by !=null && Number(acf.capacity) - Number(acf.booked_by.length)>0 
+					  ? Number(acf.capacity) - Number(acf.booked_by.length) 
+					  : acf.capacity}</li>
                       <li><strong>When:</strong> {acf.date}</li>
                       <li><strong>What time:</strong> {acf.start_time} - {acf.end_time}</li>
                     </ul>
@@ -93,10 +107,15 @@ if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
 				<div className="sidebar-widget wow fadeInUp">
 				{! isAuthor ? (
 				<div className="guest-btns">
-				<button className="submit login details">
-				{" "}
-				<Link className="btn" to={{pathname: `/book/${match.params.cardId}`, state: acf}} >Book Now</Link>{" "}
-				</button>
+			
+				{! hasBooked ? (
+						<button className="submit login details">
+					<Link className="btn" to={{pathname: `/book/${match.params.cardId}`, state: acf}} >Book Now</Link>{" "}
+					</button>
+				) : (
+					<h5>You have booked this class.</h5>
+				) }
+
 				</div>
 				) : (
 					<div className="author-btns">
