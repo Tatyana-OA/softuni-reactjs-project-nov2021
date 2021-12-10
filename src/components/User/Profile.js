@@ -36,16 +36,19 @@ const Profile = () => {
 	useEffect( async ()=>{
 		//TO FIX
 		let classes = []
-		if (user.acf.participates_in_classes != null) {
-		
+		if (user.acf.participates_in_classes != null && user.acf.user_type == "student") {
+
 			for (let cl of user.acf.participates_in_classes) {
 				console.log(cl, 'classId')
 				let receivedClass = await classService.getClassById(cl['classId'])
 				classes.push(receivedClass)
 			}
+		} else if (user.acf.user_type == "teacher") {
+				classes = await classService.getAllbyPerson(userId);
+				console.log('in teacher stuff')
 		}
 		console.log(classes, 'received classes')
-		const result = await classService.getAllbyPerson(userId);
+		
 		setuserClasses(classes);
 
 
@@ -140,7 +143,7 @@ const Profile = () => {
             <h2>{user.acf.user_type == "student" ? "Classes you have booked" : "Classes you teach"}</h2>
           </div>
         </div>
-		{user.acf.participates_in_classes !=null && userClasses ? 
+		{ userClasses.length > 0 ? 
 		(    <div className="class">
           <div className="container">
             <div className="row class-container">
@@ -150,6 +153,7 @@ const Profile = () => {
 			  	key = {c.id}
 				classData = {c}
 				authorId={c.author}
+				cardId = {c.id}
 				/>) }
             </div>
           </div>
