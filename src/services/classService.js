@@ -104,3 +104,25 @@ export async function getAllbyPerson(personId)  {
 
 }
 
+export async function bookClassbyId(classData, classId, userToken) {
+	try {
+		const settings = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + userToken
+			},
+			body: JSON.stringify(classData)
+		};
+		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes/${classId}`, settings);
+		console.log(response)
+
+		return response.json();
+	}catch(err) {
+		console.error(err)
+	}
+}
+
+
+
+

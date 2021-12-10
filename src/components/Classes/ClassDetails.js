@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import SinglePageHead from "../SinglePageHead";
 import * as classService from '../../services/classService';
+import * as userService from '../../services/userService';
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";
 
@@ -16,22 +17,8 @@ const ClassDetails = ({
 const classAuthor = location.state
 const authorId = location.state.authorId
 const {userInfo: currentLoggedUser}= useContext(AuthContext)
-const [classDetails, setClassDetails] = useState({})
-
-useEffect(() => {
-	//console.log(match.params)
-	 async function getClass() {
-		const result = await classService.getClassById(match.params.cardId)
-		setClassDetails(result)
-	 }
-	 getClass()
-}, [])
-
-let {id, acf } = classDetails;
-console.log(acf, 'class acf')
-
-const showBtns = Boolean(currentLoggedUser.isAuth) || Boolean(localStorage.getItem('user'))
 const localStorageUser = JSON.parse(localStorage.getItem('user'))
+const [userAcf, setUserAcf] = useState(null)
 let currentUserID = '';
 if (currentLoggedUser.user) {
 	currentUserID = currentLoggedUser.user.user.id
@@ -39,21 +26,88 @@ if (currentLoggedUser.user) {
 	currentUserID = localStorageUser.user.id
 }
 console.log(currentUserID)
+console.log(localStorageUser)
 let isAuthor = false;
-let hasBooked = false;
+
 if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
 	|| localStorageUser && localStorageUser.user.id === authorId) {
 	isAuthor = true;
 }
 
+const userToken = localStorageUser.token || currentLoggedUser.user.token
 
+
+const [classDetails, setClassDetails] = useState({})
+const [hasBooked, setHasBooked] = useState(false)
+
+const showBtns = Boolean(currentLoggedUser.isAuth) || Boolean(localStorage.getItem('user'))
+
+
+useEffect(() => {
+	//console.log(match.params)
+	 async function getClass() {
+		const result = await classService.getClassById(match.params.cardId)
+		 let userResult = await userService.searchUserByEmail(localStorageUser.user_email)
+		 userResult= userResult[0].acf;
+		setUserAcf(userResult)
+		setClassDetails(result)
+		console.log(userAcf, 'USER ACF')
+		
+	 }
+	 getClass()
+}, [])
+
+
+console.log(userAcf, 'USERACF')
+
+let {id, acf } = classDetails;
+console.log(acf, 'class acf')
+
+
+
+const bookClass = async (e) => {
+	e.preventDefault();
+	console.log(userToken, 'userTOken')
+	
+	let classToBook = match.params.cardId;
+	console.log(userAcf)
+	console.log(classToBook, 'to be booked')
+	let booked_by = '';
+	let participates_in_classes = ''
+
+	acf.booked_by != null ? booked_by = [...acf.booked_by, {"userId": currentUserID.toString()}] : booked_by = [{"userId": currentUserID.toString()}]
+	userAcf.participates_in_classes != null  ? participates_in_classes = [...userAcf.participates_in_classes, {"classId": classToBook.toString()}] 
+	: participates_in_classes = [{"classId": classToBook.toString()}]
+	let objToClass = {
+		"acf": {
+			 booked_by
+		}
+	}
+	let objToUser = {
+		"acf": {
+			participates_in_classes
+		}
+	}
+	
+	let result = await classService.bookClassbyId(objToClass, classToBook, userToken)
+	let userResult = await userService.addBookingToUser(currentUserID, objToUser, userToken)
+console.log('CLASS BOOKED',result)
+console.log('BOOKING ADDED TO USER', userResult)
+setHasBooked(true)
+}
+
+// if ( acf.booked_by !=null) {
+// 	acf.booked_by.forEach(f=>f['userId'] == currentUserID ? setHasBooked(true) : "")
+// } 
+console.log(hasBooked, 'BOOKED')
     return acf ? (
     <>
       <SinglePageHead
         pageInfo={{ name: acf.name, slug: window.location.href }}
       />
 	   {console.log(acf.booked_by)}
-	  {acf.booked_by !=null && acf.booked_by.forEach(f=>f['userId'] == currentUserID ? hasBooked=true : "")}
+	   {console.log(hasBooked)}
+	
 	 
       <div className="single">
         <div className="container">
@@ -109,8 +163,8 @@ if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
 				<div className="guest-btns">
 			
 				{! hasBooked ? (
-						<button className="submit login details">
-					<Link className="btn" to={{pathname: `/book/${match.params.cardId}`, state: acf}} >Book Now</Link>{" "}
+						<button className="submit login details" onClick={bookClass} >
+					Book Now
 					</button>
 				) : (
 					<h5>You have booked this class.</h5>

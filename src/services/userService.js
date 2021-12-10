@@ -100,6 +100,25 @@ export async function getTeachers() {
 	}
 }
 
+export async function addBookingToUser(userId, data, userToken) {
+	try {
+		const settings = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + userToken
+			},
+			body: JSON.stringify(data)
+		};
+		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users/${userId}`, settings);
+		console.log(response)
+
+		return response.json();
+	}catch(err) {
+		console.error(err)
+	}
+}
+
 
 export function ValidateEmail(mail) {
 	console.log('validating')
