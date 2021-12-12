@@ -15,6 +15,7 @@ import { useState, useEffect, useContext } from 'react';
 import AuthContext from './contexts/AuthContext';
 import EditClass from './components/Classes/EditClass';
 import DeleteClass from './components/Classes/Delete/DeleteClass';
+import BookContext from './contexts/BookContext';
 
 
 
@@ -22,6 +23,7 @@ import DeleteClass from './components/Classes/Delete/DeleteClass';
 
 const App = () => {
 	const [userInfo, setUserInfo] = useState({isAuth:false, user: ''})
+	const [bookingInfo, setBookingInfo] = useState([])
 	const localStorageUser = JSON.parse(localStorage.getItem('user'))
 
 	console.log('App: ', userInfo)
@@ -30,13 +32,18 @@ const App = () => {
 	const userLogout = () => {
 		localStorage.clear()
 		exposeUserInfo({})
+		changeBookingInfo([])
 	}
 	const exposeUserInfo = (user) => {
 		setUserInfo({isAuth:Boolean(user.first_name || user.token), user:{...user}})
 	}
+	const changeBookingInfo = (info) => {
+		setBookingInfo(info)
+	}
 	return (
 		<>
 		<AuthContext.Provider value={{userInfo, exposeUserInfo }}>
+			<BookContext.Provider value={{bookingInfo, changeBookingInfo}}>
 		<Header {...userInfo} userLogout={userLogout} />
 		<Switch>
 				<Route path="/" exact component={Hero}/>
@@ -63,6 +70,7 @@ const App = () => {
 				<Route path="*" component={ErrorPage}></Route>
 				</Switch>
 			<Footer />
+			</BookContext.Provider>
 			</AuthContext.Provider>
 		</>
 	)

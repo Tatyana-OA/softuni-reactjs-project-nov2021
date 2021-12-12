@@ -9,12 +9,15 @@ import "./Profile.css"
 import * as classService from '../../services/classService';
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";
+import BookContext from "../../contexts/BookContext";
 
 const Profile = () => {
 	let userId;
 	let user;
 	
 	let {userInfo} = useContext(AuthContext)
+	let {bookingInfo} = useContext(BookContext)
+	console.log(bookingInfo, 'bookingsInfo')
 	console.log(userInfo,'Profile Context')
 	if (userInfo.user !=='')  {
 		userId = userInfo.user.user.id
@@ -49,7 +52,7 @@ const Profile = () => {
 		}
 		console.log(classes, 'received classes')
 		
-		setuserClasses(classes);
+		setuserClasses(classes.length > bookingInfo.length ? classes : bookingInfo);
 
 
 	},[userInfo])

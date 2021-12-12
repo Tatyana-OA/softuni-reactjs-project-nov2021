@@ -4,6 +4,7 @@ import * as classService from '../../services/classService';
 import * as userService from '../../services/userService';
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";
+import BookContext from "../../contexts/BookContext";
 
 
 
@@ -14,6 +15,8 @@ const ClassDetails = ({
 	
 }) => {
 
+const {bookingInfo, changeBookingInfo} = useContext(BookContext);
+console.log(bookingInfo, changeBookingInfo)
 const classAuthor = location.state
 const authorId = location.state.authorId
 const {userInfo: currentLoggedUser}= useContext(AuthContext)
@@ -40,8 +43,9 @@ const userToken = localStorageUser.token || currentLoggedUser.user.token
 
 const [classDetails, setClassDetails] = useState({})
 const [hasBooked, setHasBooked] = useState(false)
+const showBtns = (Boolean(currentLoggedUser.isAuth) || Boolean(localStorage.getItem('user')) )
 
-const showBtns = Boolean(currentLoggedUser.isAuth) || Boolean(localStorage.getItem('user'))
+
 
 
 useEffect(() => {
@@ -62,7 +66,6 @@ console.log(userAcf, 'USERACF')
 
 let {id, acf } = classDetails;
 console.log(acf, 'class acf')
-
 
 
 const bookClass = async (e) => {
@@ -91,6 +94,14 @@ const bookClass = async (e) => {
 
 	let result = await classService.bookClassbyId(objToClass, classToBook, userToken)
 	let userResult = await userService.addBookingToUser(currentUserID, objToUser, userToken)
+	let ids = []
+	for (let id of userResult.acf?.participates_in_classes) {
+		ids.push(id['classId'])
+	}
+	let updatedBookings = await classService.getSeveralClassesByIds(ids);
+	console.log(updatedBookings, 'UPDATEDBOOKINGS')
+	changeBookingInfo(updatedBookings)
+	localStorage.setItem('bookings', JSON.stringify(updatedBookings))
 	console.log(userResult)
 
 setHasBooked(true)
@@ -98,9 +109,11 @@ setHasBooked(true)
 
     return acf ? (
     <>
+
       <SinglePageHead
         pageInfo={{ name: acf.name, slug: window.location.href }}
       />
+
 
       <div className="single">
         <div className="container">
@@ -154,10 +167,9 @@ setHasBooked(true)
 				<div className="sidebar-widget wow fadeInUp">
 				{! isAuthor ? (
 				<div className="guest-btns">
-			
 				{! hasBooked && ! acf.booked_by?.some(e => e['userId'] == currentUserID) ? (
-						<button className="submit login details" onClick={bookClass} >
-					Book Now
+						<button className="submit login details" onClick={bookClass} > BOOK CLASS
+				
 					</button>
 				) : (
 					<h5>You have booked this class.</h5>
