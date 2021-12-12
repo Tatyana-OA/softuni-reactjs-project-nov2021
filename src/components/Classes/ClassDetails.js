@@ -37,6 +37,7 @@ if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
 const userToken = localStorageUser.token || currentLoggedUser.user.token
 
 
+
 const [classDetails, setClassDetails] = useState({})
 const [hasBooked, setHasBooked] = useState(false)
 
@@ -52,7 +53,6 @@ useEffect(() => {
 		setUserAcf(userResult)
 		setClassDetails(result)
 		console.log(userAcf, 'USER ACF')
-		
 	 }
 	 getClass()
 }, [])
@@ -68,7 +68,7 @@ console.log(acf, 'class acf')
 const bookClass = async (e) => {
 	e.preventDefault();
 	console.log(userToken, 'userTOken')
-	
+
 	let classToBook = match.params.cardId;
 	console.log(userAcf)
 	console.log(classToBook, 'to be booked')
@@ -88,27 +88,19 @@ const bookClass = async (e) => {
 			participates_in_classes
 		}
 	}
-	
+
 	let result = await classService.bookClassbyId(objToClass, classToBook, userToken)
 	let userResult = await userService.addBookingToUser(currentUserID, objToUser, userToken)
-console.log('CLASS BOOKED',result)
-console.log('BOOKING ADDED TO USER', userResult)
+
 setHasBooked(true)
 }
 
-// if ( acf.booked_by !=null) {
-// 	acf.booked_by.forEach(f=>f['userId'] == currentUserID ? setHasBooked(true) : "")
-// } 
-console.log(hasBooked, 'BOOKED')
     return acf ? (
     <>
       <SinglePageHead
         pageInfo={{ name: acf.name, slug: window.location.href }}
       />
-	   {console.log(acf.booked_by)}
-	   {console.log(hasBooked)}
-	
-	 
+
       <div className="single">
         <div className="container">
           <div className="row details-row">
@@ -162,7 +154,7 @@ console.log(hasBooked, 'BOOKED')
 				{! isAuthor ? (
 				<div className="guest-btns">
 			
-				{! hasBooked ? (
+				{! hasBooked && ! acf.booked_by.some(e => e['userId'] == currentUserID) ? (
 						<button className="submit login details" onClick={bookClass} >
 					Book Now
 					</button>
