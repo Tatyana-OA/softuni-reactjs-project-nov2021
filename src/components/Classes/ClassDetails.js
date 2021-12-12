@@ -91,6 +91,7 @@ const bookClass = async (e) => {
 
 	let result = await classService.bookClassbyId(objToClass, classToBook, userToken)
 	let userResult = await userService.addBookingToUser(currentUserID, objToUser, userToken)
+	console.log(userResult)
 
 setHasBooked(true)
 }
@@ -154,7 +155,7 @@ setHasBooked(true)
 				{! isAuthor ? (
 				<div className="guest-btns">
 			
-				{! hasBooked && ! acf.booked_by.some(e => e['userId'] == currentUserID) ? (
+				{! hasBooked && ! acf.booked_by?.some(e => e['userId'] == currentUserID) ? (
 						<button className="submit login details" onClick={bookClass} >
 					Book Now
 					</button>

@@ -31,7 +31,7 @@ const Profile = () => {
 	let isAuth = userInfo.isAuth || localStorage.user
 
 	console.log(user, 'tis user')
-	console.log(user.acf.participates_in_classes)
+	console.log(user.acf.participates_in_classes, 'participates')
 	const [userClasses, setuserClasses] = useState([]);
 	useEffect( async ()=>{
 		//TO FIX
@@ -62,7 +62,7 @@ const Profile = () => {
 	// return (
 	// 	<h1>PRofile</h1>
 	// )
-
+console.log('SET', new Set(userClasses))
 	console.log(user)
   return isAuth ? (
     <>
