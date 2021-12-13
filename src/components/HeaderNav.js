@@ -11,11 +11,14 @@ const Header = ({
 	let displayName = '';
 	let userId = ''
 	let locallyAuth=false;
+	let currentUser; 
+	let userType;
 
 	if (userInfo.isAuth && userInfo.user.user) {
 		console.log('After login')
 		 displayName = userInfo.user.user_display_name || ''
 		 userId = userInfo.user.user.id || ''
+		 currentUser = userInfo.user.user || ''
 	} 
 
 	console.log(JSON.parse(localStorage.getItem('user')))
@@ -23,12 +26,19 @@ const Header = ({
 	if (localStorage.getItem('user')) {
 		const localStorageUser = JSON.parse(localStorage.getItem('user'))
 		console.log('Logged user persists on refresh')
+		currentUser = localStorageUser || ''
 		displayName = localStorageUser.user_display_name || ''
 		userId = localStorageUser.user.id || ''
 		locallyAuth = !locallyAuth
 		console.log(locallyAuth)
 
 	}
+	if (currentUser) {
+		 userType = currentUser.acf?.user_type || currentUser.user?.acf?.user_type
+	}
+
+	console.log(userType)
+	console.log(currentUser, 'currentUser')
 
 	const isAuth = locallyAuth || userInfo.isAuth
 
@@ -57,7 +67,10 @@ const Header = ({
 					) :
 					(
 						<div className="user-navigation navbar-nav">
+					{userType=="teacher" ? (
 						<NavLink to="/create" className="nav-item nav-link" activeClassName="active">Create Class</NavLink>
+					) : ""}
+
 						<NavLink to={`/profile/${userId}`} className="nav-item nav-link user-profile" activeClassName="active">My Profile</NavLink>
 						<NavLink to="/" className="nav-item nav-link" activeClassName="active" onClick={userLogout}>Logout</NavLink>
 
