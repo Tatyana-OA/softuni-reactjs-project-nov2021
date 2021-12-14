@@ -13,7 +13,7 @@ const initialNotificationState = {type:'', message: []}
 
 
 const Register = () => {
-	errors =[]
+	//errors =[]
 	const [notification, setNotification] = useState(initialNotificationState)
 	const [showNotification, setShowNotification] = useState(false);
 	
@@ -74,20 +74,29 @@ const closeNotification = () => {
 					},
 
 				}
-
-				const createdUser = userService.createUser(cleanUserData);
+				try {
+			await userService.createUser(cleanUserData);
 				setShowNotification(true)
 				setNotification({
 					type:'success',
 					message: success
 				})
-				// username = username.substring(0,1).toUpperCase() + username.substring(1)
-				// onLoginCall(username);
 
-			setTimeout(() => {history.push("/login")}, 4000)
+			setTimeout(() => {history.push("/login")}, 2000)
+				}
+				catch (err) {
+					console.log('IN ERROR', err.message)
+					errors.push(err.message)
+			setShowNotification(true)
+			setNotification({
+				type:'error',
+				message: errors
+			})
+				}
+
 			}
 
-
+			errors= []
 console.log(errors)
 
 	}

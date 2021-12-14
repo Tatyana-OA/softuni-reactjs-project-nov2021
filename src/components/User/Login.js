@@ -43,7 +43,7 @@ const closeNotification = () => {
 				message: success
 			})
 		
-			setTimeout(() => {history.push("/")}, 3000)
+			setTimeout(() => {history.push("/")}, 2000)
 		 } else {
 			errors.push('Invalid username or wrong password.')
 

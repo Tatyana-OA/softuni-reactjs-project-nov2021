@@ -55,7 +55,7 @@ export async function createUser(userData) {
 		"password": "18071702TKteam"
 	})
 	console.log('token', token)
-	try {
+	
 		const settings = {
 			method: 'POST',
 			headers: {
@@ -64,17 +64,16 @@ export async function createUser(userData) {
 			},
 			body: JSON.stringify(userData)
 		};
-		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users`, settings);
 
-		return response.json();
-	}catch(err) {
-		console.error(err)
-	}
-	localStorage.setItem('username', userData.username)
-	localStorage.setItem('token', token)
-	for (let key in userData.acf) {
-		localStorage.setItem(`${key}`, userData.acf[key])
-	}
+			let response = await fetch(`${apiUrl}/wp-json/wp/v2/users`, settings);
+			if (response.status == 201) {
+				return response.json();
+			} else {
+				throw ({message:'Registration failed. Try another email.'})
+			}
+
+
+
 }
 
 export async function getUserById(id) {
