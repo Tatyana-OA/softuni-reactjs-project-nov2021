@@ -13,6 +13,7 @@ const initialNotificationState = {type:'', message: []}
 
 
 const Register = () => {
+	errors =[]
 	const [notification, setNotification] = useState(initialNotificationState)
 	const [showNotification, setShowNotification] = useState(false);
 	
@@ -28,8 +29,6 @@ const closeNotification = () => {
 		const formData = new FormData(e.target);
 		const {username, email, first_name, last_name, password, re_password, user_imageUrl, user_type} = Object.fromEntries(formData)
 
-		// TO DO: VALIDATION
-		console.log(email)
 	
 		if (username.toString().length < 3 || username.toString().length > 15) {
 			errors.push('Username must be between 3 and 15 characters')

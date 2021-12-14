@@ -2,7 +2,7 @@
 .alert.error{
 	margin-top:30px;
 	padding: 20px;
-	background-color: #c25a52; /* Red */
+	background-color: #c25a52bd; /* Red */
 	color: white;
 	margin-bottom: 15px;
   }

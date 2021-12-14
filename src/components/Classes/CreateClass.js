@@ -1,12 +1,31 @@
 import SinglePageHead from "../SinglePageHead";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
 import * as classService from '../../services/classService';
 import { isAuth } from "../../hoc/isAuth";
+import {  validateUrl } from "../../services/userService";
+import Notification from "../User/Notification/Notification";
+import { useHistory } from 'react-router-dom';
+
+let errors = []
+let success = [`You have successfully created a class! Namaste!`]
+const initialNotificationState = {type:'', message: []}
 
 
 
 const CreateClass = () => {
+	const history = useHistory();
+
+	// Notifation handling
+	const [notification, setNotification] = useState(initialNotificationState)
+	const [showNotification, setShowNotification] = useState(false);
+	const closeNotification = () => {
+	setShowNotification(false)
+	setNotification(initialNotificationState)
+
+	}
+
+
 	const { userInfo ,exposeUserInfo } = useContext(AuthContext)
 	let userToken;
 	if (!userInfo.isAuth) {
@@ -17,13 +36,52 @@ const CreateClass = () => {
 	}
 	console.log(userInfo ,exposeUserInfo )
 
+	// console.log(isNaN(Number('8')))
+
 	async function submitCreate(e) {
+		errors = []
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const {name, type, imageUrl, capacity, description, start_time, end_time, date } = Object.fromEntries(formData)
-		console.log( Object.fromEntries(formData));
-		console.log('create form')
+		if (name.toString().length < 3 || name.toString().length > 50) {
+			errors.push('Name must be between 3 and 50 characters')
+		}
+		if (description.toString().length < 10 || description.toString().length > 100) {
+			errors.push('Description must be between 10 and 100 characters.')
+		}
+		if (isNaN(Number(capacity.toString()))) {
+			errors.push('Capacity must be a number between 1 and 20.')
+		}
+		if (Number(capacity.toString()) < 0 || Number(capacity.toString())>20) {
 
+			errors.push('Capacity must be a number between 1 and 20.')
+		}
+		let imageUrlValid = validateUrl(imageUrl);
+
+		if (! imageUrlValid) {
+			errors.push('Image URL must be a valid URL.')
+		} 
+		if (start_time.toString() == '') {
+			errors.push('Starting time of class is a mandatory field.')
+		}
+		if (end_time.toString() == '') {
+			errors.push('Ending time of class is a mandatory field.')
+		}
+		if (date.toString() == '') {
+			errors.push('Date of class is a mandatory field.')
+		}
+
+		if (errors.length > 0 ) {
+			setShowNotification(true)
+			setNotification({
+				type:'error',
+				message: errors
+			})
+
+			console.log(errors)
+		}
+
+	else {
 		const cleanClassData = {
 			"type": "yogac_classes",
 			"title": name,
@@ -43,13 +101,21 @@ const CreateClass = () => {
 		console.log(userToken)
 
 		await classService.createClass(cleanClassData, userToken);
-
+		setShowNotification(true)
+		setNotification({
+			type:'success',
+			message: success
+		})
+		setTimeout(() => {history.push("/")}, 4000)
+	}
+		
 	}
 	return (
 		<>
 		<SinglePageHead pageInfo={{name:"Create Class", slug: "create"}} />
 		<div className="container-register">
     <div className="title sign">Create Yoga Class</div>
+	{showNotification==true ? <Notification type={notification.type} message={notification.message} closeNotification={closeNotification} /> : '' }
     <div className="content">
       <form action="#" method="POST" onSubmit={submitCreate}>
         <div className="user-details">
