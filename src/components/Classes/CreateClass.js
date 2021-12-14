@@ -49,10 +49,8 @@ const CreateClass = () => {
 		if (description.toString().length < 10 || description.toString().length > 100) {
 			errors.push('Description must be between 10 and 100 characters.')
 		}
-		if (isNaN(Number(capacity.toString()))) {
-			errors.push('Capacity must be a number between 1 and 20.')
-		}
-		if (Number(capacity.toString()) < 0 || Number(capacity.toString())>20) {
+
+		if (Number(capacity.toString()) < 1 || Number(capacity.toString())>20) {
 
 			errors.push('Capacity must be a number between 1 and 20.')
 		}

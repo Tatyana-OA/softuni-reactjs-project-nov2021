@@ -1,9 +1,15 @@
 import SinglePageHead from "../SinglePageHead";
 import * as classService from '../../services/classService'
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
 import { isAuth } from "../../hoc/isAuth";
+import {  validateUrl } from "../../services/userService";
+import Notification from "../User/Notification/Notification";
 
+
+let errors = []
+let success = [`You have successfully created a class! Namaste! REDIRECTING!`]
+const initialNotificationState = {type:'', message: []}
 
 
 const EditClass = ({
@@ -11,6 +17,16 @@ const EditClass = ({
 	match,
 	location
 }) => {
+
+
+	// Notifation handling
+	const [notification, setNotification] = useState(initialNotificationState)
+	const [showNotification, setShowNotification] = useState(false);
+	const closeNotification = () => {
+	setShowNotification(false)
+	setNotification(initialNotificationState)
+
+	}
 	const classId = match.params.classId
 	const classInfo = location.state;
 	const { userInfo ,exposeUserInfo } = useContext(AuthContext)
@@ -25,30 +41,75 @@ const EditClass = ({
 	console.log(classInfo)
 
 	const submitEdit = async(e) => {
+		errors= []
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const {name, type, imageUrl, capacity, description, start_time, end_time, date } = Object.fromEntries(formData)
 		console.log( Object.fromEntries(formData));
-		const cleanClassData = {
-			"type": "yogac_classes",
-			"title": name,
-			"status": "publish",
-			"acf": {
-				name,
-				description,
-				type,
-				imageUrl,
-				capacity,
-				date,
-				start_time,
-				end_time,
-			}
-
+		if (name.toString().length < 3 || name.toString().length > 50) {
+			errors.push('Name must be between 3 and 50 characters')
+		}
+		if (description.toString().length < 10 || description.toString().length > 100) {
+			errors.push('Description must be between 10 and 100 characters.')
 		}
 
-		await classService.editClassbyId(cleanClassData,classId, userToken);
+		if (Number(capacity.toString()) < 1 || Number(capacity.toString())>20) {
 
-		history.push('/');
+			errors.push('Capacity must be a number between 1 and 20.')
+		}
+		let imageUrlValid = validateUrl(imageUrl);
+
+		if (! imageUrlValid) {
+			errors.push('Image URL must be a valid URL.')
+		} 
+		if (start_time.toString() == '') {
+			errors.push('Starting time of class is a mandatory field.')
+		}
+		if (end_time.toString() == '') {
+			errors.push('Ending time of class is a mandatory field.')
+		}
+		if (date.toString() == '') {
+			errors.push('Date of class is a mandatory field.')
+		}
+		console.log(errors)
+		if (errors.length > 0 ) {
+			setShowNotification(true)
+			setNotification({
+				type:'error',
+				message: errors
+			})
+
+			console.log(errors)
+		}
+
+		else {
+			const cleanClassData = {
+				"type": "yogac_classes",
+				"title": name,
+				"status": "publish",
+				"acf": {
+					name,
+					description,
+					type,
+					imageUrl,
+					capacity,
+					date,
+					start_time,
+					end_time,
+				}
+	
+			}
+	
+			await classService.editClassbyId(cleanClassData,classId, userToken);
+	
+			setShowNotification(true)
+			setNotification({
+				type:'success',
+				message: success
+			})
+			setTimeout(() => {history.push("/")}, 4000)
+		}
+
 	}
 
 	return (
@@ -56,6 +117,7 @@ const EditClass = ({
 		<SinglePageHead pageInfo={{name:"Edit Class", slug: `edit/${classId}`}} />
 		<div className="container-register">
     <div className="title sign">Edit Yoga Class</div>
+	{showNotification==true ? <Notification type={notification.type} message={notification.message} closeNotification={closeNotification} /> : '' }
     <div className="content">
       <form action="#" method="POST" onSubmit={submitEdit}>
         <div className="user-details">
