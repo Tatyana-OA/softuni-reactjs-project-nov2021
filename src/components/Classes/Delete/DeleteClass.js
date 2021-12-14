@@ -48,7 +48,7 @@ const DeleteClass = ({
 			<div className="delete-class-img">
 				<img src={classData.imageUrl} alt="Class Image" className="delete-cat-img"/>
 			</div>
-			<div className="class-text">
+			<div className="class-text del">
 
 				<h2>{classData.name}</h2>
 				<div className="class-meta">

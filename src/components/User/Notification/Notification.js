@@ -5,7 +5,6 @@ const Notification = ({type, message, closeNotification}) => {
 		let key = 1;
 		return (
       <div className={`alert ${type}`}>
-		  <h5 className="notify-title">{type=='error' ? 'Aww, Snap!' : 'Horray!'} </h5>
         <span
           className="closebtn"
           onClick={closeNotification}

@@ -22,3 +22,6 @@ i.del {
 	margin-top:15px;
 	text-decoration:underline;
 }
+.class-text.del {
+	margin-left:30px;
+}

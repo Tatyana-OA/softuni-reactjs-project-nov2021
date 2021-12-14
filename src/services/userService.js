@@ -23,7 +23,8 @@ export async function getBearerToken(currentUser) {
 		return result;
 
 	}catch(err) {
-		console.error(err)
+		throw new Error(err.message);
+		
 	}
 
 

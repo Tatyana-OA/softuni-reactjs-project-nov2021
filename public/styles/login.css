@@ -6,7 +6,7 @@
 .main {
 	background-color: #ffffff;
 	width: 400px;
-	height: 400px;
+	height: auto;
 	margin: 5em auto;
 	border-radius: 1.5em;
 	box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
@@ -93,6 +93,7 @@ font-family: 'Ubuntu', sans-serif;
 	background:#F7CAC9;
 	color:#211323;
 }
+
 .register-link-log {
 	text-align:center;
 }
@@ -108,7 +109,9 @@ button {
 	color: #E1BEE7;
 	text-decoration: none
 }
-
+.register-link-log {
+	padding-bottom:20px;
+}
 @media (max-width: 600px) {
 	.main {
 		border-radius: 0px;
