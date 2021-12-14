@@ -28,7 +28,7 @@ const Header = ({
 		console.log('Logged user persists on refresh')
 		currentUser = localStorageUser || ''
 		displayName = localStorageUser.user_display_name || ''
-		userId = localStorageUser.user.id || ''
+		userId = localStorageUser.user?.id || ''
 		locallyAuth = !locallyAuth
 		console.log(locallyAuth)
 
@@ -38,7 +38,7 @@ const Header = ({
 	}
 
 	console.log(userType)
-	console.log(currentUser, 'currentUser')
+	console.log(currentUser, 'currentUser hello')
 
 	const isAuth = locallyAuth || userInfo.isAuth
 

@@ -1,12 +1,26 @@
 import SinglePageHead from "../SinglePageHead";
 
 import * as userService from '../../services/userService';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
 import { useHistory } from "react-router";
+import { validateEmail, validateUrl } from "../../services/userService";
+import Notification from "./Notification/Notification";
+
+let errors = []
+let success = [`You have successfully registered! Namaste! Redirecting in 3, 2, 1...`]
+const initialNotificationState = {type:'', message: []}
 
 
 const Register = () => {
+	const [notification, setNotification] = useState(initialNotificationState)
+	const [showNotification, setShowNotification] = useState(false);
+	
+const closeNotification = () => {
+	setShowNotification(false)
+	setNotification(initialNotificationState)
+}
+
 	let history = useHistory()
 	const { exposeUserInfo } = useContext(AuthContext)
 	const onRegister = async (e) => {
@@ -15,28 +29,67 @@ const Register = () => {
 		const {username, email, first_name, last_name, password, re_password, user_imageUrl, user_type} = Object.fromEntries(formData)
 
 		// TO DO: VALIDATION
-
-		const cleanUserData = {
-			username,
-			email,
-			password,
-			"name": username,
-   			 "acf": {
-				user_type,
-				user_imageUrl,
-				first_name,
-				last_name,
-				email
-    		},
-
+		console.log(email)
+	
+		if (username.toString().length < 3 || username.toString().length > 15) {
+			errors.push('Username must be between 3 and 15 characters')
+		}
+		if ((first_name.toString().length < 3 || first_name.toString().length > 15) || (last_name.toString().length < 3 ||last_name.toString().length > 15)) {
+			errors.push('Both first and last name must be between 3 and 15 characters')
+		}
+		if (password.toString().length < 4 || password.toString().length > 10) {
+			errors.push('Password must be between 4 and 10 characters.')
+		}
+		if (password!==re_password) {
+			errors.push('Passwords must match')
+		}
+		let imageUrlValid = validateUrl(user_imageUrl);
+		let emailValid = validateEmail(email);
+		if (! imageUrlValid) {
+			errors.push('Image URL must be a valid URL.')
+		} 
+		if (! emailValid) {
+			errors.push('Enter a valid email address')
 		}
 
-		const createdUser = userService.createUser(cleanUserData);
-		// username = username.substring(0,1).toUpperCase() + username.substring(1)
-		// onLoginCall(username);
-		history.push("/login")
+		if (errors.length > 0 ) {
+			setShowNotification(true)
+			setNotification({
+				type:'error',
+				message: errors
+			})
+
+		}
+			else  {
+				const cleanUserData = {
+					username,
+					email,
+					password,
+					"name": username,
+						"acf": {
+						user_type,
+						user_imageUrl,
+						first_name,
+						last_name,
+						email
+					},
+
+				}
+
+				const createdUser = userService.createUser(cleanUserData);
+				setShowNotification(true)
+				setNotification({
+					type:'success',
+					message: success
+				})
+				// username = username.substring(0,1).toUpperCase() + username.substring(1)
+				// onLoginCall(username);
+
+			setTimeout(() => {history.push("/login")}, 4000)
+			}
 
 
+console.log(errors)
 
 	}
 	return (
@@ -45,6 +98,7 @@ const Register = () => {
 
   <div className="container-register">
     <div className="title sign">Registration</div>
+	{showNotification==true ? <Notification type={notification.type} message={notification.message} closeNotification={closeNotification} /> : '' }
     <div className="content">
       <form method="POST" onSubmit={onRegister}>
         <div className="user-details">

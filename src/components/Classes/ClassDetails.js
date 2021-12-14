@@ -24,8 +24,8 @@ const localStorageUser = JSON.parse(localStorage.getItem('user'))
 const [userAcf, setUserAcf] = useState(null)
 let currentUserID = '';
 if (currentLoggedUser.user) {
-	currentUserID = currentLoggedUser.user.user.id
-} else if (localStorageUser.user) {
+	currentUserID = currentLoggedUser?.user?.user?.id
+} else if (localStorageUser?.user) {
 	currentUserID = localStorageUser.user.id
 }
 console.log(currentUserID)
@@ -37,7 +37,7 @@ if (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId
 	isAuthor = true;
 }
 
-const userToken = localStorageUser.token || currentLoggedUser.user.token
+const userToken = localStorageUser?.token || currentLoggedUser?.user.token
 
 
 
@@ -52,8 +52,8 @@ useEffect(() => {
 	//console.log(match.params)
 	 async function getClass() {
 		const result = await classService.getClassById(match.params.cardId)
-		 let userResult = await userService.searchUserByEmail(localStorageUser.user_email)
-		 userResult= userResult[0].acf;
+		 let userResult = await userService.searchUserByEmail(localStorageUser?.user_email)
+		 userResult= userResult[0]?.acf;
 		setUserAcf(userResult)
 		setClassDetails(result)
 		console.log(userAcf, 'USER ACF')
@@ -106,6 +106,13 @@ const bookClass = async (e) => {
 
 setHasBooked(true)
 }
+
+
+const SpecificButtons = (
+	userAcf?.user_type == "teacher" ? '' :
+	<button className="submit login details" onClick={bookClass} > BOOK CLASS
+	</button>
+)
 
     return acf ? (
     <>
@@ -168,9 +175,10 @@ setHasBooked(true)
 				{! isAuthor ? (
 				<div className="guest-btns">
 				{! hasBooked && ! acf.booked_by?.some(e => e['userId'] == currentUserID) ? (
-						<button className="submit login details" onClick={bookClass} > BOOK CLASS
-				
-					</button>
+
+					<>
+					{SpecificButtons}
+					</>
 				) : (
 					<h5>You have booked this class.</h5>
 				) }
