@@ -72,7 +72,7 @@ const Header = ({
 					) : ""}
 
 						<NavLink to={`/profile/${userId}`} className="nav-item nav-link user-profile" activeClassName="active">My Profile</NavLink>
-						<NavLink to="/" className="nav-item nav-link" activeClassName="active" onClick={userLogout}>Logout</NavLink>
+						<NavLink to="/logout" className="nav-item nav-link" activeClassName="active" onClick={userLogout}>Logout</NavLink>
 
 					</div>
 					)

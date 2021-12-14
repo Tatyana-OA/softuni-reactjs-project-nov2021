@@ -18,7 +18,7 @@ const ClassDetails = ({
 const {bookingInfo, changeBookingInfo} = useContext(BookContext);
 console.log(bookingInfo, changeBookingInfo)
 const classAuthor = location.state
-const authorId = location.state.authorId
+const authorId = location.state?.authorId
 const {userInfo: currentLoggedUser}= useContext(AuthContext)
 const localStorageUser = JSON.parse(localStorage.getItem('user'))
 const [userAcf, setUserAcf] = useState(null)
