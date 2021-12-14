@@ -2,15 +2,27 @@ import SinglePageHead from "./SinglePageHead";
 import { send } from 'emailjs-com';
 import  * as userService from "../services/userService";
 import { useState } from "react";
+import Notification from "./User/Notification/Notification";
+import { validateEmail } from "../services/userService";
+import { useHistory } from "react-router";
 
+const initialNotificationState = {type:'', message: []}
 const Contact = () => {
+	let history = useHistory();
+	const [notification, setNotification] = useState(initialNotificationState)
+	const [showNotification, setShowNotification] = useState(false);
+	
+const closeNotification = () => {
+	setShowNotification(false)
+	setNotification(initialNotificationState)
+}
 	const [toSend, setToSend] = useState({
 		"from_name": '',
 		"to_name": 'Admin',
 		"message": '',
 		"reply_to": '',
 	  });
-	  const [success, setSuccesss] = useState('');
+
 	 let userData = []
 
 	  const getName = (e) => {
@@ -22,6 +34,18 @@ const Contact = () => {
 		console.log(e.target.value)
 	  }
 	  const getEmail = (e) => {
+		  if (! validateEmail(e.target.value)) {
+			setNotification({
+				type:'error',
+				message: ['Email is not valid.']
+			})
+			setShowNotification(true)
+			
+		  } else {
+			  setNotification(initialNotificationState)
+			  setShowNotification(false)
+		  }
+		
 		setToSend(prevState => ({
 			...prevState,
 			["reply_to"]: e.target.value
@@ -48,25 +72,32 @@ const Contact = () => {
 		  )
 			.then((response) => {
 			  console.log('SUCCESS!', response.status, response.text);
-			  setSuccesss('Message Successfully Sent.')
+			  setShowNotification(true)
+			  setNotification({
+				  type:'success',
+				  message: ['Message sent successfully. We will get back to you!']
+			  })
 			  console.log(toSend)
 			  e.target.reset();
-			  hideSuccessError()
+		
 			})
 			.catch((err) => {
 			  console.log('FAILED...', err);
-			  setSuccesss('Error. Message was not sent.')
-			  hideSuccessError()
-			});
-		//invalidEmail = userService.ValidateEmail(email)
+			  setShowNotification(true)
+			  setNotification({
+				  type:'error',
+				  message: ['Error sending message! Try again or contact us via phone']
+			  })
 
+			});
+	
+		//	setTimeout(() => {setShowNotification(false)},3000)
+
+			setTimeout(() => {history.push("/")}, 4000)
+			setNotification(initialNotificationState)
 	}
 
-		function hideSuccessError() {
-			setTimeout(() => {
-				setSuccesss('')
-			}, 3000)
-		}
+
 	return (
 		<>
 		<SinglePageHead pageInfo={{name:'Contact', slug:'contact'}} />
@@ -102,11 +133,12 @@ const Contact = () => {
                             </div>
                         </div>
                     </div>
+					{showNotification==true ? <Notification type={notification.type} message={notification.message} closeNotification={closeNotification} page={'contact'}/> : '' }
                     <div className="col-12 wow fadeInUp" data-wow-delay="0.1s">
                         <div className="contact-form">
                             <div id="success"></div>
                             <form name="sentMessage" id="contactForm" onSubmit={submitContact}> 
-							<div>{success !== '' ? success : ''}</div>
+	
                                 <div className="control-group">
                                     <input onBlur={getName} type="text" name="name" className="form-control" id="name" placeholder="Your Name" required="required"  data-validation-required-message="Please enter your name" />
                                     <p className="help-block text-danger"></p>

@@ -1,10 +1,11 @@
 import './Notification.css'
 
-const Notification = ({type, message, closeNotification}) => {
+const Notification = ({type, message, closeNotification, page}) => {
 	console.log(type, message)
+	console.log(page)
 		let key = 1;
 		return (
-      <div className={`alert ${type}`}>
+      <div className={`alert ${type} ${page=="contact" ? "contact" : ''}`} >
         <span
           className="closebtn"
           onClick={closeNotification}

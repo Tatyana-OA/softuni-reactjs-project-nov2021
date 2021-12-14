@@ -106,7 +106,7 @@ console.log(errors)
 
   <div className="container-register">
     <div className="title sign">Registration</div>
-	{showNotification==true ? <Notification type={notification.type} message={notification.message} closeNotification={closeNotification} /> : '' }
+	{showNotification==true ? <Notification type={notification.type} message={notification.message} closeNotification={closeNotification}  /> : '' }
     <div className="content">
       <form method="POST" onSubmit={onRegister}>
         <div className="user-details">

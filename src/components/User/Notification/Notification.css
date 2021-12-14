@@ -29,6 +29,25 @@
 	background-color: #23ab59; /* Red */
 	color:white;
   }
+  .alert.success.contact {
+	width: 100%;
+    height: 70px;
+    margin-top: 0px;
+    padding: 20px 10px;
+  }
+  .alert.success.contact p {
+	  margin-bottom: 0px;
+  }
+
+.alert.error.contact {
+  width: 100%;
+  height: 70px;
+  margin-top: 0px;
+  padding: 20px 10px;
+}
+.alert.error.contact p {
+	margin-bottom: 0px;
+}
   .single-msg {
 	  font-size:16px;
   }
