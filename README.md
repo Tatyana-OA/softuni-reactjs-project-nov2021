@@ -1,6 +1,47 @@
-# Getting Started with Create React App
+# Yooga Studio React.js Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This [project](https://github.com/Tatyana-OA/softuni-reactjs-project-nov2021) was created by [Tatyana Asenova](https://github.com/Tatyana-OA) for the purposes of React. js Softuni Course, Nov-Dec 2021.
+
+## About The Project - Non-technical Description
+
+The project is designed as a platform for a Yoga Studio, facilitating the needs browsing users (guests) as well as yoga teachers and students. The main "unit" in this platform is the yoga class which can be viewed, created, booked, modified and deleted depending on certain user roles.
+
+## Public part
+
+This part of the platform is designed for non-registered users. These users have access to the following:
+
+* Home page -> 
+Main dashboard page in which the user can find basic information about the studio as well as the latest classes
+* Classes -> 
+Classes catalog page which lists all available classes with filtering options
+* Class Details Page -> 
+A page offering more detailed information about classes such as: description, group size, start/end time etc.
+* Teachers-> 
+A page listing all yoga teachers registered in the platform with their avatars and names.
+* Contact-> 
+A page giving contact information as well as the option to sent an email to the admin of the platform.
+* Login-> 
+A page where the login form for already registered users is located.
+* Register-> 
+A page where the register form for non-users is located.
+
+## Private part
+### Yoga teachers private pages
+### Yoga students private pages
+
+
+
+## About The Project - Technical Description
+### Built With
+
+* [Next.js](https://nextjs.org/)
+* [React.js](https://reactjs.org/)
+* [Vue.js](https://vuejs.org/)
+* [Angular](https://angular.io/)
+* [Svelte](https://svelte.dev/)
+* [Laravel](https://laravel.com)
+* [Bootstrap](https://getbootstrap.com)
+* [JQuery](https://jquery.com)
 
 ## Available Scripts
 
