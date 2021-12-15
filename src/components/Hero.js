@@ -12,7 +12,7 @@ const Hero = (props) => {
                         <div className="hero-text">
                             <h1>Yoga Practice For Good Health</h1>
                             <p>
-                                Lorem ipsum dolor sit amet elit. Phasell nec pretum mi. Curabi ornare velit non. Aliqua metus tortor auctor quis sem.
+                               Join our classes to attain your desired health and body goals. It is all about living your best life and we're here to help!
                             </p>
                             <div className="hero-btn">
                                 <Link className="btn" to="/register">Join Now</Link>

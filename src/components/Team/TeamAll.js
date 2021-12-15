@@ -25,9 +25,13 @@ const TeamAll = () => {
                     <p>Yoga Trainer</p>
                     <h2>Expert Yoga Trainer</h2>
                 </div>
-                <div className="row">
-				{teaching.map(t => <TeamSingleCard key={t.id} userFullName = {t['acf'].first_name + ' ' + t['acf'].last_name} userImage={t['acf'].user_imageUrl} userType={t['acf'].user_type} />)}
-                </div>
+				{teaching.length > 0 ? (
+					<div className="row">
+				  		{teaching.map(t => 
+						  <TeamSingleCard key={t.id} userFullName = {t['acf'].first_name + ' ' + t['acf'].last_name} userImage={t['acf'].user_imageUrl} userType={t['acf'].user_type} />)}
+						  </div>
+						) :  <h4 className="no-classes-found">No teachers found.</h4>}
+
             </div>
         </div>
 		</>

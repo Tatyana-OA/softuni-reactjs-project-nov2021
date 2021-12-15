@@ -47,7 +47,7 @@ const AllClasses = () => {
 	}
 	function getDance(e) {
 		e.preventDefault();
-		const dance = initialState.filter( cl => cl.acf.type=="dance yoga")
+		const dance = initialState.filter( cl => cl.acf.type=="yoga dance")
 
 		setAllClasses(dance)
 	}
@@ -71,10 +71,10 @@ const AllClasses = () => {
                         </div>
                         <div className="about-text">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulputate. Aliquam metus tortor, auctor id gravida condimentum, viverra quis sem.
+							Dear friends, we created Yooga with the desire to make a special place where the feeling of ease, elegance, comfort and space is complemented by attention, understanding and love for anyone who comes to our yoga family. 
                             </p>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulputate. Aliquam metus tortor, auctor id gravida condimentum, viverra quis sem. Curabitur non nisl nec nisi scelerisque maximus.
+							We collaborate with highly accredited instructors as part of our team. We believe that they will make each one of you feel special and we look forward to introducing them to you. 
                             </p>
                             <Link className="btn" to="/teachers">Meet the Teachers</Link>
                         </div>
