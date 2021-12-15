@@ -1,10 +1,10 @@
-import SinglePageHead from "../SinglePageHead";
-import SingleClassCard from "./SingleClassCard";
+import SinglePageHead from "../../SinglePageHead";
+import SingleClassCard from "../SingleClassCard";
 import { Link, NavLink } from 'react-router-dom';
 import { useState, useEffect} from "react";
 import './AllClasses.css'
 
-import * as classService from '../../services/classService'
+import * as classService from '../../../services/classService';
 let initialState = []
 
 const AllClasses = () => {
@@ -91,11 +91,11 @@ const AllClasses = () => {
                 <div className="row">
                     <div className="col-12">
                         <ul id="class-filter">
-                       <li>	<NavLink exact={true} to="/all" data-filter="*"  onClick = {showAllClasses} >All Classes</NavLink> </li>
-                            <li > <NavLink to="/balance" data-filter=".filter-1" onClick={getBodyBalance} >Body Balance </NavLink></li>
-                            <li> <NavLink to="/hatha" data-filter=".filter-2" onClick={getHatha} >Hatha Yoga </NavLink></li>
-                            <li> <NavLink to="/children" data-filter=".filter-3" onClick={getChildren} >Children Yoga </NavLink></li>
-                            <li> <NavLink to="/dance" data-filter=".filter-4"onClick={getDance} >Yoga Dance </NavLink></li>
+                       <li>	<NavLink exact={true} to="/all" data-filter="*"  className="filter-classes-navlink" onClick = {showAllClasses} >All Classes</NavLink> </li>
+                            <li> <NavLink to="/balance" data-filter=".filter-1"  className="filter-classes-navlink" onClick={getBodyBalance} >Body Balance </NavLink></li>
+                            <li> <NavLink to="/hatha" data-filter=".filter-2"  className="filter-classes-navlink" onClick={getHatha} >Hatha Yoga </NavLink></li>
+                            <li> <NavLink to="/children" data-filter=".filter-3"  className="filter-classes-navlink" onClick={getChildren} >Children Yoga </NavLink></li>
+                            <li> <NavLink to="/dance" data-filter=".filter-4" className="filter-classes-navlink" onClick={getDance} >Yoga Dance </NavLink></li>
                         </ul>
                     </div>
                 </div>

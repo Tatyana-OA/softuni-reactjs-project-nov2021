@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-import SinglePageHead from "../SinglePageHead";
-import * as classService from '../../services/classService';
-import * as userService from '../../services/userService';
+import SinglePageHead from "../../SinglePageHead";
+import * as classService from '../../../services/classService';
+import * as userService from '../../../services/userService';
 import { useState, useEffect, useContext } from "react";
-import AuthContext from "../../contexts/AuthContext";
-import BookContext from "../../contexts/BookContext";
+import AuthContext from "../../../contexts/AuthContext";
+import BookContext from "../../../contexts/BookContext";
+
+import './ClassDetails.css';
 
 
 
@@ -118,7 +120,7 @@ const SpecificButtons = (
     <>
 
       <SinglePageHead
-        pageInfo={{ name: acf.name, slug: window.location.href }}
+        pageInfo={{ name: acf.name, slug: `details/${match.params.cardId}` }}
       />
 
 
@@ -147,7 +149,7 @@ const SpecificButtons = (
                   <div className="category-widget">
                     <ul>
                       <li><strong>Taught By</strong></li>
-					  {classAuthor.first_name ? (
+					  {classAuthor?.first_name ? (
 						<div className="single-bio wow fadeInUp">
 						<div className="single-bio-img">
 						<img src={classAuthor.user_imageUrl} />

@@ -69,7 +69,7 @@ console.log('SET', new Set(userClasses))
 	console.log(user)
   return isAuth ? (
     <>
-      <SinglePageHead pageInfo={{ name: "My Account", slug:'profile' }} />
+      <SinglePageHead pageInfo={{ name: "My Account", slug:'profile/' + userId }} />
       <div className="team">
         <div className="container">
           <div className="row inf-content">

@@ -3,14 +3,14 @@ import Header from "./components/HeaderNav";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
-import AllClasses from './components/Classes/AllClasses';
+import AllClasses from './components/Classes/AllClasses/AllClasses'
 import TeamAll from './components/Team/TeamAll';
 import Register from './components/User/Register'
 import Login from './components/User/Login';
 import Profile from './components/User/Profile';
 import ErrorPage from './components/ErrorPage';
 import CreateClass from './components/Classes/CreateClass';
-import ClassDetails from './components/Classes/ClassDetails';
+import ClassDetails from './components/Classes/ClassDetails/ClassDetails';
 import { useState, useEffect, useContext } from 'react';
 import AuthContext from './contexts/AuthContext';
 import EditClass from './components/Classes/EditClass';
