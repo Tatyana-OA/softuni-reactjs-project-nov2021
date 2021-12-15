@@ -1,15 +1,15 @@
-import SinglePageHead from "../SinglePageHead";
-import SingleTeamMember from "../Team/TeamSingleCard";
-import SingleClassCard from "../Classes/SingleClassCard";
+import SinglePageHead from "../../SinglePageHead";
+import SingleTeamMember from "../../Team/TeamSingleCard";
+import SingleClassCard from "../../Classes/SingleClassCard";
 import { useState, useEffect } from "react";
-import { isAuth } from '../../hoc/isAuth'
+import { isAuth } from '../../../hoc/isAuth'
 import "./Profile.css"
 
 
-import * as classService from '../../services/classService';
+import * as classService from '../../../services/classService';
 import { useContext } from "react";
-import AuthContext from "../../contexts/AuthContext";
-import BookContext from "../../contexts/BookContext";
+import AuthContext from "../../../contexts/AuthContext";
+import BookContext from "../../../contexts/BookContext";
 
 const Profile = () => {
 	let userId;

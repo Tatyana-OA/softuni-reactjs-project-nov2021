@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-
-
+import "./ClassTeacherInfo.css"
 
 export const ClassTeacherInfo = ({classAuthor, cardId, authorId}) => {
 

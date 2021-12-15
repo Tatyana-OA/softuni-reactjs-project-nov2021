@@ -1,6 +1,6 @@
 import * as userService from '../../services/userService'
 import { useState, useEffect } from 'react';
-import { ClassTeacherInfo } from './ClassTeacherInfo';
+import { ClassTeacherInfo } from './ClassTeacherInfo/ClassTeacherInfo';
 
 
 

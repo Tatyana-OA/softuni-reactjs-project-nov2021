@@ -1,13 +1,13 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Header from "./components/HeaderNav";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import AllClasses from './components/Classes/AllClasses/AllClasses'
 import TeamAll from './components/Team/TeamAll';
-import Register from './components/User/Register'
-import Login from './components/User/Login';
-import Profile from './components/User/Profile';
+import Register from './components/User/Register/Register'
+import Login from './components/User/Login/Login';
+import Profile from './components/User/Profile/Profile';
 import ErrorPage from './components/ErrorPage';
 import CreateClass from './components/Classes/CreateClass';
 import ClassDetails from './components/Classes/ClassDetails/ClassDetails';
@@ -25,14 +25,17 @@ const App = () => {
 	const [userInfo, setUserInfo] = useState({isAuth:false, user: ''})
 	const [bookingInfo, setBookingInfo] = useState([])
 	const localStorageUser = JSON.parse(localStorage.getItem('user'))
+	let history = useHistory();
 
 	console.log('App: ', userInfo)
 
 	console.log('App says: ', localStorageUser)
-	const userLogout = () => {
+	const userLogout = (e) => {
+		e.preventDefault()
 		localStorage.clear()
 		exposeUserInfo({})
 		changeBookingInfo([])
+		history.push('/')
 	}
 	const exposeUserInfo = (user) => {
 		setUserInfo({isAuth:Boolean(user.first_name || user.token), user:{...user}})
