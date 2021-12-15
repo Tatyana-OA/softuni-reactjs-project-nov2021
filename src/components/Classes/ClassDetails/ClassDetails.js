@@ -45,6 +45,7 @@ const userToken = localStorageUser?.token || currentLoggedUser?.user.token
 
 const [classDetails, setClassDetails] = useState({})
 const [hasBooked, setHasBooked] = useState(false)
+const [changeSpots, setChangeSpots] = useState(false)
 const showBtns = (Boolean(currentLoggedUser.isAuth) || Boolean(localStorage.getItem('user')) )
 
 
@@ -106,12 +107,17 @@ const bookClass = async (e) => {
 	localStorage.setItem('bookings', JSON.stringify(updatedBookings))
 	console.log(userResult)
 
-setHasBooked(true)
-}
 
+setHasBooked(true)
+setChangeSpots(true)
+}
+let initialspotsLeft =  acf?.booked_by !== null ? Number(acf?.capacity) - Number(acf?.booked_by?.length) : acf.capacity
+
+let finalSpots = changeSpots ? initialspotsLeft-- : initialspotsLeft;
+console.log('SPOTS LEFT', initialspotsLeft)
 
 const SpecificButtons = (
-	userAcf?.user_type == "teacher" ? '' :
+	userAcf?.user_type == "teacher" || initialspotsLeft == 0 ? '' :
 	<button className="submit login details" onClick={bookClass} > BOOK CLASS
 	</button>
 )
@@ -164,9 +170,8 @@ const SpecificButtons = (
                       <li><strong>Class Type:</strong> {acf.type}</li>
                       <li><strong>Group Size:</strong> {acf.capacity} </li>
                       <li><strong>Spots Left: </strong>
-					  {acf.booked_by !=null && Number(acf.capacity) - Number(acf.booked_by.length)>0 
-					  ? Number(acf.capacity) - Number(acf.booked_by.length) 
-					  : acf.capacity}</li>
+					  {initialspotsLeft> 0 ? initialspotsLeft
+					  : 'Fully Booked'}</li>
                       <li><strong>When:</strong> {acf.date}</li>
                       <li><strong>What time:</strong> {acf.start_time} - {acf.end_time}</li>
                     </ul>
