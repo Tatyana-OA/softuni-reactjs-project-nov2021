@@ -65,7 +65,7 @@ const AllClasses = () => {
                         </div>
                     </div>
                     <div className="col-lg-7 col-md-6">
-                        <div className="section-header text-left">
+                        <div className="section-header text-left classes-header-text">
                             <p>Learn About Us</p>
                             <h2>Welcome to Yooga</h2>
                         </div>

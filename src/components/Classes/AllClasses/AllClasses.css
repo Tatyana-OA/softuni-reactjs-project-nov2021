@@ -7,3 +7,8 @@
 	background: #343148;
     color: #F7CAC9;
 }
+
+.classes-header-text {
+	text-align:center!important;
+	margin-bottom:30px!important;
+}

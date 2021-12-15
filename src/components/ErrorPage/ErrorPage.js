@@ -14,7 +14,7 @@ const ErrorPage = () => {
                         <div className="section-header text-left">
                             <h2>You've encountered an error!</h2>
                         </div>
-                        <div className="about-text">
+                        <div className="about-text error">
                         <div className="about-img">
                             %<img src="./img/errorimage.gif" alt="Error Image" style={{width: '70%'}} />
 
