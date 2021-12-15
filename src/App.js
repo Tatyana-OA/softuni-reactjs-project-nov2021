@@ -1,19 +1,19 @@
 import { Route, Switch, useHistory } from 'react-router-dom';
-import Header from "./components/HeaderNav";
-import Hero from "./components/Hero";
-import Footer from "./components/Footer";
-import Contact from "./components/Contact";
+import Header from "./components/HeaderNav/HeaderNav";
+import Hero from "./components/Hero/Hero";
+import Footer from "./components/Footer/Footer";
+import Contact from "./components/Contact/Contact";
 import AllClasses from './components/Classes/AllClasses/AllClasses'
-import TeamAll from './components/Team/TeamAll';
+import TeamAll from './components/Team/TeamAll/TeamAll';
 import Register from './components/User/Register/Register'
 import Login from './components/User/Login/Login';
 import Profile from './components/User/Profile/Profile';
-import ErrorPage from './components/ErrorPage';
-import CreateClass from './components/Classes/CreateClass';
+import ErrorPage from './components/ErrorPage/ErrorPage';
+import CreateClass from './components/Classes/CreateClass/CreateClass';
 import ClassDetails from './components/Classes/ClassDetails/ClassDetails';
 import { useState, useEffect, useContext } from 'react';
 import AuthContext from './contexts/AuthContext';
-import EditClass from './components/Classes/EditClass';
+import EditClass from './components/Classes/EditClass/EditClass';
 import DeleteClass from './components/Classes/Delete/DeleteClass';
 import BookContext from './contexts/BookContext';
 

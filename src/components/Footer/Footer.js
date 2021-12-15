@@ -1,4 +1,6 @@
-const Footer = (props) => {
+import "./Footer.css"
+
+const Footer = () => {
 	return (
 		
 		<div className="footer wow fadeIn" data-wow-delay="0.3s">

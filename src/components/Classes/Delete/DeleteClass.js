@@ -1,4 +1,4 @@
-import SinglePageHead from "../../SinglePageHead";
+import SinglePageHead from "../../SinglePageHead/SinglePageHead";
 import * as classService from '../../../services/classService'
 import { useContext } from "react";
 import AuthContext from "../../../contexts/AuthContext";

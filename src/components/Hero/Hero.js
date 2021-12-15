@@ -1,8 +1,9 @@
 
-import LatestClasses from "./Classes/LatestClasses";
+import LatestClasses from "../Classes/LatestClasses/LatestClasses";
 import { Link } from 'react-router-dom';
+import "./Hero.css"
 
-const Hero = (props) => {
+const Hero = () => {
 	return (
 		<>
 		<div className="hero">
@@ -15,7 +16,7 @@ const Hero = (props) => {
                                Join our classes to attain your desired health and body goals. It is all about living your best life and we're here to help!
                             </p>
                             <div className="hero-btn">
-                                <Link className="btn" to="/register">Join Now</Link>
+                                <Link className="btn" to="/classes">Explore Classes</Link>
                                 <Link className="btn" to="/contact">Contact Us</Link>
                             </div>
                         </div>

@@ -1,23 +1,21 @@
-import SinglePageHead from "../SinglePageHead";
-import * as classService from '../../services/classService'
+import SinglePageHead from "../../SinglePageHead/SinglePageHead";
 import { useContext, useState } from "react";
-import AuthContext from "../../contexts/AuthContext";
-import { isAuth } from "../../hoc/isAuth";
-import {  validateUrl } from "../../services/userService";
-import Notification from "../User/Notification/Notification";
-
+import AuthContext from "../../../contexts/AuthContext";
+import * as classService from '../../../services/classService';
+import { isAuth } from "../../../hoc/isAuth";
+import {  validateUrl } from "../../../services/userService";
+import Notification from "../../User/Notification/Notification";
+import { useHistory } from 'react-router-dom';
+import "./CreateClass.css"
 
 let errors = []
-let success = [`You have successfully created a class! Namaste! REDIRECTING!`]
+let success = [`You have successfully created a class! Namaste!`]
 const initialNotificationState = {type:'', message: []}
 
 
-const EditClass = ({
-	history,
-	match,
-	location
-}) => {
 
+const CreateClass = () => {
+	const history = useHistory();
 
 	// Notifation handling
 	const [notification, setNotification] = useState(initialNotificationState)
@@ -27,8 +25,8 @@ const EditClass = ({
 	setNotification(initialNotificationState)
 
 	}
-	const classId = match.params.classId
-	const classInfo = location.state;
+
+
 	const { userInfo ,exposeUserInfo } = useContext(AuthContext)
 	let userToken;
 	if (!userInfo.isAuth) {
@@ -37,15 +35,15 @@ const EditClass = ({
 	} else {
 		userToken = userInfo.user.token
 	}
+	console.log(userInfo ,exposeUserInfo )
 
-	console.log(classInfo)
+	// console.log(isNaN(Number('8')))
 
-	const submitEdit = async(e) => {
-		errors= []
+	async function submitCreate(e) {
+		errors = []
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const {name, type, imageUrl, capacity, description, start_time, end_time, date } = Object.fromEntries(formData)
-		console.log( Object.fromEntries(formData));
 		if (name.toString().length < 3 || name.toString().length > 50) {
 			errors.push('Name must be between 3 and 50 characters')
 		}
@@ -71,7 +69,7 @@ const EditClass = ({
 		if (date.toString() == '') {
 			errors.push('Date of class is a mandatory field.')
 		}
-		console.log(errors)
+
 		if (errors.length > 0 ) {
 			setShowNotification(true)
 			setNotification({
@@ -82,52 +80,51 @@ const EditClass = ({
 			console.log(errors)
 		}
 
-		else {
-			const cleanClassData = {
-				"type": "yogac_classes",
-				"title": name,
-				"status": "publish",
-				"acf": {
-					name,
-					description,
-					type,
-					imageUrl,
-					capacity,
-					date,
-					start_time,
-					end_time,
-				}
-	
+	else {
+		const cleanClassData = {
+			"type": "yogac_classes",
+			"title": name,
+			"status": "publish",
+			"acf": {
+				name,
+				description,
+				type,
+				imageUrl,
+				capacity,
+				date,
+				start_time,
+				end_time,
 			}
-	
-			await classService.editClassbyId(cleanClassData,classId, userToken);
-	
-			setShowNotification(true)
-			setNotification({
-				type:'success',
-				message: success
-			})
-			setTimeout(() => {history.push("/")}, 4000)
+
 		}
+		console.log(userToken)
 
+		await classService.createClass(cleanClassData, userToken);
+		setShowNotification(true)
+		setNotification({
+			type:'success',
+			message: success
+		})
+		setTimeout(() => {history.push("/")}, 4000)
 	}
-
+		
+	}
 	return (
 		<>
-		<SinglePageHead pageInfo={{name:"Edit Class", slug: `edit/${classId}`}} />
+		<SinglePageHead pageInfo={{name:"Create Class", slug: "create"}} />
 		<div className="container-register">
-    <div className="title sign">Edit Yoga Class</div>
+    <div className="title sign">Create Yoga Class</div>
 	{showNotification==true ? <Notification type={notification.type} message={notification.message} closeNotification={closeNotification} /> : '' }
     <div className="content">
-      <form action="#" method="POST" onSubmit={submitEdit}>
+      <form action="#" method="POST" onSubmit={submitCreate}>
         <div className="user-details">
           <div className="input-box">
             <span className="details">Name</span>
-            <input type="text" name="name" placeholder="Enter class name" defaultValue={classInfo.name} />
+            <input type="text" name="name" placeholder="Enter class name" />
           </div>
           <div className="input-box">
             <span className="details">Type</span>
-			<select name="type" defaultValue={classInfo.type}>
+			<select name="type">
 				<option value="body balance">Body Balance</option>
 				<option value="hatha yoga">Hatha Yoga</option>
 				<option value="children yoga">Children Yoga</option>
@@ -137,38 +134,36 @@ const EditClass = ({
 
           <div className="input-box">
             <span className="details">Class Image</span>
-            <input type="text" name="imageUrl" placeholder="Enter image URL for class" defaultValue={classInfo.imageUrl || ''}/>
+            <input type="text" name="imageUrl" placeholder="Enter image URL for class" />
           </div>
 		  <div className="input-box">
             <span className="details">Class Capacity</span>
-            <input type="text" name="capacity" placeholder="Enter max class attendees" defaultValue={classInfo.capacity || ''}/>
+            <input type="text" name="capacity" placeholder="Enter max class attendees" />
           </div>
 		  <div className="input-box">
             <span className="details">Description</span>
-            <textarea name="description" rows="4" cols="30" placeholder="Enter class description" defaultValue={classInfo.description || ''}/>
+            <textarea name="description" rows="4" cols="30" placeholder="Enter class description" />
           </div>
 		  <div className="input-box">
             <span className="details">Date</span>
-            <input type="date" name="date"  placeholder="Enter max class attendees" defaultValue={classInfo.date || ''}/>
+            <input type="date" name="date"  placeholder="Enter max class attendees" />
           </div>
 		  <div className="input-box">
             <span className="details">Class Start Time</span>
-            <input type="time" name="start_time" defaultValue={classInfo.start_time || ''}/>
+            <input type="time" name="start_time" />
           </div>
 		  <div className="input-box">
             <span className="details">Class End Time</span>
-            <input type="time" name="end_time" defaultValue={classInfo.end_time || ''} />
+            <input type="time" name="end_time"  />
           </div>
         </div>
         <div className="button">
-          <input type="submit" value="Edit Class" />
+          <input type="submit" value="Create Class" />
         </div>
       </form>
     </div>
   </div>
 		</>
-	
 	)
 }
-
-export default isAuth(EditClass);
+export default isAuth(CreateClass);

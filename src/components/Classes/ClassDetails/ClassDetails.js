@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import SinglePageHead from "../../SinglePageHead";
+import SinglePageHead from "../../SinglePageHead/SinglePageHead";
 import * as classService from '../../../services/classService';
 import * as userService from '../../../services/userService';
 import { useState, useEffect, useContext } from "react";

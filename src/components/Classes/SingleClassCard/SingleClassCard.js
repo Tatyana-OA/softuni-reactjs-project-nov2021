@@ -1,7 +1,8 @@
-import * as userService from '../../services/userService'
+import * as userService from '../../../services/userService'
 import { useState, useEffect } from 'react';
-import { ClassTeacherInfo } from './ClassTeacherInfo/ClassTeacherInfo';
+import { ClassTeacherInfo } from '../ClassTeacherInfo/ClassTeacherInfo';
 
+import "./SingleClassCard.css"
 
 
 const SingleClassCard = ({classData, authorId, cardId}) => {
@@ -12,9 +13,9 @@ const SingleClassCard = ({classData, authorId, cardId}) => {
 	useEffect( async () => {
 		const result = await userService.getUserById(authorId)
 		setClassAuthor(result["acf"])
-		
+
 	}, [])
-	
+
 	// console.log(classAuthor, 'author')
 	if (classData.acf) {
 		classData = classData.acf

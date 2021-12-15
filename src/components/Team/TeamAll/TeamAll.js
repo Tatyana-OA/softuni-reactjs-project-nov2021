@@ -1,7 +1,9 @@
-import SinglePageHead from "../SinglePageHead";
-import TeamSingleCard from "../Team/TeamSingleCard";
-import * as userService from '../../services/userService'
+import SinglePageHead from "../../SinglePageHead/SinglePageHead";
+import TeamSingleCard from "../TeamSingleCard/TeamSingleCard";
+import * as userService from '../../../services/userService'
 import { useEffect, useState } from "react";
+
+import "./TeamAll.css"
 
 const TeamAll = () => {
 	const [teachers, setTeachers] = useState([])

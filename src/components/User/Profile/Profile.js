@@ -1,6 +1,6 @@
-import SinglePageHead from "../../SinglePageHead";
-import SingleTeamMember from "../../Team/TeamSingleCard";
-import SingleClassCard from "../../Classes/SingleClassCard";
+import SinglePageHead from "../../SinglePageHead/SinglePageHead";
+import SingleTeamMember from "../../Team/TeamSingleCard/TeamSingleCard";
+import SingleClassCard from "../../Classes/SingleClassCard/SingleClassCard";
 import { useState, useEffect } from "react";
 import { isAuth } from '../../../hoc/isAuth'
 import "./Profile.css"

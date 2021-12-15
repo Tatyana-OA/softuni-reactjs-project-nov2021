@@ -1,4 +1,4 @@
-import SinglePageHead from "../../SinglePageHead";
+import SinglePageHead from "../../SinglePageHead/SinglePageHead";
 
 import * as userService from '../../../services/userService';
 import { useContext, useState } from "react";
@@ -6,6 +6,7 @@ import AuthContext from "../../../contexts/AuthContext";
 import { useHistory } from "react-router";
 import { validateEmail, validateUrl } from "../../../services/userService";
 import Notification from "../Notification/Notification";
+import "./Register.css"
 
 let errors = []
 let success = [`You have successfully registered! Namaste! Redirecting in 3, 2, 1...`]

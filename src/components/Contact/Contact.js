@@ -1,10 +1,11 @@
-import SinglePageHead from "./SinglePageHead";
+import SinglePageHead from "../SinglePageHead/SinglePageHead";
 import { send } from 'emailjs-com';
-import  * as userService from "../services/userService";
+import  * as userService from "../../services/userService";
 import { useState } from "react";
-import Notification from "./User/Notification/Notification";
-import { validateEmail } from "../services/userService";
+import Notification from "../User/Notification/Notification";
+import { validateEmail } from "../../services/userService";
 import { useHistory } from "react-router";
+import "./Contact.css"
 
 const initialNotificationState = {type:'', message: []}
 const Contact = () => {

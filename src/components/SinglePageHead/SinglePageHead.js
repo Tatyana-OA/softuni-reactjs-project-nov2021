@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import "./SinglePageHead.css"
 
 const SinglePageHead = ({pageInfo}) => {
 	return (

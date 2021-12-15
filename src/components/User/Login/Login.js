@@ -1,10 +1,11 @@
-import SinglePageHead from "../../SinglePageHead";
+import SinglePageHead from "../../SinglePageHead/SinglePageHead";
 import { Link } from 'react-router-dom';
 import * as userService from '../../../services/userService';
 import { useHistory } from "react-router";
 import { useContext, useState } from "react";
 import AuthContext from "../../../contexts/AuthContext";
 import Notification from "../Notification/Notification";
+import "./Login.css"
 
 
 

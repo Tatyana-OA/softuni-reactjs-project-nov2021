@@ -1,5 +1,5 @@
-import SinglePageHead from "../../SinglePageHead";
-import SingleClassCard from "../SingleClassCard";
+import SinglePageHead from "../../SinglePageHead/SinglePageHead";
+import SingleClassCard from "../SingleClassCard/SingleClassCard";
 import { Link, NavLink } from 'react-router-dom';
 import { useState, useEffect} from "react";
 import './AllClasses.css'

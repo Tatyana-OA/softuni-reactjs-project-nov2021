@@ -1,5 +1,6 @@
-import SinglePageHead from "./SinglePageHead";
+import SinglePageHead from "../SinglePageHead/SinglePageHead";
 import { Link } from 'react-router-dom';
+import "./ErrorPage.css"
 
 const ErrorPage = () => {
 	return (
@@ -10,10 +11,10 @@ const ErrorPage = () => {
     
 
                     <div className="error-page-info">
-                        <div className="section-header text-left" style={{margin:'0 auto'}}>
+                        <div className="section-header text-left">
                             <h2>You've encountered an error!</h2>
                         </div>
-                        <div className="about-text" style={{textAlign:'center'}}>
+                        <div className="about-text">
                         <div className="about-img">
                             %<img src="./img/errorimage.gif" alt="Error Image" style={{width: '70%'}} />
 
