@@ -1,11 +1,7 @@
 
 const apiUrl = 'https://nexxita.ephedratk.com';
 
-// function UpdateUserContext(userInfo) {
-// 	const [newUser, setNewUser] = useState(user);
-// 	setNewUser
 
-// }
 
 export async function getBearerToken(currentUser) {
 	

@@ -1,8 +1,7 @@
 import SinglePageHead from "../../SinglePageHead/SinglePageHead";
 
 import * as userService from '../../../services/userService';
-import { useContext, useState } from "react";
-import AuthContext from "../../../contexts/AuthContext";
+import {  useState } from "react";
 import { useHistory } from "react-router";
 import { validateEmail, validateUrl } from "../../../services/userService";
 import Notification from "../Notification/Notification";
@@ -17,14 +16,14 @@ const Register = () => {
 	//errors =[]
 	const [notification, setNotification] = useState(initialNotificationState)
 	const [showNotification, setShowNotification] = useState(false);
-	
+
 const closeNotification = () => {
 	setShowNotification(false)
 	setNotification(initialNotificationState)
 }
 
 	let history = useHistory()
-	const { exposeUserInfo } = useContext(AuthContext)
+
 	const onRegister = async (e) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);

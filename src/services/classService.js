@@ -123,7 +123,7 @@ export async function bookClassbyId(classData, classId, userToken) {
 }
 
 export async function getSeveralClassesByIds(classIds) {
-	// https://nexxita.ephedratk.com/wp-json/wp/v2/yogac_classes/?include[]=46&include[]=54
+	
 	try {
 
 		let createUrl = `${apiUrl}/wp-json/wp/v2/yogac_classes/?`;

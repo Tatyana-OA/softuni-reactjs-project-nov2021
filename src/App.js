@@ -11,7 +11,7 @@ import Profile from './components/User/Profile/Profile';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import CreateClass from './components/Classes/CreateClass/CreateClass';
 import ClassDetails from './components/Classes/ClassDetails/ClassDetails';
-import { useState, useEffect, useContext } from 'react';
+import { useState } from 'react';
 import AuthContext from './contexts/AuthContext';
 import EditClass from './components/Classes/EditClass/EditClass';
 import DeleteClass from './components/Classes/Delete/DeleteClass';

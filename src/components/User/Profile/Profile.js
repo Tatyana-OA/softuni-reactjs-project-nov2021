@@ -22,7 +22,6 @@ const Profile = () => {
 
 	const [userClasses, setuserClasses] = useState([]);
 	useEffect( async ()=>{
-		//TO FIX
 		let classes = []
 		if (user.acf.participates_in_classes != null && user.acf.user_type == "student") {
 
