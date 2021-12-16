@@ -106,7 +106,7 @@ export async function getAllbyPerson(personId)  {
 }
 
 export async function bookClassbyId(classData, classId, userToken) {
-	try {
+	
 		const settings = {
 			method: 'POST',
 			headers: {
@@ -118,10 +118,12 @@ export async function bookClassbyId(classData, classId, userToken) {
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes/${classId}`, settings);
 		console.log(response)
 
-		return response.json();
-	}catch(err) {
-		console.error(err)
-	}
+	
+		if (response.status == 200) {
+			return response.json();
+		} else {
+			return ({message:'Booking failed.'})
+		}
 }
 
 export async function getSeveralClassesByIds(classIds) {

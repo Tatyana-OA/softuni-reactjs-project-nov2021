@@ -101,7 +101,7 @@ export async function getTeachers() {
 }
 
 export async function addBookingToUser(userId, data, userToken) {
-	try {
+
 		const settings = {
 			method: 'POST',
 			headers: {
@@ -113,10 +113,12 @@ export async function addBookingToUser(userId, data, userToken) {
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users/${userId}`, settings);
 		console.log(response)
 
-		return response.json();
-	}catch(err) {
-		console.error(err)
-	}
+		if (response.status == 200) {
+			return response.json();
+		} else {
+			return ({message:'Booking failed.'})
+		}
+	
 }
 
 
