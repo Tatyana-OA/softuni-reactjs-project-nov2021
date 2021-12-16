@@ -76,7 +76,7 @@ export async function editClassbyId(classData, classId, userToken) {
 
 
 export async function deleteClassbyId(classId, userToken) {
-	try {
+	
 		const settings = {
 			method: 'DELETE',
 			headers: {
@@ -86,10 +86,11 @@ export async function deleteClassbyId(classId, userToken) {
 		};
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes/${classId}`, settings);
 		console.log(response)
-
-		return response.json();
-	}catch(err) {
-		console.error(err)
+		if (response.status == "200") {
+			return response.json();
+		} 
+	else {
+		throw ({message:'Class Deletion failed. Try again or contact us.'})
 	}
 }
 

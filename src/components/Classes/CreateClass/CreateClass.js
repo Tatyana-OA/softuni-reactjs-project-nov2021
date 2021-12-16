@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 import "./CreateClass.css"
 
 let errors = []
-let success = [`You have successfully created a class! Namaste!`]
+let success = [`You have successfully created a class! Redirecting in 3, 2, 1..!`]
 const initialNotificationState = {type:'', message: []}
 
 
