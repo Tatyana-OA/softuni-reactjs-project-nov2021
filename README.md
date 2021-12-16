@@ -1,10 +1,15 @@
 # Yooga Studio React.js Project
 
-This [project](https://github.com/Tatyana-OA/softuni-reactjs-project-nov2021) was created by [Tatyana Asenova](https://github.com/Tatyana-OA) for the purposes of React. js Softuni Course, Nov-Dec 2021.
-
 ## About The Project - Non-technical Description
 
 The project is designed as a platform for a Yoga Studio, facilitating the needs browsing users (guests) as well as yoga teachers and students. The main "unit" in this platform is the yoga class which can be viewed, created, booked, modified and deleted depending on certain user roles.
+
+
+This [project](https://github.com/Tatyana-OA/softuni-reactjs-project-nov2021) was created by [Tatyana Asenova](https://github.com/Tatyana-OA) for the purposes of React. js Softuni Course, Nov-Dec 2021.
+
+![Project Dashboard](https://i.ibb.co/kM9K92f/homepage.png)
+
+
 
 ## Public part
 
