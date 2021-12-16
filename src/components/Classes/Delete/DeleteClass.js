@@ -29,13 +29,13 @@ const closeNotification = () => {
 	const classId = match.params.classId
 	const classData = location.state;
 	const { userInfo } = useContext(AuthContext)
-	let userToken;
-	if (!userInfo.isAuth) {
-		console.log(JSON.parse(localStorage.getItem('user')))
-		userToken = JSON.parse(localStorage.getItem('user')).token
-	} else {
-		userToken = userInfo.user.token
-	}
+	let userToken = userInfo.user.token;
+	// if (!userInfo.isAuth) {
+	// 	console.log(JSON.parse(localStorage.getItem('user')))
+	// 	userToken = JSON.parse(localStorage.getItem('user')).token
+	// } else {
+	// 	userToken = userInfo.user.token
+	// }
 
 	console.log(classData)
 	console.log(userInfo)

@@ -11,13 +11,13 @@ const SingleClassCard = ({classData, authorId, cardId}) => {
 		setClassAuthor(author)
 	}
 	let result;
-	useEffect( async () => {
-		
+	useEffect( () => {
+
 		async function getClassAuthor() {
 		 result = await userService.getUserById(authorId)
 		 setClassAuthor(result["acf"])
 		}
-		
+
 		getClassAuthor();
 
 	}, [])

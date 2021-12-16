@@ -33,11 +33,14 @@ const App = () => {
 	const [userInfo, setUserInfo] = useState({isAuth:false, user: ''})
 	const [bookingInfo, setBookingInfo] = useState([])
 	const localStorageUser = JSON.parse(localStorage.getItem('user'))
+	if (localStorageUser !== null && userInfo.user == '') {
+		setUserInfo({isAuth:true, user: {...localStorageUser}})
+	}
 	let history = useHistory();
 
-	console.log('App: ', userInfo)
+	console.log('App user context: ', userInfo)
 
-	console.log('App says: ', localStorageUser)
+	console.log('App user local: ', localStorageUser)
 	const userLogout = async(e) => {
 		e.preventDefault()
 		

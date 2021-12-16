@@ -15,23 +15,13 @@ const Profile = () => {
 	let userId;
 	let user;
 	let {userInfo} = useContext(AuthContext)
-	let {bookingInfo} = useContext(BookContext)
+	let {bookingInfo, changeBookingInfo} = useContext(BookContext)
 	console.log(bookingInfo, 'bookingsInfo')
 	console.log(userInfo,'Profile Context')
-	if (userInfo.user !=='')  {
-		userId = userInfo.user.user.id
-		user = userInfo.user.user;
-	} else {
-
-			const localStorageUser = JSON.parse(localStorage.getItem('user'))
-			console.log('Logged user persists on refresh')
-			user = localStorageUser.user
-			userId = localStorageUser.user.id || ''
-
-	}
-
-	let isAuth = userInfo.isAuth || localStorage.user
-
+	userId = userInfo.user.user.id
+	user = userInfo.user.user;
+	let isAuth = userInfo.isAuth
+	console.log()
 	console.log(user, 'tis user')
 	console.log(user.acf.participates_in_classes, 'participates')
 	const [userClasses, setuserClasses] = useState([]);
@@ -59,7 +49,7 @@ const Profile = () => {
 
 
 
-
+console.log(userClasses)
 
 	// return (
 	// 	<h1>PRofile</h1>
@@ -149,8 +139,7 @@ console.log('SET', new Set(userClasses))
 		(    <div className="class">
           <div className="container">
             <div className="row class-container">
-              {/* TO DO DYNAMIC  */}
-			  { userClasses.map(c =>
+			  { userClasses.filter(cl => cl.message!=="Invalid post ID.").map(c =>
 			  <SingleClassCard
 			  	key = {c.id}
 				classData = {c}

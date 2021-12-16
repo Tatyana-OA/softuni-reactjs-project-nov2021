@@ -8,7 +8,7 @@ import Notification from "../../User/Notification/Notification";
 
 
 let errors = []
-let success = [`You have successfully created a class! Namaste! REDIRECTING!`]
+let success = [`You have successfully edited a class! Namaste! REDIRECTING!`]
 const initialNotificationState = {type:'', message: []}
 
 
@@ -30,13 +30,13 @@ const EditClass = ({
 	const classId = match.params.classId
 	const classInfo = location.state;
 	const { userInfo ,exposeUserInfo } = useContext(AuthContext)
-	let userToken;
-	if (!userInfo.isAuth) {
-		console.log(JSON.parse(localStorage.getItem('user')))
-		userToken = JSON.parse(localStorage.getItem('user')).token
-	} else {
-		userToken = userInfo.user.token
-	}
+	let userToken =userInfo.user.token;
+	// if (!userInfo.isAuth) {
+	// 	console.log(JSON.parse(localStorage.getItem('user')))
+	// 	userToken = JSON.parse(localStorage.getItem('user')).token
+	// } else {
+	// 	userToken = userInfo.user.token
+	// }
 
 	console.log(classInfo)
 
@@ -107,7 +107,7 @@ const EditClass = ({
 				type:'success',
 				message: success
 			})
-			setTimeout(() => {history.push("/")}, 4000)
+			setTimeout(() => {history.push("/")}, 2000)
 		}
 
 	}

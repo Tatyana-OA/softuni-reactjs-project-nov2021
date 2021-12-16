@@ -38,6 +38,7 @@ const closeNotification = () => {
 			localStorage.setItem('user', JSON.stringify(user))
 			// username = username.substring(0,1).toUpperCase() + username.substring(1)
 			// onLoginCall(username);
+			console.log(JSON.parse(localStorage.getItem('user')))
 			setShowNotification(true)
 			setNotification({
 				type:'success',

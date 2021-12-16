@@ -12,7 +12,6 @@ const Header = ({
 	let {userInfo, exposeUserInfo} = useContext(AuthContext);
 	let displayName = '';
 	let userId = ''
-	let locallyAuth=false;
 	let currentUser; 
 	let userType;
 
@@ -25,16 +24,7 @@ const Header = ({
 
 	console.log(JSON.parse(localStorage.getItem('user')))
 	
-	if (localStorage.getItem('user')) {
-		const localStorageUser = JSON.parse(localStorage.getItem('user'))
-		console.log('Logged user persists on refresh')
-		currentUser = localStorageUser || ''
-		displayName = localStorageUser.user_display_name || ''
-		userId = localStorageUser.user?.id || ''
-		locallyAuth = !locallyAuth
-		console.log(locallyAuth)
 
-	}
 	if (currentUser) {
 		 userType = currentUser.acf?.user_type || currentUser.user?.acf?.user_type
 	}
@@ -42,7 +32,7 @@ const Header = ({
 	console.log(userType)
 	console.log(currentUser, 'currentUser hello')
 
-	const isAuth = locallyAuth || userInfo.isAuth
+	const isAuth = userInfo.isAuth
 
 	// 	// id -> 
 	//  console.log(displayName,'context')

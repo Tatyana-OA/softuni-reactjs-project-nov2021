@@ -28,13 +28,13 @@ const CreateClass = () => {
 
 
 	const { userInfo ,exposeUserInfo } = useContext(AuthContext)
-	let userToken;
-	if (!userInfo.isAuth) {
-		console.log(JSON.parse(localStorage.getItem('user')))
-		userToken = JSON.parse(localStorage.getItem('user')).token
-	} else {
-		userToken = userInfo.user.token
-	}
+	let userToken= userInfo.user.token
+	// if (!userInfo.isAuth) {
+	// 	console.log(JSON.parse(localStorage.getItem('user')))
+	// 	userToken = JSON.parse(localStorage.getItem('user')).token
+	// } else {
+	// 	userToken = userInfo.user.token
+	// }
 	console.log(userInfo ,exposeUserInfo )
 
 	// console.log(isNaN(Number('8')))

@@ -32,39 +32,34 @@ const ClassDetails = ({
   const classAuthor = location.state;
   const authorId = location.state?.authorId;
   const { userInfo: currentLoggedUser } = useContext(AuthContext);
-  const localStorageUser = JSON.parse(localStorage.getItem("user"));
   const [userAcf, setUserAcf] = useState(null);
-  let currentUserID = "";
-  if (currentLoggedUser.user) {
-    currentUserID = currentLoggedUser?.user?.user?.id;
-  } else if (localStorageUser?.user) {
-    currentUserID = localStorageUser.user.id;
-  }
+  let currentUserID = currentLoggedUser?.user?.user?.id;
+  
   console.log(currentUserID);
-  console.log(localStorageUser);
+ 
+
   let isAuthor = false;
 
-  if (
-    (currentLoggedUser.isAuth && currentLoggedUser.user_id === authorId) ||
-    (localStorageUser && localStorageUser.user.id === authorId)
-  ) {
+  if (currentLoggedUser.isAuth && currentUserID === authorId) 
+ {
     isAuthor = true;
   }
-
-  const userToken = localStorageUser?.token || currentLoggedUser?.user.token;
+  console.log(isAuthor, 'isAuthor')
+  console.log(authorId, currentLoggedUser.user.id)
+  console.log('CURRENT LOGGED USER', currentLoggedUser)
+  const userToken = currentLoggedUser?.user.token;
 
   const [classDetails, setClassDetails] = useState({});
   const [hasBooked, setHasBooked] = useState(false);
   const [changeSpots, setChangeSpots] = useState(false);
-  const showBtns =
-    Boolean(currentLoggedUser.isAuth) || Boolean(localStorage.getItem("user"));
+  const showBtns = Boolean(currentLoggedUser.isAuth) 
 
   useEffect(() => {
     //console.log(match.params)
     async function getClass() {
       const result = await classService.getClassById(match.params.cardId);
       let userResult = await userService.searchUserByEmail(
-        localStorageUser?.user_email
+        currentLoggedUser?.user?.user_email
       );
       userResult = userResult[0]?.acf;
       setUserAcf(userResult);
