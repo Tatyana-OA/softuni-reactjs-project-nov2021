@@ -8,37 +8,27 @@ const Header = ({
 	userLogout
 }) => {
 
-	//console.log(user, 'Navigation')
 	let {userInfo, exposeUserInfo} = useContext(AuthContext);
 	let displayName = '';
 	let userId = ''
-	let currentUser; 
+	let currentUser;
 	let userType;
 
 	if (userInfo.isAuth && userInfo.user.user) {
-		console.log('After login')
+
 		 displayName = userInfo.user.user_display_name || ''
 		 userId = userInfo.user.user.id || ''
 		 currentUser = userInfo.user.user || ''
 	} 
 
-	console.log(JSON.parse(localStorage.getItem('user')))
-	
 
 	if (currentUser) {
 		 userType = currentUser.acf?.user_type || currentUser.user?.acf?.user_type
 	}
 
-	console.log(userType)
-	console.log(currentUser, 'currentUser hello')
 
 	const isAuth = userInfo.isAuth
 
-	// 	// id -> 
-	//  console.log(displayName,'context')
-	// //  console.log(userId, 'ID')
-	//  console.log(userInfo, 'userInfo')
-	// //  console.log(userInfo.user.user.id)
 	return (
 		<>
 		<div className="navbar navbar-expand-lg bg-dark navbar-dark">

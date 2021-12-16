@@ -31,21 +31,13 @@ const EditClass = ({
 	const classInfo = location.state;
 	const { userInfo ,exposeUserInfo } = useContext(AuthContext)
 	let userToken =userInfo.user.token;
-	// if (!userInfo.isAuth) {
-	// 	console.log(JSON.parse(localStorage.getItem('user')))
-	// 	userToken = JSON.parse(localStorage.getItem('user')).token
-	// } else {
-	// 	userToken = userInfo.user.token
-	// }
 
-	console.log(classInfo)
 
 	const submitEdit = async(e) => {
 		errors= []
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		const {name, type, imageUrl, capacity, description, start_time, end_time, date } = Object.fromEntries(formData)
-		console.log( Object.fromEntries(formData));
 		if (name.toString().length < 3 || name.toString().length > 50) {
 			errors.push('Name must be between 3 and 50 characters')
 		}
@@ -71,7 +63,6 @@ const EditClass = ({
 		if (date.toString() == '') {
 			errors.push('Date of class is a mandatory field.')
 		}
-		console.log(errors)
 		if (errors.length > 0 ) {
 			setShowNotification(true)
 			setNotification({
@@ -79,7 +70,6 @@ const EditClass = ({
 				message: errors
 			})
 
-			console.log(errors)
 		}
 
 		else {

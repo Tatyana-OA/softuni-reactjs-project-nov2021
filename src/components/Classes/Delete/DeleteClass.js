@@ -30,15 +30,6 @@ const closeNotification = () => {
 	const classData = location.state;
 	const { userInfo } = useContext(AuthContext)
 	let userToken = userInfo.user.token;
-	// if (!userInfo.isAuth) {
-	// 	console.log(JSON.parse(localStorage.getItem('user')))
-	// 	userToken = JSON.parse(localStorage.getItem('user')).token
-	// } else {
-	// 	userToken = userInfo.user.token
-	// }
-
-	console.log(classData)
-	console.log(userInfo)
 
 	const submitDelete = async(e) => {
 		e.preventDefault();
@@ -59,7 +50,6 @@ const closeNotification = () => {
 				message: errors
 			})
 		}
-		console.log(result, 'result from server')
 
 	}
 

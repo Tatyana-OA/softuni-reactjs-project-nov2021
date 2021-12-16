@@ -28,25 +28,19 @@ const ClassDetails = ({
     setNotification(initialNotificationState);
   };
   const { bookingInfo, changeBookingInfo } = useContext(BookContext);
-  console.log(bookingInfo, changeBookingInfo);
   const classAuthor = location.state;
   const authorId = location.state?.authorId;
   const { userInfo: currentLoggedUser } = useContext(AuthContext);
   const [userAcf, setUserAcf] = useState(null);
   let currentUserID = currentLoggedUser?.user?.user?.id;
-  
-  console.log(currentUserID);
- 
+
 
   let isAuthor = false;
 
-  if (currentLoggedUser.isAuth && currentUserID === authorId) 
- {
+  if (currentLoggedUser.isAuth && currentUserID === authorId){
     isAuthor = true;
   }
-  console.log(isAuthor, 'isAuthor')
-  console.log(authorId, currentLoggedUser.user.id)
-  console.log('CURRENT LOGGED USER', currentLoggedUser)
+
   const userToken = currentLoggedUser?.user.token;
 
   const [classDetails, setClassDetails] = useState({});
@@ -55,7 +49,7 @@ const ClassDetails = ({
   const showBtns = Boolean(currentLoggedUser.isAuth) 
 
   useEffect(() => {
-    //console.log(match.params)
+   
     async function getClass() {
       const result = await classService.getClassById(match.params.cardId);
       let userResult = await userService.searchUserByEmail(
@@ -64,24 +58,20 @@ const ClassDetails = ({
       userResult = userResult[0]?.acf;
       setUserAcf(userResult);
       setClassDetails(result);
-      console.log(userAcf, "USER ACF");
+   
 
     }
     getClass();
   }, []);
 
-  console.log(userAcf, "USERACF");
+
 
   let { id, acf } = classDetails;
-  console.log(acf, "class acf");
+
 
   const bookClass = async (e) => {
     e.preventDefault();
-    console.log(userToken, "userTOken");
-
     let classToBook = match.params.cardId;
-    console.log(userAcf);
-    console.log(classToBook, "to be booked");
     let booked_by = "";
     let participates_in_classes = "";
 
@@ -136,10 +126,8 @@ const ClassDetails = ({
       ids.push(id["classId"]);
     }
     let updatedBookings = await classService.getSeveralClassesByIds(ids);
-    console.log(updatedBookings, "UPDATEDBOOKINGS");
     changeBookingInfo(updatedBookings);
     localStorage.setItem("bookings", JSON.stringify(updatedBookings));
-    console.log(userResult);
 
     setHasBooked(true);
     setChangeSpots(true);
@@ -150,7 +138,6 @@ const ClassDetails = ({
       : acf.capacity;
 
   let finalSpots = changeSpots ? initialspotsLeft-- : initialspotsLeft;
-  console.log("SPOTS LEFT", initialspotsLeft);
 
   const SpecificButtons =
     userAcf?.user_type == "teacher" || initialspotsLeft == 0 ? (

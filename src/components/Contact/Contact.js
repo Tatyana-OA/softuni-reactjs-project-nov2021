@@ -32,7 +32,7 @@ const closeNotification = () => {
 			...prevState,
 			["from_name"]: e.target.value
 		}));
-		console.log(e.target.value)
+
 	  }
 	  const getEmail = (e) => {
 		  if (! validateEmail(e.target.value)) {
@@ -51,14 +51,14 @@ const closeNotification = () => {
 			...prevState,
 			["reply_to"]: e.target.value
 		}));
-		console.log(e.target.value)
+
 	  }
 	  const getMessage = (e) => {
 		setToSend(prevState => ({
 			...prevState,
 			["message"]: e.target.value
 		}));
-		console.log(e.target.value)
+
 	  }
 
 
@@ -72,18 +72,18 @@ const closeNotification = () => {
 			'user_ASUFZV4633Wfp9UfdzYfX'
 		  )
 			.then((response) => {
-			  console.log('SUCCESS!', response.status, response.text);
+	
 			  setShowNotification(true)
 			  setNotification({
 				  type:'success',
 				  message: ['Message sent successfully. We will get back to you!']
 			  })
-			  console.log(toSend)
+			
 			  e.target.reset();
 		
 			})
 			.catch((err) => {
-			  console.log('FAILED...', err);
+		
 			  setShowNotification(true)
 			  setNotification({
 				  type:'error',

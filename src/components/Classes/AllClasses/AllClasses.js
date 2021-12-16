@@ -11,12 +11,15 @@ const AllClasses = () => {
 	const [allClasses, setAllClasses] = useState([]);
 	const [activeFilter, setActiveFilter] = useState('');
 
-	useEffect( async ()=>{
+	useEffect( ()=>{
 
-		const result = await classService.getAll();
-		initialState = [...result]
-		setAllClasses(result);
+		async function getThemClasses() {
+			const result = await classService.getAll();
+			initialState = [...result]
+			setAllClasses(result);
+		}
 
+		getThemClasses()
 
 	},[])
 
@@ -52,7 +55,6 @@ const AllClasses = () => {
 		setAllClasses(dance)
 	}
 
-	console.log('all classes', allClasses)
 	return (
 		<>
 		<SinglePageHead pageInfo={{name:'Classes', slug:'classes' }} />

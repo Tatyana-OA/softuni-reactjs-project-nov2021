@@ -29,15 +29,6 @@ const CreateClass = () => {
 
 	const { userInfo ,exposeUserInfo } = useContext(AuthContext)
 	let userToken= userInfo.user.token
-	// if (!userInfo.isAuth) {
-	// 	console.log(JSON.parse(localStorage.getItem('user')))
-	// 	userToken = JSON.parse(localStorage.getItem('user')).token
-	// } else {
-	// 	userToken = userInfo.user.token
-	// }
-	console.log(userInfo ,exposeUserInfo )
-
-	// console.log(isNaN(Number('8')))
 
 	async function submitCreate(e) {
 		errors = []
@@ -77,7 +68,6 @@ const CreateClass = () => {
 				message: errors
 			})
 
-			console.log(errors)
 		}
 
 	else {
@@ -97,7 +87,6 @@ const CreateClass = () => {
 			}
 
 		}
-		console.log(userToken)
 
 		await classService.createClass(cleanClassData, userToken);
 		setShowNotification(true)

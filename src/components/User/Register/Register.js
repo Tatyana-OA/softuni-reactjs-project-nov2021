@@ -86,7 +86,6 @@ const closeNotification = () => {
 			setTimeout(() => {history.push("/login")}, 2000)
 				}
 				catch (err) {
-					console.log('IN ERROR', err.message)
 					errors.push(err.message)
 			setShowNotification(true)
 			setNotification({
@@ -98,7 +97,7 @@ const closeNotification = () => {
 			}
 
 			errors= []
-console.log(errors)
+
 
 	}
 	return (
@@ -130,11 +129,11 @@ console.log(errors)
 
           <div className="input-box">
             <span className="details">Password</span>
-            <input type="text" name="password" placeholder="Enter your password" required />
+            <input type="password" name="password" placeholder="Enter your password" required />
           </div>
           <div className="input-box">
             <span className="details">Confirm Password</span>
-            <input type="text" name="re_password" placeholder="Confirm your password" required />
+            <input type="password" name="re_password" placeholder="Confirm your password" required />
           </div>
 		  <div className="input-box">
             <span className="details">Avatar Url</span>

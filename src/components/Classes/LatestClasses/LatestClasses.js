@@ -14,7 +14,6 @@ const LatestClasses = () => {
 
 		const result = await classService.getLatest();
 		setLatestClasses(result);
-		console.log('latest classes', latestClasses)
 
 	},[])
 

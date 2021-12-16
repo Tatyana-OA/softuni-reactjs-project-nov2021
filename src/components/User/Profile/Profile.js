@@ -16,14 +16,10 @@ const Profile = () => {
 	let user;
 	let {userInfo} = useContext(AuthContext)
 	let {bookingInfo, changeBookingInfo} = useContext(BookContext)
-	console.log(bookingInfo, 'bookingsInfo')
-	console.log(userInfo,'Profile Context')
 	userId = userInfo.user.user.id
 	user = userInfo.user.user;
 	let isAuth = userInfo.isAuth
-	console.log()
-	console.log(user, 'tis user')
-	console.log(user.acf.participates_in_classes, 'participates')
+
 	const [userClasses, setuserClasses] = useState([]);
 	useEffect( async ()=>{
 		//TO FIX
@@ -31,16 +27,14 @@ const Profile = () => {
 		if (user.acf.participates_in_classes != null && user.acf.user_type == "student") {
 
 			for (let cl of user.acf.participates_in_classes) {
-				console.log(cl, 'classId')
 				let receivedClass = await classService.getClassById(cl['classId'])
 				classes.push(receivedClass)
 			}
 		} else if (user.acf.user_type == "teacher") {
 				classes = await classService.getAllbyPerson(userId);
-				console.log('in teacher stuff')
+
 		}
-		console.log(classes, 'received classes')
-		
+
 		setuserClasses(classes.length > bookingInfo.length ? classes : bookingInfo);
 
 
@@ -49,13 +43,6 @@ const Profile = () => {
 
 
 
-console.log(userClasses)
-
-	// return (
-	// 	<h1>PRofile</h1>
-	// )
-console.log('SET', new Set(userClasses))
-	console.log(user)
   return isAuth ? (
     <>
       <SinglePageHead pageInfo={{ name: "My Account", slug:'profile/' + userId }} />

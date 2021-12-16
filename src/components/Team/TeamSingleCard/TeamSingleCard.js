@@ -1,8 +1,8 @@
 import "./TeamSingleCard.css"
 
 const SingleTeamMember = ({style, userFullName, userImage, userType}) => {
-	console.log(userType)
-	
+
+
 	return (
 		<div className="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.0s" style={style}>
 		<div className="team-item">

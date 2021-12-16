@@ -38,9 +38,7 @@ const App = () => {
 	}
 	let history = useHistory();
 
-	console.log('App user context: ', userInfo)
 
-	console.log('App user local: ', localStorageUser)
 	const userLogout = async(e) => {
 		e.preventDefault()
 		
@@ -54,7 +52,6 @@ const App = () => {
 			setShowNotification(true);
 			setNotification({type:'error', message: ['Logout Interrupted. Please try again or contact us.']})
 		}
-		console.log('LOGOUT RESPONSE', response )
 
 	}
 	const exposeUserInfo = (user) => {

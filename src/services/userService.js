@@ -19,28 +19,24 @@ export async function getBearerToken(currentUser) {
 		let user = await searchUserByEmail(result.user_email)
 		result.user=user[0];
 		user = user[0]
-		console.log('login result',result.token)
 		return result;
 
 	}catch(err) {
 		throw new Error(err.message);
-		
+
 	}
 
 
 }
 export async function searchUserByEmail(email) {
-	console.log('in search')
+
 	const settings = {
 		method: 'GET',
-		// headers: {
-		// 	'Authorization': 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9uZXh4aXRhLmVwaGVkcmF0ay5jb20iLCJpYXQiOjE2Mzc3NjUzMTYsIm5iZiI6MTYzNzc2NTMxNiwiZXhwIjoxNjM4MzcwMTE2LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxIn19fQ.gqll5FDn2TEHR0v2vL-RrS9xzz78bnjWTJB86zmY-Q4'
-		// },
+
 	};
 	try {
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users?search=${email}`, settings)
 		let result = await response.json();
-		console.log(await result, 'Search user by email')
 		return result;
 	}catch(err) {
 		console.error(err)
@@ -54,8 +50,7 @@ export async function createUser(userData) {
 		"username": "Nexxita",
 		"password": "18071702TKteam"
 	})
-	console.log('token', token)
-	
+
 		const settings = {
 			method: 'POST',
 			headers: {
@@ -80,9 +75,7 @@ export async function getUserById(id) {
 	try {
 
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users/${id}`);
-		console.log('route requested', `${apiUrl}/wp-json/wp/v2/users/${id}`)
 
-		// console.log(await response, 'userbyid')
 		return response.json();
 	}catch(err) {
 		console.error(err)
@@ -92,16 +85,14 @@ export async function getTeachers() {
 	try {
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users?per_page=100`);
 
-		// console.log(await response, 'userbyid')
 		return response.json();
-		
+
 	}catch(err) {
 		console.error(err)
 	}
 }
 export async function userLogout(userToken) {
 	const data = {"token": userToken}
-	//https://nexxita.ephedratk.com/wp-json/yooga/logout
 	const settings = {
 		method: 'POST',
 		headers: {
@@ -128,19 +119,19 @@ export async function addBookingToUser(userId, data, userToken) {
 			body: JSON.stringify(data)
 		};
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/users/${userId}`, settings);
-		console.log(response)
+
 
 		if (response.status == 200) {
 			return response.json();
 		} else {
 			return ({message:'Booking failed.'})
 		}
-	
+
 }
 
 
 export function validateEmail(mail) {
-	console.log('validating')
+
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
       return true;
     } else {

@@ -24,8 +24,6 @@ export async function getLatest()  {
 }
 
 export async function createClass(classData, userToken) {
-	//console.log(classData, userToken)
-
 
 	try {
 		const settings = {
@@ -37,7 +35,7 @@ export async function createClass(classData, userToken) {
 			body: JSON.stringify(classData)
 		};
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes`, settings);
-		console.log(response)
+	
 
 		return response.json();
 	}catch(err) {
@@ -66,7 +64,7 @@ export async function editClassbyId(classData, classId, userToken) {
 			body: JSON.stringify(classData)
 		};
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes/${classId}`, settings);
-		console.log(response)
+	
 
 		return response.json();
 	}catch(err) {
@@ -85,7 +83,7 @@ export async function deleteClassbyId(classId, userToken) {
 			}
 		};
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes/${classId}`, settings);
-		console.log(response)
+	
 		if (response.status == "200") {
 			return response.json();
 		} 
@@ -116,9 +114,7 @@ export async function bookClassbyId(classData, classId, userToken) {
 			body: JSON.stringify(classData)
 		};
 		let response = await fetch(`${apiUrl}/wp-json/wp/v2/yogac_classes/${classId}`, settings);
-		console.log(response)
 
-	
 		if (response.status == 200) {
 			return response.json();
 		} else {
@@ -129,11 +125,10 @@ export async function bookClassbyId(classData, classId, userToken) {
 export async function getSeveralClassesByIds(classIds) {
 	// https://nexxita.ephedratk.com/wp-json/wp/v2/yogac_classes/?include[]=46&include[]=54
 	try {
-	
+
 		let createUrl = `${apiUrl}/wp-json/wp/v2/yogac_classes/?`;
 		classIds.forEach(id => createUrl+=`include[]=${id}&`)
 		let response = await fetch(createUrl);
-		console.log(response)
 
 		return response.json();
 	}catch(err) {
