@@ -16,12 +16,20 @@ import AuthContext from './contexts/AuthContext';
 import EditClass from './components/Classes/EditClass/EditClass';
 import DeleteClass from './components/Classes/Delete/DeleteClass';
 import BookContext from './contexts/BookContext';
+import * as userService from './services/userService'
+import Notification from './components/User/Notification/Notification';
 
 
-
-
+const initialNotificationState = {type:'', message: []}
 
 const App = () => {
+	 // Notifation handling
+	 const [notification, setNotification] = useState(initialNotificationState);
+	 const [showNotification, setShowNotification] = useState(false);
+	 const closeNotification = () => {
+	   setShowNotification(false);
+	   setNotification(initialNotificationState);
+	 };
 	const [userInfo, setUserInfo] = useState({isAuth:false, user: ''})
 	const [bookingInfo, setBookingInfo] = useState([])
 	const localStorageUser = JSON.parse(localStorage.getItem('user'))
@@ -30,12 +38,21 @@ const App = () => {
 	console.log('App: ', userInfo)
 
 	console.log('App says: ', localStorageUser)
-	const userLogout = (e) => {
+	const userLogout = async(e) => {
 		e.preventDefault()
-		localStorage.clear()
+		
+		let response = await userService.userLogout();
+		if (response =="Successful logout") {
+			localStorage.clear()
 		exposeUserInfo({})
 		changeBookingInfo([])
-		history.push('/')
+			history.push('/')
+		}else {
+			setShowNotification(true);
+			setNotification({type:'error', message: ['Logout Interrupted. Please try again or contact us.']})
+		}
+		console.log('LOGOUT RESPONSE', response )
+
 	}
 	const exposeUserInfo = (user) => {
 		setUserInfo({isAuth:Boolean(user.first_name || user.token), user:{...user}})
@@ -48,6 +65,7 @@ const App = () => {
 		<AuthContext.Provider value={{userInfo, exposeUserInfo }}>
 			<BookContext.Provider value={{bookingInfo, changeBookingInfo}}>
 		<Header {...userInfo} userLogout={userLogout} />
+		{showNotification==true ? <Notification type={notification.type} message={notification.message} closeNotification={closeNotification} /> : '' }
 		<Switch>
 				<Route path="/" exact component={Hero}/>
 				<Route path="/classes" component={AllClasses}/>

@@ -99,7 +99,24 @@ export async function getTeachers() {
 		console.error(err)
 	}
 }
+export async function userLogout(userToken) {
+	const data = {"token": userToken}
+	//https://nexxita.ephedratk.com/wp-json/yooga/logout
+	const settings = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data)
+	};
 
+	let response = await fetch(`${apiUrl}/wp-json/yooga/logout`, settings);
+	if (response.status == 200) {
+		return response.json();
+	} else {
+		return ({message:'Booking failed.'})
+	}
+}
 export async function addBookingToUser(userId, data, userToken) {
 
 		const settings = {

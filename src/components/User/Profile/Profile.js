@@ -14,7 +14,6 @@ import BookContext from "../../../contexts/BookContext";
 const Profile = () => {
 	let userId;
 	let user;
-	
 	let {userInfo} = useContext(AuthContext)
 	let {bookingInfo} = useContext(BookContext)
 	console.log(bookingInfo, 'bookingsInfo')
@@ -23,12 +22,12 @@ const Profile = () => {
 		userId = userInfo.user.user.id
 		user = userInfo.user.user;
 	} else {
-	
+
 			const localStorageUser = JSON.parse(localStorage.getItem('user'))
 			console.log('Logged user persists on refresh')
 			user = localStorageUser.user
 			userId = localStorageUser.user.id || ''
-		
+
 	}
 
 	let isAuth = userInfo.isAuth || localStorage.user
