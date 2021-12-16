@@ -97,15 +97,6 @@ const Profile = () => {
                       <td className="text-primary">{user.acf.email || "No email provided"}</td>
                     </tr>
 
-                    <tr>
-                      <td>
-                        <strong>
-                          <span className="glyphicon glyphicon-calendar text-primary"></span>
-                          Participates in
-                        </strong>
-                      </td>
-                      <td className="text-primary">X Classes</td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
