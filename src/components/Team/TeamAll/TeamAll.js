@@ -17,7 +17,7 @@ const TeamAll = () => {
 	}, [])
 
 	let teaching = teachers.filter(t => t.acf.user_type==='teacher')
-
+console.log(teaching)
 	return (
 		<>
 		<SinglePageHead pageInfo={{name:'Teachers', slug:'teachers' }} />
