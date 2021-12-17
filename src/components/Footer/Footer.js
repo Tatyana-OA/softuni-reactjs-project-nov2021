@@ -1,4 +1,5 @@
 import "./Footer.css"
+import { Link } from "react-router-dom";
 
 const Footer = () => {
 	return (
@@ -7,7 +8,7 @@ const Footer = () => {
             <div className="container-fluid">
                 <div className="container">
                     <div className="footer-info">
-                        <a href="index.html" className="footer-logo">Y<span>oo</span>ga</a>
+                        <span className="footer-logo">Y<span>oo</span>ga</span>
                         <h3>Sofia, Bulgaria</h3>
                         <div className="footer-menu">
                             <p>+012 345 67890</p>
@@ -18,7 +19,7 @@ const Footer = () => {
                 <div className="container copyright">
                     <div className="row">
                         <div className="col-md-6">
-                            <p>&copy; <a href="#">YooGa React.js Project</a>, All Right Reserved.</p>
+                            <p>&copy; YooGa React.js Project, All Right Reserved.</p>
                         </div>
                         <div className="col-md-6">
                             <p>Designed By <a href="https://github.com/Tatyana-OA/softuni-reactjs-project-nov2021">Tatyana Asenova, Nexxita</a></p>
