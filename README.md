@@ -7,7 +7,7 @@ The project is designed as a platform for a Yoga Studio, facilitating the needs 
 
 This [project](https://github.com/Tatyana-OA/softuni-reactjs-project-nov2021) was created by [Tatyana Asenova](https://github.com/Tatyana-OA) for the purposes of React. js Softuni Course, Nov-Dec 2021.
 
-![Project Dashboard](https://i.ibb.co/kM9K92f/homepage.png)
+[View Live](https://yooga-react-js.web.app/)
 
 
 
